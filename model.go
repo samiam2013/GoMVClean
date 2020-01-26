@@ -48,7 +48,8 @@ func tryPath(outerPath, innerPath, wholePath string) bool {
 	return (iPathTrailLen == queryPathLen)
 }
 
-func tryPathRunFunc(w http.ResponseWriter, r *http.Request, outerPath, innerPath string,
+func tryPathRunFunc(w http.ResponseWriter, r *http.Request,
+	outerPath, innerPath string,
 	runFunction func(string, string, http.ResponseWriter, *http.Request) bool) bool {
 	//fmt.Println("tryPathRunFunc(", outerPath, ",", innerPath, ", func())")
 	if len(outerPath) > len(innerPath) {
@@ -57,15 +58,36 @@ func tryPathRunFunc(w http.ResponseWriter, r *http.Request, outerPath, innerPath
 	return false
 }
 
-func privateQuery(path, wholePath string, w http.ResponseWriter, r *http.Request) bool {
+func privateQuery(path, wholePath string, w http.ResponseWriter,
+	r *http.Request) bool {
+	fmt.Println("privateQuery(path: ", path, ")")
 	fmt.Fprintf(w, "{Database: '%s', table: '%s'}\n", path, wholePath)
 	return pubAccessPrivDB
 }
 
-func publicQuery(path, wholePath string, w http.ResponseWriter, r *http.Request) bool {
+func publicQuery(path, wholePath string, w http.ResponseWriter,
+	r *http.Request) bool {
 	//fmt.Println("publicQuery(path:", path, ") called.")
-	fmt.Fprintf(w, "{Database: '%s', table: '%s'}\n", path, wholePath)
+	//fmt.Fprintf(w, "{Database: '%s', table: '%s'}\n", path, wholePath)
+	return tableQuery(path, wholePath, w, r)
+}
 
+func tableQuery(path, wholePath string, w http.ResponseWriter, r *http.Request) bool {
+	fmt.Println("tableQuery(", wholePath, ")")
+	switch wholePath {
+	case "public/":
+		fmt.Fprint(w, "{'query found, public model test case!''}")
+		return true
+	case "public/rowQuery/":
+		return rowQuery(path, w, r)
+	default:
+		errorShortCircuit(w, r, "403")
+	}
+	return false
+}
+
+func rowQuery(path string, w http.ResponseWriter, r *http.Request) bool {
+	fmt.Println("rowQuery(", path, ")")
 	return true
 }
 
