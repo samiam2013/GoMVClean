@@ -92,7 +92,9 @@ func tableQuery(path, wholePath string, w http.ResponseWriter, r *http.Request) 
 func testModelSchema(path string, verbose bool, w http.ResponseWriter, r *http.Request) bool {
 	switch path {
 	case modelTestPath:
-		return rowQuery("public/test", w, r)
+		return rowQuery(modelTestPath, w, r)
+	case modelNoGo:
+		return rowQuery(modelNoGo, w, r)
 	default:
 		return false
 	}
@@ -103,20 +105,23 @@ func rowQuery(path string, w http.ResponseWriter, r *http.Request) bool {
 	switch path {
 	case modelTestPath:
 		query(modelTestPath, w, r)
+		return true
+	case modelNoGo:
+		return false
 	default:
 		return false
 	}
-	return true
 }
 
 func query(path string, w http.ResponseWriter, r *http.Request) bool {
+	fmt.Println("query( ", path, " )")
 	switch path {
 	case modelTestPath:
 		//now it's finally safe to reach straight into the public files, ideally.
 		//that's where hashing comes in
-		renderStatic(modelPath+modelTestPath, w, r)
+		renderStatic(path+"/0.json", w, r)
 		return true //not necessarily :()
-	case "private/test":
+	case modelNoGo:
 		return false
 	default:
 		return false //woah wtf

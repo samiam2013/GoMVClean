@@ -20,6 +20,7 @@ func routeStatic(w http.ResponseWriter, r *http.Request) {
 }
 
 func renderStatic(path string, w http.ResponseWriter, r *http.Request) {
+	fmt.Println("renderStatic(", path, ")")
 	body, err := loadStaticBody(path)
 	if err != true {
 		fmt.Fprintf(w, string(body))
