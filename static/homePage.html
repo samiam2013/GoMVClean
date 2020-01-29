@@ -3,30 +3,47 @@
     <title>{{.websiteName /*not rendering*/}}: Home</title>
   </head>
   <body>
-    <center>
-      <h2>Welcome to {{.websiteName}}</h2>
-      <a href="/static/inputForm">go to input form</a>
-      <br />
-      <br />
-    </center>
-    <div>
+    <div id="bodyWrapper" style="
+                            margin-left: 68px;
+                            margin-top: 50px;">
+    <h2 style="padding-left:"50%"">Welcome to {{.websiteName}}</h2>
         The idea of {{.websiteName}} is to take something like <br />
         <ul>
           <li>
-            <a href="/model/public/testSchema"> a link to a database render<br />
+            <a href="/static/inputForm"> an input form
+          </li>
+          <li>
+            <a href="/model/public/schema"> a link to the API-DB schema <br />
             </a>
           </li>
           <li>
-            <a href="/model/private/testSchema"> to a database render that fails<br />
+            <a href="/model/private/schema"> to a model render that fails with 403<br />
             </a>
           </li>
           <li>
-            <a href="https://github.com/samiam2013/GoMVClean">to the source code<br />
+            <a href="/static/inputForm2"> to a model render that fails with 404. <br />
             </a>
+          </li>
+          <li>
+            <a href="https://github.com/samiam2013/GoMVClean" target="_blank">
+              github.com/samiam2013/GoMVClean
+            </a>
+              to the source code<br />
+          </li>
+          <li>
+            <a href="https://golang.org" target="_blank">
+              golang.org
+            </a>
+              to the source code of the source code<br />
+          </li>
+          <li>
+            <a href="https://en.wikipedia.org/wiki/Bootstrapping" target="_blank">
+              wikipedia.org/wiki/Bootstrapping
+            </a>
+              to the source code on how to source code out of a source code<br />
           </li>
 
         </ul>
-        adding intelligence to this world<br />
     </div>
   </body>
 </html>

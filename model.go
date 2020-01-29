@@ -8,7 +8,7 @@ import (
 const modelPath string = "/model/"
 const publicDBPath string = "public/"
 const privateDBPath string = "private/"
-const modelTestFolder string = "testSchema"
+const modelTestFolder string = "schema"
 const modelTestPath string = publicDBPath + modelTestFolder
 const modelNoGo string = privateDBPath + modelTestFolder
 const modelPubPath string = modelPath + publicDBPath
@@ -80,9 +80,11 @@ func publicQuery(path, wholePath string, w http.ResponseWriter,
 func tableQuery(path, wholePath string, w http.ResponseWriter, r *http.Request) bool {
 	//fmt.Println("tableQuery(", wholePath, ")")
 	switch wholePath {
-	case modelTestPath:
+	case modelPubPath:
 		return testModelSchema(wholePath, true, w, r)
 	case modelPrivPath:
+		return testModelSchema(wholePath, true, w, r)
+	case modelTestPath:
 		return testModelSchema(wholePath, true, w, r)
 	default:
 		fmt.Println("error: path not in tableQuery(", wholePath, ")")
