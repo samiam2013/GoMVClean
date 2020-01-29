@@ -1,15 +1,16 @@
 <html>
   <head>
-    <title> Website Error: 500 </title>
+    <title> Website Error: {{.errorCode}} </title>
   </head>
   <body>
     <br />
     <center>
       <h3>
-        Error : 500 : Internal Server Error <br />
-          <a href="/">
-            Go Home</a>
-        </h3>
+        Error : {{.errorCode}} Internal Server Error. <br />
+      </h3>
+        [HAL 9000]: "I'm sorry dave, I'm afraid I can't do that" <br />
+        <i>2001: A Space Oddessy</i><br />
+        <a href="/">Go Home</a>
     </center>
   </body>
 </html>

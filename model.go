@@ -8,11 +8,12 @@ import (
 const modelPath string = "/model/"
 const publicDBPath string = "public/"
 const privateDBPath string = "private/"
-const modelTestPath string = "public/test"
-const modelNoGo string = "private/test"
+const modelTestFolder string = "testSchema"
+const modelTestPath string = publicDBPath + modelTestFolder
+const modelNoGo string = privateDBPath + modelTestFolder
 const modelPubPath string = modelPath + publicDBPath
 const modelPrivPath string = modelPath + privateDBPath
-const pubAccessPrivDB bool = false
+const pubAccessPrivDB bool = false //false by default
 
 func routeModel(w http.ResponseWriter, r *http.Request) {
 	//url path is the modelQueryPath
@@ -62,9 +63,11 @@ func tryPathRunFunc(w http.ResponseWriter, r *http.Request,
 
 func privateQuery(path, wholePath string, w http.ResponseWriter,
 	r *http.Request) bool {
-	fmt.Println("privateQuery(path: ", path, ")")
-	fmt.Fprintf(w, "{Database: '%s', table: '%s'}\n", path, wholePath)
-	return pubAccessPrivDB
+	//fmt.Println("privateQuery(path: ", path, ")")
+	fmt.Fprintf(w, "{{Private : {Database: '%s', table: '%s'}, queried},\n", path, wholePath)
+	rVal := tableQuery(path, wholePath, w, r)
+	defer fmt.Fprintf(w, " returned: \"%v\"}", rVal)
+	return rVal
 }
 
 func publicQuery(path, wholePath string, w http.ResponseWriter,
@@ -75,12 +78,11 @@ func publicQuery(path, wholePath string, w http.ResponseWriter,
 }
 
 func tableQuery(path, wholePath string, w http.ResponseWriter, r *http.Request) bool {
-	fmt.Println("tableQuery(", wholePath, ")")
+	//fmt.Println("tableQuery(", wholePath, ")")
 	switch wholePath {
-	case "public/":
-		fmt.Fprint(w, "{'query found, public model test case!''}")
-		return true
 	case modelTestPath:
+		return testModelSchema(wholePath, true, w, r)
+	case modelPrivPath:
 		return testModelSchema(wholePath, true, w, r)
 	default:
 		fmt.Println("error: path not in tableQuery(", wholePath, ")")
@@ -101,7 +103,7 @@ func testModelSchema(path string, verbose bool, w http.ResponseWriter, r *http.R
 }
 
 func rowQuery(path string, w http.ResponseWriter, r *http.Request) bool {
-	fmt.Println("rowQuery(", path, ")")
+	//fmt.Println("rowQuery(", path, ")")
 	switch path {
 	case modelTestPath:
 		query(modelTestPath, w, r)
