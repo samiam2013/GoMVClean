@@ -8,6 +8,8 @@ import (
 const modelPath string = "/model/"
 const publicDBPath string = "public/"
 const privateDBPath string = "private/"
+const modelTestPath string = "public/test"
+const modelNoGo string = "private/test"
 const modelPubPath string = modelPath + publicDBPath
 const modelPrivPath string = modelPath + privateDBPath
 const pubAccessPrivDB bool = false
@@ -78,19 +80,45 @@ func tableQuery(path, wholePath string, w http.ResponseWriter, r *http.Request) 
 	case "public/":
 		fmt.Fprint(w, "{'query found, public model test case!''}")
 		return true
-	case "public/rowQuery/":
-		return rowQuery(path, w, r)
+	case modelTestPath:
+		return testModelSchema(wholePath, true, w, r)
 	default:
+		fmt.Println("error: path not in tableQuery(", wholePath, ")")
 		errorShortCircuit(w, r, "403")
 	}
 	return false
 }
 
+func testModelSchema(path string, verbose bool, w http.ResponseWriter, r *http.Request) bool {
+	switch path {
+	case modelTestPath:
+		return rowQuery("public/test", w, r)
+	default:
+		return false
+	}
+}
+
 func rowQuery(path string, w http.ResponseWriter, r *http.Request) bool {
 	fmt.Println("rowQuery(", path, ")")
+	switch path {
+	case modelTestPath:
+		query(modelTestPath, w, r)
+	default:
+		return false
+	}
 	return true
 }
 
-func testModelSchema(verbose bool) {
-
+func query(path string, w http.ResponseWriter, r *http.Request) bool {
+	switch path {
+	case modelTestPath:
+		//now it's finally safe to reach straight into the public files, ideally.
+		//that's where hashing comes in
+		renderStatic(modelPath+modelTestPath, w, r)
+		return true //not necessarily :()
+	case "private/test":
+		return false
+	default:
+		return false //woah wtf
+	}
 }

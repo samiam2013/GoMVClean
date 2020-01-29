@@ -23,7 +23,7 @@ func main() {
 	http.HandleFunc(staticPath, routeStatic) // found in static.go
 	http.HandleFunc(viewPath, routeView)     // found in view.go
 	http.HandleFunc(modelPath, routeModel)   // found in model.go
-	testModelSchema(true)                    // found in model.go
+	//testModelSchema(true)                    // found in model.go
 	log.Fatal(http.ListenAndServe(":8080", nil))
 	return
 }
