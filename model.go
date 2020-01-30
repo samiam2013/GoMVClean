@@ -7,12 +7,13 @@ import (
 )
 
 const modelPath string = "/model/"
+
 const publicDBPath string = "public/"
 const privateDBPath string = "private/"
 const modelTestFolder string = "schema"
 const modelMarkup string = ".json"
 
-const modelTestPath string = modelPath + publicDBPath + modelTestFolder
+//const modelTestPath string = modelPath + publicDBPath + modelTestFolder
 const modelNoGo string = privateDBPath + modelTestFolder
 const modelPubPath string = modelPath + publicDBPath
 const modelPrivPath string = modelPath + privateDBPath
@@ -24,7 +25,7 @@ const pubAccessPrivDB bool = false //false by default
 const sQLUpdate string = "update"
 const sQLRead string = "read"
 
-const modelDEBUG = true
+const modelDEBUG = false
 
 func modelPrint(prStr string) {
 	if modelDEBUG {
@@ -41,7 +42,7 @@ func routeModel(w http.ResponseWriter, r *http.Request) {
 }
 
 func renderModel(path string, w http.ResponseWriter, r *http.Request) {
-	modelPrint("routeModel(" + path + ")")
+	modelPrint("routeModel( " + path + " )")
 	wholePath := r.URL.Path
 	if pubAccessPrivDB {
 		if tryPath(path, privateDBPath, wholePath) {
@@ -58,7 +59,7 @@ func renderModel(path string, w http.ResponseWriter, r *http.Request) {
 }
 
 func tryPath(outerPath, innerPath, wholePath string) bool {
-	modelPrint("tryPath(" + outerPath + "," + innerPath + "," + wholePath + ")")
+	modelPrint("tryPath( " + outerPath + ", " + innerPath + ", " + wholePath + " )")
 	queryInnerPathStr := outerPath[len(innerPath):]
 	//modelPrint(queryInnerPathStr)
 	queryPathLen := len(queryInnerPathStr)
@@ -73,7 +74,7 @@ func tryPath(outerPath, innerPath, wholePath string) bool {
 func tryPathRunFunc(w http.ResponseWriter, r *http.Request,
 	outerPath, innerPath string,
 	runFunction func(string, string, http.ResponseWriter, *http.Request) bool) bool {
-	modelPrint("tryPathRunFunc( " + outerPath + ", " + innerPath + ", func())")
+	modelPrint("tryPathRunFunc( " + outerPath + ", " + innerPath + ", func() )")
 	if len(outerPath) > len(innerPath) {
 		runFunction(innerPath, outerPath, w, r)
 		return true
@@ -83,7 +84,7 @@ func tryPathRunFunc(w http.ResponseWriter, r *http.Request,
 
 func privateQuery(path, wholePath string, w http.ResponseWriter,
 	r *http.Request) bool {
-	modelPrint("privateQuery(path: " + path + " )")
+	modelPrint("privateQuery( " + path + " )")
 	fmt.Fprintf(w, "{{Private : {Database: '%s', table: '%s'}, queried},\n", path, wholePath)
 	rVal := tableQuery(path, wholePath, w, r)
 	defer fmt.Fprintf(w, " returned: \"%v\"}", rVal)
@@ -92,7 +93,7 @@ func privateQuery(path, wholePath string, w http.ResponseWriter,
 
 func publicQuery(path, wholePath string, w http.ResponseWriter,
 	r *http.Request) bool {
-	modelPrint("publicQuery(path: " + path + " ) called.")
+	modelPrint("publicQuery( " + path + " )")
 	//fmt.Fprintf(w, "{Database: '%s', table: '%s'}\n", path, wholePath)
 	return tableQuery(path, wholePath, w, r)
 }
@@ -115,11 +116,8 @@ func tableQuery(path, wholePath string, w http.ResponseWriter, r *http.Request) 
 		return true
 	case modelPrivPath:
 		return testModelSchema(wholePath, smallQL, w, r)
-	case modelTestPath:
-		smallQL := sQLUpdate
-		return testModelSchema(wholePath, smallQL, w, r)
 	case modelSchemaRead:
-		modelPrint("public/schema tableQuery( " + wholePath + " )...")
+		//modelPrint("public/schema tableQuery( " + wholePath + " )...")
 		return testModelSchema(wholePath, smallQL, w, r)
 	default:
 		modelPrint("error: path not in tableQuery( " + wholePath + " )")
@@ -129,11 +127,8 @@ func tableQuery(path, wholePath string, w http.ResponseWriter, r *http.Request) 
 }
 
 func testModelSchema(path, smallQL string, w http.ResponseWriter, r *http.Request) bool {
-	modelPrint("testModelSchema(" + path + ", " + smallQL + " )")
+	modelPrint("testModelSchema( " + path + ", " + smallQL + " )")
 	switch path {
-	case modelTestPath:
-		defer rowQuery(modelPubQueryUpdatePath, smallQL, w, r)
-		return true
 	case modelNoGo:
 		return rowQuery(modelNoGo, smallQL, w, r)
 	case modelSchemaRead:
@@ -144,11 +139,8 @@ func testModelSchema(path, smallQL string, w http.ResponseWriter, r *http.Reques
 }
 
 func rowQuery(path, smallQL string, w http.ResponseWriter, r *http.Request) bool {
-	modelPrint("rowQuery(" + path + ")")
+	modelPrint("rowQuery( " + path + " )")
 	switch path {
-	case modelTestPath:
-		query(modelTestPath, smallQL, "0", w, r)
-		return true
 	case modelSchemaRead:
 		query(modelSchemaRead, smallQL, "0", w, r)
 		return true
@@ -161,22 +153,8 @@ func rowQuery(path, smallQL string, w http.ResponseWriter, r *http.Request) bool
 }
 
 func query(path, smallQl, id string, w http.ResponseWriter, r *http.Request) bool {
-	modelPrint("query(" + path + ")")
+	modelPrint("query( " + path + " )")
 	switch path {
-	case modelTestPath:
-		//now it's finally safe to reach straight into the public files, ideally.
-		//that's where hashing comes in
-		switch smallQl {
-		case "read":
-			renderStatic(path+"/"+id+modelMarkup, w, r)
-			return true
-		case "update":
-			updateQuery(path, id, w, r)
-			renderStatic(path+modelMarkup, w, r)
-			return true
-		default:
-			return false
-		}
 	case modelSchemaRead:
 		renderStatic(modelSchemaRead+"/"+id+modelMarkup, w, r)
 		return true
@@ -191,7 +169,8 @@ func updateQuery(path, id string, w http.ResponseWriter, r *http.Request) bool {
 	//test and make sure the path exists
 	if testModelSchema(path, "update", w, r) {
 		//write into the Database
-		modelPrint("updateQuery(" + path + ") runnning...")
+		modelPrint("updateQuery( " + path + " ) runnning...")
+		updateQuery(path, "0", w, r)
 		return false
 	}
 	return true
