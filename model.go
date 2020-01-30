@@ -11,6 +11,7 @@ const modelPath string = "/model/"
 const publicDBPath string = "public/"
 const privateDBPath string = "private/"
 const modelTestFolder string = "schema"
+const schemasFilesName string = "schema"
 const modelMarkup string = ".json"
 
 //const modelTestPath string = modelPath + publicDBPath + modelTestFolder
@@ -142,7 +143,7 @@ func rowQuery(path, smallQL string, w http.ResponseWriter, r *http.Request) bool
 	modelPrint("rowQuery( " + path + " )")
 	switch path {
 	case modelSchemaRead:
-		query(modelSchemaRead, smallQL, "0", w, r)
+		query(modelSchemaRead, smallQL, schemasFilesName, w, r)
 		return true
 	case modelNoGo:
 		modelPrint("modelNoGo hit. rowquery(" + path + ")")
@@ -156,7 +157,7 @@ func query(path, smallQl, id string, w http.ResponseWriter, r *http.Request) boo
 	modelPrint("query( " + path + " )")
 	switch path {
 	case modelSchemaRead:
-		renderStatic(modelSchemaRead+"/"+id+modelMarkup, w, r)
+		renderStatic(modelSchemaRead+"/"+schemasFilesName+modelMarkup, w, r)
 		return true
 	case modelNoGo:
 		return false
@@ -170,7 +171,7 @@ func updateQuery(path, id string, w http.ResponseWriter, r *http.Request) bool {
 	if testModelSchema(path, "update", w, r) {
 		//write into the Database
 		modelPrint("updateQuery( " + path + " ) runnning...")
-		updateQuery(path, "0", w, r)
+		updateQuery(path, schemasFilesName, w, r)
 		return false
 	}
 	return true
