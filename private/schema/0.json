@@ -1,8 +1,8 @@
 {"welcome": "these are the JSON table schemas",
   "tables":{
     "test":
-      {"stringKey": string,"stringVal": string},
+      {"stringKey": "string", "stringVal": "string"},
     "updateStream":
-      {"stringKey": string, "stringVal": string},
+      {"stringKey": "string", "stringVal": "string"},
     }
 }
