@@ -1,1 +1,8 @@
-{"hello":"world <html><a href=\"/\">/</a></html> I can't help you from here."}
+{"welcome": "these are the JSON table schemas",
+  "tables":{
+    "test":
+      {"stringKey": "string"},{"stringVal": "string"},
+    "updateStream":
+      {"stringKey": "string"},{"stringVal": "string"},
+    }
+}
