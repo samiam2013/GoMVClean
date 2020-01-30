@@ -4,11 +4,13 @@ THIS CAN AND NEEDS TO BE MADE PRIVATE by
   hiding this link from being served by the controller
     in controller.go*/
 
+{ /* TABLE SCHEMAS */
+
 "*localhost:8080*/model/public/schema" : {
 
     "schemaFile" : "schema.json",
 
-    "SmallSchemaLang" : "(recursion) jsonSettings *me "
+    "SmallSchemaLang" : "*(read-only (recursion func())) jsonSettings *me "
 
 },
 
@@ -16,6 +18,13 @@ THIS CAN AND NEEDS TO BE MADE PRIVATE by
 
     "schemaFile" : "schema.json",
 
-    "SmallSchemaLang" : "httpLink : {(schemaFile) indexFileName","(schemaLink) httpLink"
+    "SmallSchemaLang" : "httpLink : { (*read-write (schemaFile)) , (httpLink) }"
 
+},
+
+"*localhost:8080/model/public/modelRead" : {
+
+    "schemaFile" : "schema.json",
+
+    "SmallSchemaLang" : "httpLink : { (read-only (schemaFile)) , (httpLink) }"
 }

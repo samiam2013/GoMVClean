@@ -1,0 +1,10 @@
+/*ELHO WELCOME TO UPDATE STREAM*/
+
+{ "cSRF tokens request stream" :
+  "*fqdn/model/public/updateStream/cSRFtokenRequestStream/"},
+
+{ "upload stream" :
+  "*fqdn/model/public/updateStream/jsonUpload/" },
+
+{ "download stream" :
+  "*fqdn/model/public/downloadStream/jsonDownload/"}
