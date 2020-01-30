@@ -10,7 +10,7 @@ THIS CAN AND NEEDS TO BE MADE PRIVATE by
 
     "schemaFile" : "schema.json",
 
-    "SmallSchemaLang" : "*(read-only (recursion func())) jsonSettings *me "
+    "SmallSchemaLang" : "(read-only (*recursion func())) jsonSettings *me "
 
 },
 
@@ -18,7 +18,7 @@ THIS CAN AND NEEDS TO BE MADE PRIVATE by
 
     "schemaFile" : "schema.json",
 
-    "SmallSchemaLang" : "httpLink : { (*read-write (schemaFile)) , (httpLink) }"
+    "SmallSchemaLang" : "{ (*read-write (schemaFile)) , (httpLink) }"
 
 },
 
@@ -26,5 +26,5 @@ THIS CAN AND NEEDS TO BE MADE PRIVATE by
 
     "schemaFile" : "schema.json",
 
-    "SmallSchemaLang" : "httpLink : { (read-only (schemaFile)) , (httpLink) }"
+    "SmallSchemaLang" : "{ (*read-write (schemaFile)) , (httpLink) }"
 }
