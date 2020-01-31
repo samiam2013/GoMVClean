@@ -19,7 +19,7 @@ Here's a fun joke, I might just clone a build of google's v8 engine for javascri
 
 I'll take a what is a js emulator for 2000 Alex. Hey, Node.JS you've got competition, Go lang and JQuery are stiff competiti-oin if you're Javascript + a JS library + a backend JS language + a type of compiled JS server or whatever. Magic to these ears. Lambdas.
 
-let's emulate that at the speed of C. Let's get rid of C. 
+let's emulate that at the speed of C. Let's get rid of C. https://github.com/augustoroman/v8
 
 if I write the Javascript engine into this and implement model-endpoint calls with a tiny amount of javascript and jQuery I'll have the world's most powerful website-in-a-box because you can enforce the version of javascript EVERYONE is running.
 
