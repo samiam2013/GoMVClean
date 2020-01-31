@@ -5,11 +5,14 @@ import (
 	"net/http"
 )
 
+//global debugger constant
+const gDebug bool = true
+
+// if path == / , load homePage.html. otherwise 404
 func homeHandler(w http.ResponseWriter, r *http.Request) {
 	path := r.URL.Path
-	//fmt.Println(path, "len:", len(path))
-	if path == "/" {
-		path = staticMarkupFolder + "homePage" + staticMarkupType
+	if path == "/" || path == "/index" {
+		path = staticMarkupFolder + "index" + staticMarkupType
 		renderStatic(path, w, r)
 		return
 	}
@@ -23,7 +26,9 @@ func main() {
 	http.HandleFunc(staticPath, routeStatic) // found in static.go
 	http.HandleFunc(viewPath, routeView)     // found in view.go
 	http.HandleFunc(modelPath, routeModel)   // found in model.go
-	//testModelSchema(true)                    // found in model.go
+	if gDebug {
+		testEverything(true) //found in test.go
+	}
 	log.Fatal(http.ListenAndServe(":8080", nil))
 	return
 }
