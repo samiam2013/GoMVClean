@@ -14,18 +14,18 @@ const publicDBPath string = "public/"
 const privateDBPath string = "private/"
 
 //what's the folder for a schema called?
-const modelTestFolder string = "schema"
+const modelSchemaFolder string = "schema"
 
 //what's the file for a folder schema called?
 const schemasFilesName string = "schema"
 const modelMarkup string = ".json"
 
 //const modelTestPath string = modelPath + publicDBPath + modelTestFolder
-const modelNoGo string = privateDBPath + modelTestFolder
+const modelNoGo string = privateDBPath + modelSchemaFolder
 const modelPubPath string = modelPath + publicDBPath
 const modelPrivPath string = modelPath + privateDBPath
-const modelPubQueryUpdatePath string = modelPubPath + modelTestFolder
-const modelSchemaRead string = publicDBPath + modelTestFolder
+const modelPubQueryUpdatePath string = modelPubPath + modelSchemaFolder
+const modelSchemaRead string = publicDBPath + modelSchemaFolder
 
 //can the public see the private things? it's a boolean value!
 const pubAccessPrivDB bool = false //false by default
@@ -176,7 +176,7 @@ func query(path, smallQl, id string, w http.ResponseWriter, r *http.Request) boo
 	case modelNoGo:
 		return false
 	default:
-		return false //woah wtf
+		return false //woah wtf why
 	}
 }
 
