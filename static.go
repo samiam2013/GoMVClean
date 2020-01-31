@@ -30,6 +30,7 @@ func renderStatic(path string, w http.ResponseWriter, r *http.Request) {
 	return
 }
 
+// this gets re-used in modelQuery.go query()
 func loadStaticBody(path string) ([]byte, bool) {
 	body, err := ioutil.ReadFile(path)
 	if err == nil {
