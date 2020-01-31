@@ -57,7 +57,7 @@ func renderModel(path string, w http.ResponseWriter, r *http.Request) {
 	wholePath := r.URL.Path
 	if pubAccessPrivDB {
 		if tryPath(path, privateDBPath, wholePath) {
-			modelPrint("tryPath(" + path + ") returned false")
+			modelPrint("tryPath(" + path + ") returned early, privateQuery() trigd.")
 			tryPathRunFunc(w, r, path, privateDBPath, privateQuery)
 			return
 		}
