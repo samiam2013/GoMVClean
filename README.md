@@ -14,8 +14,12 @@ like site.domain/public/users/bio/{hash(hash(user_id)}
 Here, `hash(hash(user_id))` is an ensurement that even if permissions on the database are failing, brute-force search of the database will still be near impossible or impossible.
 
 
-#I'm Go-ing Mad
-Here's a fun joke, I might just clone a build of google's v8 engine for javascript in Go lang into the project, that way I can create a website that runs all of that javascript, LITERALLY on the backend, what's up Node.JS you've got competition, Go lang and JQuery are stiff competitoin if you're Javascript + a library + a backend language + a type of compiled javascript server or whatever. Magic to these ears. 
+# I'm Go-ing Mad
+Here's a fun joke, I might just clone a build of google's v8 engine for javascript in Go lang into the project, that way I can create a website that runs all of that javascript, LITERALLY on the backend.
+
+I'll take a what is a js emulator for 2000 Alex. Hey, Node.JS you've got competition, Go lang and JQuery are stiff competiti-oin if you're Javascript + a JS library + a backend JS language + a type of compiled JS server or whatever. Magic to these ears. Lambdas.
+
+let's emulate that at the speed of C. Let's get rid of C. 
 
 if I write the Javascript engine into this and implement model-endpoint calls with a tiny amount of javascript and jQuery I'll have the world's most powerful website-in-a-box because you can enforce the version of javascript EVERYONE is running.
 
