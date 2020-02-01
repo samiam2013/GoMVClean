@@ -13,7 +13,7 @@ const updateStreamPath = publicDBPath + uStreamPath
 
 const dStreamPath string = publicDBPath + "downloadStream/"
 const dSchemaFolder string = dStreamPath + modelSchemaFolder + "/"
-const dSchemaFilePath string = schemasFilesName + modelMarkup
+const dSchemaFilePath string = dSchemaFolder + schemasFilesName + modelMarkup
 
 const fileFAIL = "500"
 
@@ -65,6 +65,7 @@ func publicQuery(path, wholePath string,
 func tableQuery(path, wholePath string,
 	w http.ResponseWriter, r *http.Request) bool {
 	modelPrint("tableQuery( " + wholePath + " )")
+	modelPrint("dSchemaFilePath: " + dSchemaFilePath)
 	smallQL := sQLRead
 	switch wholePath {
 	case updateStreamPath:
