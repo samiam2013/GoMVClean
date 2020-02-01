@@ -1,16 +1,6 @@
 # GoMVClean [![Go Report Card](https://goreportcard.com/badge/github.com/samiam2013/GoMVClean)]
 A Go language MVC template written for keeping with only native dependencies
 
-Look Mom I got a good grade!
-Karla Dec 26 1963 - Nov 2 2002
-
-Look Dad I still don't have a job!
-Glenn Myres Nov 2 1965 - Dec 17 2008
-
-I was put on the back of your tombstone, now you're right above my epitaph! lol
-
-seriously though, the money you left is all gone because I got a business idea but I didn't inherit much motivation, so here I am begging, https://paypal.me/GoMVClean
-
 # Basics
 In Go, dynamic form-data handling is really easy because of access to low level data and high accessibility through libraries of functions. It's also insanely easy to reach into the folder structure to read and write.
 
@@ -41,3 +31,14 @@ I will have EXACTING precision ability to enforce rules over what you send me, t
 That's one small Go Lang Library for a man on this big blue marble, one giant
 
 func leap(*manKind){manKind.stepSize(" YUGE - ish. ")}
+
+Look Mom I got a good grade!
+Karla Dec 26 1963 - Nov 2 2002
+
+Look Dad I still don't have a job!
+Glenn Myres Nov 2 1965 - Dec 17 2008
+
+I was put on the back of your tombstone, now you're right above my epitaph! lol
+
+seriously though, the money you left is all gone because I got a business idea but I didn't inherit much motivation, so here I am begging, https://paypal.me/GoMVClean Please don't give me any money if you don't have money, and please don't shame me for not getting a job programming; I'm not and never will be a sell-out. 
+
