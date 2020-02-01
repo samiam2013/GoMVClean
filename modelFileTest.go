@@ -71,7 +71,7 @@ func tableQuery(path, wholePath string,
 	case updateStreamPath:
 		modelPrint(
 			"error: updateStreamPath not implemented. (tableQuery()) modelFileTest.go")
-		uploadStream(wholePath, w, r) //found in uploadStream.go
+		uploadStream(w, r) //found in uploadStream.go
 		return true
 	case dSchemaFilePath:
 		//here we just serve the schema for the downloadStreamPath

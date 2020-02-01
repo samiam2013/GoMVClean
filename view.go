@@ -3,47 +3,22 @@ package main
 import (
 	"fmt"
 	"net/http"
-	"os"
+	"net/http/httputil"
 )
 
-const viewName = "view"
-const viewPath = "/" + viewName + "/"
-const viewFolder = viewName + string(os.PathSeparator)
-const viewType = ".html"
-
-func routeView(w http.ResponseWriter, r *http.Request) {
-	fmt.Println("routeView()...")
-	pageName := r.URL.Path[len(viewFolder):]
-	path := viewFolder + pageName + viewType
-	dynamicView(path, w, r)
-	return
-}
-
-func renderView(path string, body []byte,
-	w http.ResponseWriter, r *http.Request) string {
-	//so that we can check the errCode
-	pageName := r.URL.Path[len(viewPath):]
-	//fmt.Println("routeTemplate() pageName:", pageName)
-	switch string(pageName) {
-	case "testPost":
-		return renderTestPost(body, w, r) // found in testPost.go
-	default:
-		fmt.Println("error: ", pageName)
-		return "500"
+func uploadStream(w http.ResponseWriter, r *http.Request) {
+	//this code, thanks to *someone* on stackoverflow
+	// Save a copy of this request for debugging.
+	header, err := httputil.DumpRequest(r, true)
+	if err != nil {
+		fmt.Println(err)
 	}
-}
+	headString := string(header)
 
-func dynamicView(path string, w http.ResponseWriter, r *http.Request) {
-	//fmt.Println("dynamicView(", path, ")...")
-	body, err := loadStaticBody(path)
-	if err {
-		//run template $body
-		statusCode := renderView(path, body, w, r)
-		if statusCode != "200" {
-			errorShortCircuit(w, r, statusCode)
-		}
-	} else {
-		errorShortCircuit(w, r, "404")
-	}
+	fmt.Fprint(w, "<html><body><code style=\"white-space: pre-wrap;\">")
+	fmt.Fprint(w, "Hi, welcome to updateStream.go, here's what you sent me: \n\n")
+	fmt.Fprint(w, "HTTP Request: \n\n")
+	fmt.Fprint(w, headString)
+	fmt.Fprint(w, "</code></body></html>")
 	return
 }
