@@ -19,11 +19,11 @@ func rowQuery(path, smallQL string, w http.ResponseWriter, r *http.Request) bool
 	}
 }
 
-func query(path, smallQl, id string, w http.ResponseWriter, r *http.Request) bool {
+func query(path, smallQl, schema string, w http.ResponseWriter, r *http.Request) bool {
 	modelPrint("query( " + path + " )")
 	switch path {
 	case modelSchemaRead:
-		renderStatic(modelSchemaRead+"/"+schemasFilesName+modelMarkup, w, r)
+		renderStatic(modelSchemaRead+"/"+schema+modelMarkup, w, r)
 		return true
 	case modelNoGo:
 		return false

@@ -1,47 +1,52 @@
 <html>
   <head>
-    <title>{{.websiteName /*not rendering*/}}: Home</title>
+    <title>Index</title>
   </head>
   <body>
     <div id="bodyWrapper" style="margin-left: 68px; margin-top: 50px;">
-      <h2 style="padding-left:"50%"">Welcome to {{.websiteName}}</h2>
-      The idea of {{.websiteName}} is to take something like <br />
+      <h2 style="padding-left:"50%"">Welcome to GoMVClean</h2>
+      The idea of GoMVClean is to do anything, quicker than before.<br />
+      <br />
       <ol>
         <li>
+          A statically-referenced
         <a href="/static/inputForm">
-            An input form
+             Text Input Form
         </a>
         </li>
       <br />
         <li>
+          A link to
         <a href="/model/public/schema">
-            A link to the public API-DB schema
+             the public API-DB schema
         </a>
         </li>
       <br />
         <li>
-        <a href="/model/private/schema">
-            A link to a model render that fails with 403
+          A link to a
+        <a href="/model/public/notInSchema">
+          model render that fails with 403
         </a>
         </li>
       <br />
         <li>
-        A link to a view render
+        A link to a view render<br />
+        for a form that doesn't exist
         <a href="/static/inputForm2">
-            that fails with 404.
+          that fails with 404.
         </a>
         </li>
       <br />
         <li>
-        A link to a the
         <a href="/model/public/updateStream">
-            updateStream schema
-        </a>
+          A link to a the
+            updateStream</a> <br />
+            where V8 will run your model query dynamically
         </li>
       <br />
         <li>
         A link to a the
-        <a href="/model/private/downloadStream">
+        <a href="/model/public/downloadStream/schema">
             downloadStream schema
         </a>
         </li>
@@ -49,23 +54,23 @@
     <br />
       <ul>
         <li>
-        <a href="https://github.com/samiam2013/GoMVClean" target="_blank">
-          GitHub.com/Samiam2013/GoMVClean
-        </a>
-        : A link to the source code <br />
+          A link to the source code <br />
+          <a href="https://github.com/samiam2013/GoMVClean" target="_blank">
+            GitHub.com/Samiam2013/GoMVClean
+          </a>
         </li>
-      <br />
+      <br /><br />
         <li>
+          A link to the source code language documentation <br />
         <a href="https://golang.org" target="_blank">
-          GoLang.Org</a> A link to the source code language documentation
+          GoLang.Org</a>
         </li>
-      <br />
+      <br /><br />
         <li>
+          How pulling yourself up by bootstraps is
+          technically a non-physical thing <br />
           <a href="https://en.wikipedia.org/wiki/Bootstrapping" target="_blank">
-          en.Wikipedia.org/wiki/Bootstrapping</a>
-          <br />
-          how pulling yourself up by bootstraps is
-          technically a non-physical thing
+            en.Wikipedia.org/wiki/Bootstrapping</a>
         </li>
       </ul>
     </div>

@@ -4,7 +4,7 @@ THIS CAN AND NEEDS TO BE MADE PRIVATE by
   hiding this link from being served by the controller
     in controller.go*/
 
-{ /* TABLE SCHEMAS */
+{
 
 "*localhost:8080*/model/public/schema" : {
 

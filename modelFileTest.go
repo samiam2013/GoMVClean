@@ -6,6 +6,16 @@ import (
 	"strconv"
 )
 
+//bs slash operator for windows backslash 95
+//I guess I fixed it once in the loadStaticBody() once and for all
+const uStreamPath string = "updateStream"
+const dStreamPath string = "downloadStream" + "/"
+const schemaFileName = schemasFilesName
+const updateStreamPath = publicDBPath + uStreamPath
+const downloadStreamFile = publicDBPath + dStreamPath + schemaFileName
+
+const fileFAIL = "500"
+
 //see if this is modelPath/tableName/tableNameN
 func tryPath(outerPath, innerPath, wholePath string) bool {
 	modelPrint(
@@ -56,6 +66,17 @@ func tableQuery(path, wholePath string,
 	modelPrint("tableQuery( " + wholePath + " )")
 	smallQL := sQLRead
 	switch wholePath {
+	case updateStreamPath:
+		modelPrint(
+			"error: updateStreamPath not implemented. (tableQuery()) modelFileTest.go")
+		haveAV8(wholePath, w, r) //found in haveAV8.go
+		//errorShortCircuit(w, r, fileFAIL)
+		return true
+	case downloadStreamFile:
+		//here we just serve the schema for the downloadStreamPath
+		query(dStreamPath, "read", modelMarkup, w, r)
+		//errorShortCircuit(w, r, fileFAIL)
+		return true
 	case modelPubPath:
 		//if head says POST, go to "update mode"
 		contLenStr := r.Header.Get("Content-Length")

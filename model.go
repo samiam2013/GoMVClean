@@ -34,7 +34,7 @@ const sQLUpdate string = "update"
 const sQLRead string = "read"
 
 //model verbosity switch
-const modelDEBUG = true
+const modelDEBUG = false
 
 //model failure Error Constant
 const modelFAIL = "403"
