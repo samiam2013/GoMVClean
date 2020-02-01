@@ -1,6 +1,14 @@
 # GoMVClean [![Go Report Card](https://goreportcard.com/badge/github.com/samiam2013/GoMVClean)]
 A Go language MVC template written for keeping with only native dependencies
 
+Look Mom I got a good grade!
+Karla Dec 26 1963 - Nov 2 2002
+
+Look Dad I still don't have a job! 
+Glenn Myres Nov 2 1965 - Dec 17 2008
+
+I was put on the back of your tombstone, now you're right above my epitaph! lol
+
 # Basics
 In Go, dynamic form-data handling is really easy because of access to low level data and high accessibility through libraries of functions. it's also insanely easy to reach into the folder structure to read and write.
 
