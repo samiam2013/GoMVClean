@@ -36,4 +36,4 @@ But if I can pull that off, I'm pretty sure I just put a rope around a room size
 
 That's one small Go Lang Library for a man on this big blue marble, one giant
 
-func leap(*manKind){ *manKind.Realize( " this is Yuge-ish. " )  }
+func leap(*manKind){ manKind.Realize( " this is Yuge-ish. " )  }
