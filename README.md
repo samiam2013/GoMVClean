@@ -1,4 +1,4 @@
-# GoMVClean
+# GoMVClean [![Go Report Card](https://goreportcard.com/badge/github.com/samiam2013/GoMVClean)]
 A Go language MVC template written for keeping with only native dependencies
 
 # Basics
@@ -19,28 +19,14 @@ like `site.domain/public/table/column/hashed(userId)`
 
 Here, `hashed(userId)` is an assurance that even if permissions on the database are failing, brute-force search of the database will still be near impossible or impossible.
 
+I have public model endpoints for arbitrary data upload and download and I'm working on Cross-Site request forgery tokening so that forms are automatically validated. Since JavaScript comes with every browser, I'm going to try to write very vanilla JS for AJAX so that every page pull generates a new token and every page request deletes that token and generates a new one. CSRF everywhere + a reverse HTTPS proxy like NGINX == hopefully safe
 
-# Let's make a JS emulator
-The above is mostly done. I'm going to be working on a havaAv8.go script to boot-strap v8.
-
-I'm going to have to force you to haveAv8.go yourself and build v8 if you're not using
-1) Microsoft windows, because that's the development environment (thank GitHub and Atom)
-2) Ubuntu/Debian Linux, because that's what I'm familiar with. My apologies go to the "OSX" and RedHat communities.
-
-I cloned a build of Google's v8 engine for JS written in Go. This way I can create a website that enforces the version and runs almost all of the JS, LITERALLY on the backend.
-
-How to emulate JS at the speed of C: https://github.com/augustoroman/v8
-
-There will be a master V8 boot script. The console will be up-to speed on what it can query right after it's summoned and then a web socket can hold the connection open and return data.
-
-This can all happen before the user asks for any data, for functionality like search recommendations. All without telling users how the model is being queried, running a ton of JS on their end, or having a centralized schema for the data.
-
-This also has the potential to free front-end web designers from having to know anything about MySQL or even having to know there's a database because you can write one-off queries into random-data test folders for them to use to speed up development.
+After that, I'm going to attempt to write a Go database engine that understands the schema and can find a file arbitrarily and index arbitrarily after being queried with JSON. I'm basically looking to write my own NoSQL MVC in Go.
 
 # Epitaph
-If I can pull this off, I'm pretty sure I just lasso'ed the moon into low earth orbit and tied it down. If it's finished, you get to write a website that's written in JS and Go. As long as those two languages are supported it will have enforcement of how the code runs aside from browser ajax calls, because if the user doesn't run the PGP library to get into v8 they don't get in, and that's a lot of work, and it makes sending messages a lot of work.
+If I can pull this off, I'm pretty sure I just lasso'ed the moon into low earth orbit and tied it down. If it's finished, you get to write a website from a template that's written in JS and Go. As long as those two languages are supported it will have enforcement of how the code runs aside from browser ajax calls.
 
-However, I will have EXACTING precision ability to enforce what you send me, and it will always be secure, whether you use HTTPS:// or not, this is a second layer for the model just so that well, I can run my model with JS and users will never see any of the information. Users won't be able to see API endpoints, nor a schema, nor an algorithm, nor a giant library of JS waiting to load in their browser. Maybe this will be around with Go and JS for like hundreds, thousands of years based on the fact that signal processing work is largely done in assembly or C, 60 year old languages.
+I will have EXACTING precision ability to enforce rules over what you send me, this is a second layer for the model just so that I can run my model with JS and users will never see any of the information. Users won't be able to see API endpoints, nor a schema, nor an algorithm, nor a giant library of JS waiting to load in their browser. Maybe this will be around with Go and JS for like hundreds, thousands of years based on the fact that signal processing work is largely done in assembly or C, 60 year old languages.
 
 That's one small Go Lang Library for a man on this big blue marble, one giant
 

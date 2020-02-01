@@ -71,7 +71,7 @@ func tableQuery(path, wholePath string,
 	case updateStreamPath:
 		modelPrint(
 			"error: updateStreamPath not implemented. (tableQuery()) modelFileTest.go")
-		haveAV8(wholePath, w, r) //found in haveAV8.go
+		uploadStream(wholePath, w, r) //found in uploadStream.go
 		//errorShortCircuit(w, r, fileFAIL)
 		return true
 	case dSchemaFilePath:
