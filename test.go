@@ -38,16 +38,17 @@ func testModel(hasToPass bool) bool {
 
 func testSchema(schema string) bool {
 	fmt.Println("testing the Public schema.......")
-	jsonBody, err := loadStaticBody(modelPubPath)
+	jsonBody, err := loadStaticBody(modelPrivPath)
 	if err {
-		fmt.Println("fail.")
+		fmt.Print("fail.")
 		return true
 	} else if gDebug {
-		fmt.Println("testSchema(" + modelPubPath + ") : false. printing schema...")
+		fmt.Println("testSchema(" + modelPrivPath + ") : false. printing schema...")
 		fmt.Println(string(jsonBody))
-	} else {
-		fmt.Print("pass.")
+		fmt.Println("failed.")
+		return false
 	}
+	fmt.Print("pass.")
 	return false
 }
 
