@@ -6,7 +6,7 @@ import (
 	"net/http/httputil"
 )
 
-func uploadStream(w http.ResponseWriter, r *http.Request) {
+func routeView(w http.ResponseWriter, r *http.Request) {
 	//this code, thanks to *someone* on stackoverflow
 	// Save a copy of this request for debugging.
 	header, err := httputil.DumpRequest(r, true)

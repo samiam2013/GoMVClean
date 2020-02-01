@@ -15,7 +15,7 @@ const indexPathName string = indexPath + indexName
 const indexFAIL = "404"
 
 // if path == / , load homePage.html. otherwise 404
-func homeHandler(w http.ResponseWriter, r *http.Request) {
+func routeIndex(w http.ResponseWriter, r *http.Request) {
 	path := r.URL.Path
 	if path == indexPath || path == indexPathName {
 		path = staticMarkupFolder + indexName + staticMarkupType
@@ -27,10 +27,10 @@ func homeHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
-	http.HandleFunc(indexPath, homeHandler)
+	http.HandleFunc(indexPath, routeIndex)
 	http.HandleFunc(errorsPath, routeError)  // found in errors.go
 	http.HandleFunc(staticPath, routeStatic) // found in static.go
-	http.HandleFunc(viewPath, uploadStream)  // found in view.go
+	http.HandleFunc(viewPath, routeView)     // found in view.go
 	http.HandleFunc(modelPath, routeModel)   // found in model.go
 	if gDebug {
 		testEverything(true) //found in test.go

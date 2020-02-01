@@ -69,9 +69,7 @@ func tableQuery(path, wholePath string,
 	smallQL := sQLRead
 	switch wholePath {
 	case updateStreamPath:
-		modelPrint(
-			"error: updateStreamPath not implemented. (tableQuery()) modelFileTest.go")
-		uploadStream(w, r) //found in uploadStream.go
+		routeView(w, r)
 		return true
 	case dSchemaFilePath:
 		//here we just serve the schema for the downloadStreamPath
