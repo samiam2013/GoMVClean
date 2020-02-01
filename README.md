@@ -13,6 +13,12 @@ like site.domain/public/table/column/{hash(hash(user_id)}
 
 Here, `hash(hash(user_id))` is an assurance that even if permissions on the database are failing, brute-force search of the database will still be near impossible or impossible.
 
+This ^ is mostly done. I'm going to be working on a havaAv8.go script to boot-strap v8.
+
+I'm going to have to force you to haveAv8.yourself and build v8 if you're not using
+1) Microsoft windows, because that's the development environment (thank GitHub and Atom)
+2) Ubuntu/Debian Linux, because that's what I'm familiar with
+My apologies go to the "OSX" and RedHat communities.
 
 # I'm Go-ing Mad
 Here's a fun joke, I might just clone a build of Google's v8 engine for Javascript in Golang into the project, that way I can create a website that runs all of that Javascript, LITERALLY on the backend.
