@@ -18,7 +18,7 @@ func routeView(w http.ResponseWriter, r *http.Request) {
 	headString := string(header)
 
 	fmt.Fprint(w, "<html><body><code style=\"white-space: pre-wrap;\">")
-	fmt.Fprint(w, "Hi, welcome to updateStream.go, here's what you sent me: \n\n")
+	fmt.Fprint(w, "Hi, welcome to view.go, here's what you sent me: \n\n")
 	fmt.Fprint(w, "HTTP Request: \n\n")
 	fmt.Fprint(w, headString)
 	fmt.Fprint(w, "</code></body></html>")

@@ -13,7 +13,7 @@ const staticDEBUG = false
 // who you gonna call?
 const staticPath = "/static/"
 
-//fix relative static paths for windows.
+//break out that auto-backslash because windows is broken
 const staticMarkupFolder = "static" + string(os.PathSeparator)
 const staticMarkupType = ".html"
 const staticFAIL = "404"
@@ -41,7 +41,7 @@ func renderStatic(path string, w http.ResponseWriter, r *http.Request) {
 }
 
 // this gets re-used in modelQuery.go query()
-// and again in breakStuff.go through query()
+// and again in modelBreakStuff.go through query()
 // DANGEROUS STUFF HERE
 // load a static body given the relative path
 func loadStaticBody(path string) ([]byte, bool) {
