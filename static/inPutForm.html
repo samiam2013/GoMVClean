@@ -1,28 +1,23 @@
 
 
 <html>
-  <head>
-    <title>{{.websiteName /*not rendering*/}}: Home</title>
-  </head>
-  <body>
-    <div id="bodyWrapper" style="
-                            margin-left: 68px;
-                            margin-top: 50px;">
-    <h3 style="padding-left:"50%"">
-      Add your data to {{.websiteName}}</h3>
-    <a href="/">Back to Main Page</a><br />
-      <br />
-      A string explaining what the data is for:<br />
-      <br />
-        <form name="textForm" method="POST" action="/view/testPost">
-            <input name="textField" type="text"></input><br />
-          <br />
-          Input : <br />
-            <p>
-              <textarea name="textArea" cols="60" rows="20">base64...</textarea>
-            </p>
-          <br />
-          <input type="submit" value="Submit"></input>
-        </form>
-    </body>
+<head>
+  <title>View: Input Form</title>
+</head>
+<body>
+  <div id="bodyWrapper" style="
+                          margin-left: 68px;
+                          margin-top: 50px;
+                          font-family: monospace;">
+    &lt  <a href="/">Back to Main Page</a><br />
+    <h2>Add your data to GoMVClean!</h2>
+      <form name="textForm" method="POST" action="/view/testPost">
+          <p>
+            <textarea name="textArea" cols="60" rows="20">base64...</textarea>
+          </p>
+        <br />
+        <input type="submit" value="Submit"></input>
+      </form>
+    </div>
+  </body>
 </html>
