@@ -75,7 +75,7 @@ func tableQuery(path, wholePath string,
 		return testModelSchema(wholePath, smallQL, w, r)
 	default:
 		modelPrint("error: path not in tableQuery( " + wholePath + " )")
-		errorShortCircuit(w, r, "403")
+		errorShortCircuit(w, r, modelFAIL)
 	}
 	return false
 }

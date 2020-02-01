@@ -6,6 +6,9 @@ import (
 	"net/http"
 )
 
+//model render fail constatnt
+const modelRenderFAIL = "404"
+
 func uQuery(writePriority bool, path, schemaFileName string,
 	w http.ResponseWriter, r *http.Request) bool {
 	// use the query path to determine which data to update
@@ -34,7 +37,7 @@ func modelWrite(path, schemaFileName string,
 	}
 	defer log.Fatalln("hey sysadmins, SOMEONE tried to write to SOMEWHERE \n" +
 		"that's not in GoMVClean -> model.go's -> const schemaFileName string")
-	errorShortCircuit(w, r, "403")
+	errorShortCircuit(w, r, modelFAIL)
 	return false
 }
 
@@ -50,8 +53,8 @@ func modelStaticWrite(path string,
 				"GoMVClean-> modelQuery.go-> modelStaticWrite(", urlPath, ") \n"+
 				"-> loadStaticBody(", urlPath, ")\n"+
 				"-> static.go ->  ioutil.Readfile(", urlPath, ") \n"+
-				"That failed with a 404...")
-			errorShortCircuit(w, r, "404")
+				"That failed with a ", modelRenderFAIL, "...")
+			errorShortCircuit(w, r, modelRenderFAIL)
 			return false
 		}
 		ioutil.WriteFile(path, jsonString, 0642)
@@ -61,6 +64,6 @@ func modelStaticWrite(path string,
 		"THIS IS ONLY SUPPOSED TO BE USED BY modelWrite() \n" +
 		"because of safety mechnisms put in place. \n" +
 		"GODSPEED MAN, 73s W9USI over and OUT\n")
-	errorShortCircuit(w, r, "403")
+	errorShortCircuit(w, r, modelFAIL)
 	return true
 }

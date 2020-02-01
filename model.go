@@ -36,6 +36,9 @@ const sQLRead string = "read"
 //model verbosity switch
 const modelDEBUG = false
 
+//model failure Error Constant
+const modelFAIL = "403"
+
 func modelPrint(prStr string) {
 	if modelDEBUG {
 		fmt.Println(prStr)
@@ -66,6 +69,6 @@ func renderModel(path string, w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	//tell them explicitly that's forbidden
-	errorShortCircuit(w, r, "403")
+	errorShortCircuit(w, r, modelFAIL)
 	return
 }
