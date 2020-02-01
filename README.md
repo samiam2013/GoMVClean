@@ -9,6 +9,8 @@ Glenn Myres Nov 2 1965 - Dec 17 2008
 
 I was put on the back of your tombstone, now you're right above my epitaph! lol
 
+seriously though, the money you left is all gone because I got a business idea but I didn't inherit much motivation, so here I am begging, Paypal.me/GoMVClean
+
 # Basics
 In Go, dynamic form-data handling is really easy because of access to low level data and high accessibility through libraries of functions. It's also insanely easy to reach into the folder structure to read and write.
 
