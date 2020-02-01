@@ -6,6 +6,8 @@ import (
 	"net/http/httputil"
 )
 
+const viewPath = "/view/"
+
 func routeView(w http.ResponseWriter, r *http.Request) {
 	//this code, thanks to *someone* on stackoverflow
 	// Save a copy of this request for debugging.
