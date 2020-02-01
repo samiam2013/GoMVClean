@@ -1,6 +1,10 @@
 # GoMVClean [![Go Report Card](https://goreportcard.com/badge/github.com/samiam2013/GoMVClean)]
 A Go language MVC template written for keeping with only native dependencies
 
+"a quote from internet land : "Go really doesn't need a framework. There have been many attempts, but have all failed because frameworks just get in the way. The core language was designed for building rest APIs. If you want MVC [in] Go, just start structuring your code that way."
+
+What, so I can't do a good job of it and make the result free?
+
 # Basics
 In Go, dynamic form-data handling is really easy because of access to low level data and high accessibility through libraries of functions. It's also insanely easy to reach into the folder structure to read and write.
 
