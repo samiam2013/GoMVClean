@@ -23,7 +23,7 @@ func testEverything(hasToPass bool) {
 // self-explanatory
 func testModel(hasToPass bool) bool {
 	fmt.Println("testing the Model........")
-	testModelPath := modelSchemaRead + "/" + modelSchemaFolder + modelMarkup
+	testModelPath := modelSchemaPub + "/" + schemaFolder + modelMarkup
 	fmt.Println("testing model path: ", testModelPath)
 	schema, err := loadStaticBody(testModelPath)
 	if !gDebug && err {

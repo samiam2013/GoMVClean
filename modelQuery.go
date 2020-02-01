@@ -7,9 +7,9 @@ import (
 func rowQuery(path, smallQL string, w http.ResponseWriter, r *http.Request) bool {
 	modelPrint("rowQuery( " + path + " )")
 	switch path {
-	case modelSchemaRead:
-		//found in breakStuff.go
-		query(modelSchemaRead, smallQL, schemasFilesName, w, r)
+	case modelSchemaPub:
+		//found in breakStuff.go, I bring you query()
+		query(modelSchemaPub, smallQL, schemaFile, w, r)
 		return true
 	case modelNoGo:
 		modelPrint("modelNoGo hit. rowquery(" + path + ")")
@@ -20,12 +20,16 @@ func rowQuery(path, smallQL string, w http.ResponseWriter, r *http.Request) bool
 }
 
 func query(path, smallQl, schema string, w http.ResponseWriter, r *http.Request) bool {
-	modelPrint("query( " + path + " )")
+	modelPrint("query(" + path + ")")
 	switch path {
-	case modelSchemaRead:
-		renderStatic(modelSchemaRead+"/"+schema+modelMarkup, w, r)
+	case modelSchemaPub:
+		renderStatic(modelSchemaPub+"/"+schema+modelMarkup, w, r)
 		return true
 	case modelNoGo:
+		if pubAccessPrivDB {
+			//code for go-around
+
+		}
 		return false
 	default:
 		return false //woah wtf why
@@ -38,7 +42,7 @@ func updateQuery(path, id string, w http.ResponseWriter, r *http.Request) bool {
 		//write into the Database
 		modelPrint("updateQuery( " + path + " ) runnning...")
 		//found in breakStuff.go
-		return uQuery(true, path, schemasFilesName, w, r)
+		return uQuery(true, path, schemaFile, w, r)
 	}
 	return true
 }

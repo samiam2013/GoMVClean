@@ -31,7 +31,7 @@ func uQuery(writePriority bool, path, schemaFileName string,
 	// use the query path to determine which data to update
 	// then use the Request to figure out what to put there.
 	// return said database query as a renderStatic(path)
-	if query(path, modelSchemaRead, schemaFileName, w, r) {
+	if query(path, modelSchemaPub, schemaFileName, w, r) {
 		//the data exists and can be read
 		if writePriority {
 			//here's where whe write post data
@@ -49,7 +49,7 @@ func uQuery(writePriority bool, path, schemaFileName string,
 func modelWrite(path, schemaFileName string,
 	w http.ResponseWriter, r *http.Request) bool {
 	//try to write:Static to the model
-	if schemaFileName == schemasFilesName {
+	if schemaFileName == schemaFile {
 		return modelStaticWrite(path, w, r)
 	}
 	defer log.Fatalln(schemaFailString)

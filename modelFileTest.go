@@ -12,13 +12,13 @@ const updateStreamPath = publicDBPath + uStreamPath
 
 // how are you going to get there?
 const dStreamPath string = publicDBPath + "downloadStream/"
-const dSchemaFolder string = dStreamPath + modelSchemaFolder + "/"
-const dSchemaFilePath string = dSchemaFolder + schemasFilesName + modelMarkup
+const dSchemaFolder string = dStreamPath + schemaFolder + "/"
+const dSchemaFilePath string = dSchemaFolder + schemaFile + modelMarkup
 
 // what happens if they're not home?
 const fileFAIL = "500"
 
-//see if this is modelPath/tableName/tableNameN
+//see if this is modelPath/tableName/column
 func tryPath(outerPath, innerPath, wholePath string) bool {
 	modelPrint(
 		"tryPath( " + outerPath + ", " + innerPath + ", " + wholePath + " )")
@@ -90,7 +90,7 @@ func tableQuery(path, wholePath string,
 		return true
 	case modelPrivPath:
 		return testModelSchema(wholePath, smallQL, w, r)
-	case modelSchemaRead:
+	case modelSchemaPub:
 		return testModelSchema(wholePath, smallQL, w, r)
 	default:
 		modelPrint("error: path not in tableQuery( " + wholePath + " )")
@@ -106,8 +106,8 @@ func testModelSchema(path, smallQL string,
 	switch path {
 	case modelNoGo:
 		return rowQuery(modelNoGo, smallQL, w, r)
-	case modelSchemaRead:
-		return rowQuery(modelSchemaRead, smallQL, w, r)
+	case modelSchemaPub:
+		return rowQuery(modelSchemaPub, smallQL, w, r)
 	default:
 		return false
 	}

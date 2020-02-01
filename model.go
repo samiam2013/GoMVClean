@@ -5,6 +5,9 @@ import (
 	"net/http"
 )
 
+//model verbosity switch
+const modelDEBUG = false //true
+
 //where do I sit on the website tree?
 const modelPath string = "/model/"
 
@@ -13,18 +16,18 @@ const publicDBPath string = "public/"
 const privateDBPath string = "private/"
 
 //what's the folder for a schema called?
-const modelSchemaFolder string = "schema"
+const schemaFolder string = "schema"
 
 //what's the file for a folder schema called?
-const schemasFilesName string = "schema"
+const schemaFile string = "schema"
 const modelMarkup string = ".json"
 
 //const modelTestPath string = modelPath + publicDBPath + modelTestFolder
-const modelNoGo string = privateDBPath + modelSchemaFolder
+const modelNoGo string = privateDBPath + schemaFolder
 const modelPubPath string = modelPath + publicDBPath
 const modelPrivPath string = modelPath + privateDBPath
-const modelPubQueryUpdatePath string = modelPubPath + modelSchemaFolder
-const modelSchemaRead string = publicDBPath + modelSchemaFolder
+const modelPubQueryUpdatePath string = modelPubPath + schemaFolder
+const modelSchemaPub string = publicDBPath + schemaFolder
 
 //can the public see the private things? it's a boolean value!
 const pubAccessPrivDB bool = false //false by default
@@ -32,9 +35,6 @@ const pubAccessPrivDB bool = false //false by default
 //smallQL language commands
 const sQLUpdate string = "update"
 const sQLRead string = "read"
-
-//model verbosity switch
-const modelDEBUG = true
 
 //model failure Error Constant
 const modelFAIL = "403"
