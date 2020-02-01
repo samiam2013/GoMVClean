@@ -1,11 +1,14 @@
 package main
 
-import "net/http"
+import (
+	"net/http"
+)
 
 func rowQuery(path, smallQL string, w http.ResponseWriter, r *http.Request) bool {
 	modelPrint("rowQuery( " + path + " )")
 	switch path {
 	case modelSchemaRead:
+		//found in breakStuff.go
 		query(modelSchemaRead, smallQL, schemasFilesName, w, r)
 		return true
 	case modelNoGo:
@@ -34,16 +37,8 @@ func updateQuery(path, id string, w http.ResponseWriter, r *http.Request) bool {
 	if testModelSchema(path, "update", w, r) {
 		//write into the Database
 		modelPrint("updateQuery( " + path + " ) runnning...")
-		return uQuery(path, schemasFilesName, w, r)
+		//found in breakStuff.go
+		return uQuery(true, path, schemasFilesName, w, r)
 	}
-	return true
-}
-
-func uQuery(path, schemasFileName string,
-	w http.ResponseWriter, r *http.Request) bool {
-	// use the query path to determine which data to update
-	// then use the Request to figure out what to put there.
-	// return said database query as a renderStatic(path)
-
 	return true
 }

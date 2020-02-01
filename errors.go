@@ -26,7 +26,7 @@ func errorShortCircuit(w http.ResponseWriter,
 		renderStatic(path, w, r)
 		return
 	case "403":
-		//w.WriteHeader(http.StatusForbidden)
+		w.WriteHeader(http.StatusForbidden)
 		renderStatic(path, w, r)
 		return
 	default:
