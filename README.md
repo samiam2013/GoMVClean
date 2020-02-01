@@ -21,7 +21,7 @@ The MySQL structure `database -> table -> column` is really well known and is be
 
 However, this private/public structure means data from the public side is available for developing with the server while it is still running the site and running your new "private" model development (e.g. for private development of a smartphone app against the private model API)
 
-The Model is basic folders with individual schemas, JSON files scattered into folders by schema-define structures.
+The Model is made of folders with individual `schema.json` files scattered into folders by schema-defined structures. In the future, this will mean self-modifying file structure.
 
 like `site.domain/public/table/column/hashed(userId)`
 
