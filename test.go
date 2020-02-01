@@ -37,16 +37,26 @@ func testModel(hasToPass bool) bool {
 }
 
 func testSchema(schema string) bool {
-	fmt.Println("testing the Schema.......")
-	return true
+	fmt.Println("testing the Public schema.......")
+	jsonBody, err := loadStaticBody(modelPubPath)
+	if err {
+		fmt.Println("fail.")
+		return true
+	} else if gDebug {
+		fmt.Println("testSchema(" + modelPubPath + ") : false. printing schema...")
+		fmt.Println(string(jsonBody))
+	} else {
+		fmt.Print("pass.")
+	}
+	return false
 }
 
 func testView(hasToPass bool) bool {
-	fmt.Println("testing the View.........")
+	fmt.Println("testing the View.........test not written.")
 	return true
 }
 
 func testController(hasToPass bool) bool {
-	fmt.Println("testing the Controller!...")
+	fmt.Println("testing the Controller!..test not written.")
 	return true
 }

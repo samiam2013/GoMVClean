@@ -9,6 +9,23 @@ import (
 //model render fail constatnt
 const modelRenderFAIL = "404"
 
+const fatalLoadString = "hey sysadmins, \n" +
+	"GoMVClean-> modelQuery.go-> modelStaticWrite( urlPath ) \n" +
+	"-> loadStaticBody( urlPath )\n" +
+	"-> static.go ->  ioutil.Readfile( urlPathv ) \n" +
+	"That failed with a " + modelRenderFAIL + "..."
+
+const fatalWriteString = "hey sysadmins, BIG PROBLEM, someone is using \n" +
+	"modelStaticWrite() in GoMVClean -> modelQuery.go \n" +
+	"THIS IS ONLY SUPPOSED TO BE USED BY modelWrite() \n" +
+	"because of safety mechnisms put in place. \n" +
+	"GODSPEED MAN, 73s W9USI over and OUT \n" +
+	"That failed with a " + modelFAIL + "..."
+
+const schemaFailString = "hey sysadmins, SOMEONE tried to write to \n" +
+	"SOMEWHERE that's not in GoMVClean -> model.go's -> const schemaFileName string" +
+	"That failed with a " + modelFAIL + "..."
+
 func uQuery(writePriority bool, path, schemaFileName string,
 	w http.ResponseWriter, r *http.Request) bool {
 	// use the query path to determine which data to update
@@ -35,8 +52,7 @@ func modelWrite(path, schemaFileName string,
 	if schemaFileName == schemasFilesName {
 		return modelStaticWrite(path, w, r)
 	}
-	defer log.Fatalln("hey sysadmins, SOMEONE tried to write to SOMEWHERE \n" +
-		"that's not in GoMVClean -> model.go's -> const schemaFileName string")
+	defer log.Fatalln(schemaFailString)
 	errorShortCircuit(w, r, modelFAIL)
 	return false
 }
@@ -49,21 +65,13 @@ func modelStaticWrite(path string,
 		//let's write to the request location
 		jsonString, jsonErr := loadStaticBody(urlPath)
 		if jsonErr {
-			defer log.Fatalln("hey sysadmins, \n"+
-				"GoMVClean-> modelQuery.go-> modelStaticWrite(", urlPath, ") \n"+
-				"-> loadStaticBody(", urlPath, ")\n"+
-				"-> static.go ->  ioutil.Readfile(", urlPath, ") \n"+
-				"That failed with a ", modelRenderFAIL, "...")
+			defer log.Fatalln(fatalLoadString)
 			errorShortCircuit(w, r, modelRenderFAIL)
 			return false
 		}
 		ioutil.WriteFile(path, jsonString, 0642)
 	}
-	defer log.Fatalln("hey sysadmins, BIG PROBLEM, someone is using \n" +
-		"modelStaticWrite() in GoMVClean -> modelQuery.go \n" +
-		"THIS IS ONLY SUPPOSED TO BE USED BY modelWrite() \n" +
-		"because of safety mechnisms put in place. \n" +
-		"GODSPEED MAN, 73s W9USI over and OUT\n")
+	defer log.Fatalln()
 	errorShortCircuit(w, r, modelFAIL)
 	return true
 }

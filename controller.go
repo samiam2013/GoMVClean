@@ -8,20 +8,26 @@ import (
 //global debugger constant
 const gDebug bool = true
 
+const httpPort string = ":8080"
+const indexPath string = "/"
+const indexName string = "index"
+const indexPathName string = indexPath + indexName
+const indexFAIL = "404"
+
 // if path == / , load homePage.html. otherwise 404
 func homeHandler(w http.ResponseWriter, r *http.Request) {
 	path := r.URL.Path
-	if path == "/" || path == "/index" {
-		path = staticMarkupFolder + "index" + staticMarkupType
+	if path == indexPath || path == indexPathName {
+		path = staticMarkupFolder + indexName + staticMarkupType
 		renderStatic(path, w, r)
 		return
 	}
-	errorShortCircuit(w, r, "404")
+	errorShortCircuit(w, r, indexFAIL)
 	return
 }
 
 func main() {
-	http.HandleFunc("/", homeHandler)
+	http.HandleFunc(indexPath, homeHandler)
 	http.HandleFunc(errorsPath, routeError)  // found in errors.go
 	http.HandleFunc(staticPath, routeStatic) // found in static.go
 	http.HandleFunc(viewPath, routeView)     // found in view.go
@@ -29,6 +35,6 @@ func main() {
 	if gDebug {
 		testEverything(true) //found in test.go
 	}
-	log.Fatal(http.ListenAndServe(":8080", nil))
+	log.Fatal(http.ListenAndServe(httpPort, nil))
 	return
 }

@@ -58,10 +58,10 @@ func tableQuery(path, wholePath string,
 	switch wholePath {
 	case modelPubPath:
 		//if head says POST, go to "update mode"
-		contLen := r.Header.Get("Content-Length")
-		contLenStr, _ := strconv.Atoi(contLen)
+		contLenStr := r.Header.Get("Content-Length")
+		contLen, _ := strconv.Atoi(contLenStr)
 		//fmt.Println("post: ",contLen)
-		if contLenStr == 0 {
+		if contLen == 0 {
 			smallQL = sQLRead
 		} else {
 			smallQL = sQLUpdate
