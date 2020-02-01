@@ -1,30 +1,32 @@
-/*ELHO these are the JSON table schemas
+"
+ELHO these are the JSON table schemas
 
-THIS CAN AND NEEDS TO BE MADE PRIVATE by
-  hiding this link from being served by the controller
-    in controller.go*/
+THIS will be telling user javascript where to query
+then, in descending cascade, tell V8 how to read the database
+with these JSON arrays
+"
 
 {
 
-"*localhost:8080*/model/public/schema" : {
+"*fqdn/model/public/schema" : {
 
     "schemaFile" : "schema.json",
 
-    "SmallSchemaLang" : "(read-only (*recursion func())) jsonSettings *me "
+    "SmallSchemaLang" : "(read-only (schemaFile))"
 
 },
 
-"*localhost:8080*/model/public/updateStream" : {
+"*fqdn/model/public/updateStream/schema" : {
 
     "schemaFile" : "schema.json",
 
-    "SmallSchemaLang" : "{ (*read-write (schemaFile)) , (httpLink) }"
+    "SmallSchemaLang" : "(read-write (schemaFile))"
 
 },
 
-"*localhost:8080/model/public/downloadStream" : {
+"*fqdn/model/public/downloadStream/schema" : {
 
     "schemaFile" : "schema.json",
 
-    "SmallSchemaLang" : "{ (*read-write (schemaFile)) , (httpLink) }"
+    "SmallSchemaLang" : "(read-write (schemaFile))"
 }

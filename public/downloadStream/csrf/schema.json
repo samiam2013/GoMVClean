@@ -1,4 +1,0 @@
-/*ELHO welcome to json download stream
-one concern I have about this, you can upload random data at the speeed you
-can request CSRF tokens, my signing algorithm (Javascript), and compute at */
-{"jsonCSRFTokensignedRequestKey" : "base64 (data)"}

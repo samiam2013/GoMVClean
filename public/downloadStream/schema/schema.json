@@ -1,6 +1,3 @@
-"*localhost:8080/model/public/downloadStream" : {
-
-    "schemaFile" : "schema.json",
-
-    "SmallSchemaLang" : "{ (*read-write (schemaFile)) , (httpLink) }"
+"*fqdn/model/public/downloadStream/csrf" : {
+    "SmallSchemaLang" : "{ 'csrfToken' : (base64) }"
 }
