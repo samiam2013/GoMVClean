@@ -4,20 +4,20 @@ A Go language MVC template written for keeping with only native dependencies
 Look Mom I got a good grade!
 Karla Dec 26 1963 - Nov 2 2002
 
-Look Dad I still don't have a job! 
+Look Dad I still don't have a job!
 Glenn Myres Nov 2 1965 - Dec 17 2008
 
 I was put on the back of your tombstone, now you're right above my epitaph! lol
 
 # Basics
-In Go, dynamic form-data handling is really easy because of access to low level data and high accessibility through libraries of functions. it's also insanely easy to reach into the folder structure to read and write.
+In Go, dynamic form-data handling is really easy because of access to low level data and high accessibility through libraries of functions. It's also insanely easy to reach into the folder structure to read and write.
 
 So with a Go language MVC website template, the entire model can be fractured into private and public instance folders.
 
-Permissions can be dynamically set for access to each user as measured by keeping a persistent-state variable for each user after a login. I don't want to use cookies, I'll probably just keep a persistent web socket if I can do that instead.
+Permissions can be dynamically set for access to each user as measured by keeping a persistent-state variable for each user after a login. I don't want to use cookies, I don't like cookies. I'll probably just limit logins to session cookies since that stops me from having to implement persistent cookie storage.
 
 # Model Structure
-The MySQL structure 'database' -> 'table' -> 'column' is really well known and is being implemented by folders in descending order. This allows for a private folder for development of model scenarios to be implemented alongside the actual live site. For now there's a Boolean switch disabling it until I can implement a solution for deciding if a user should be able to access the private database.
+The MySQL structure `database -> table -> column` is really well known and is being implemented by folders in descending order. This allows for a private folder for development of model scenarios to be implemented alongside the actual live site. This is implemented in a `query("folderPath")` with main folder paths `public/` and `private/` .  For now there's a Boolean switch disabling it until I can implement a solution for deciding if a user should be able to access the private database.
 
 However, this private/public structure means data from the public side is available for developing with the server while it is still running the site and running your new "private" model development (e.g. for private development of a smartphone app against the private model API)
 
