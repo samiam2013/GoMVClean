@@ -6,22 +6,38 @@ A quote from internet land : "Go really doesn't need a framework. There have bee
 What, so I can't do a good job of it and make the result free?
 
 # How to use it
+
 Download Go at Golang.org, clone this project into a directory.
+
 go build;
+
 go run;
 
+
 Look at the index, it's a static file, and so is the form.
+
 Look at the view, it's a go file, it just outputs what you send it
+
 Realize that the view file tells you what it sees whether you visit it as a GET request or a POST form.
+
 look at modelQuery.go and modelBreakStuff.go, these are the important database checks and they also include the most important, most functional stuff to be used.
+
 Ignore the schema files, they're just stand-ins for whatever you want to use.
 
-You've got a quick way to load a page: renderStatic() in static.go
-You've got a quick way to load an error page: errorShortCircuit()
-You've got a quick way to get data from the model: loadStaticBody()
-You've got a quick way to check and see if something's in the model query()
-and a fast way to break everything if you're willing to use uQuery()
+
+load a page: renderStatic() in static.go
+
+load an error page: errorShortCircuit()
+
+get data from the model: loadStaticBody()
+
+check and see if something's in the model: query()
+
+write to a space in the model: uQuery()
+
+
 as far as I can tell this is all you *need* to make a website.
+
 
 # Basics
 In Go, dynamic form-data handling is really easy because of access to low level data and high accessibility through libraries of functions. It's also insanely easy to reach into the folder structure to read and write.
