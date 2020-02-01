@@ -22,7 +22,7 @@ THIS CAN AND NEEDS TO BE MADE PRIVATE by
 
 },
 
-"*localhost:8080/model/public/modelRead" : {
+"*localhost:8080/model/public/downloadStream" : {
 
     "schemaFile" : "schema.json",
 
