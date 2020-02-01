@@ -6,15 +6,16 @@ import (
 	"strconv"
 )
 
-//bs slash operator for windows backslash 95
-//I guess I fixed it once in the loadStaticBody() once and for all
+// who you gonna go visit?
 const uStreamPath string = "updateStream"
 const updateStreamPath = publicDBPath + uStreamPath
 
+// how are you going to get there?
 const dStreamPath string = publicDBPath + "downloadStream/"
 const dSchemaFolder string = dStreamPath + modelSchemaFolder + "/"
 const dSchemaFilePath string = dSchemaFolder + schemasFilesName + modelMarkup
 
+// what happens if they're not home?
 const fileFAIL = "500"
 
 //see if this is modelPath/tableName/tableNameN
@@ -57,7 +58,6 @@ func privateQuery(path, wholePath string,
 func publicQuery(path, wholePath string,
 	w http.ResponseWriter, r *http.Request) bool {
 	modelPrint("publicQuery( " + path + " )")
-	//fmt.Fprintf(w, "{Database: '%s', table: '%s'}\n", path, wholePath)
 	return tableQuery(path, wholePath, w, r)
 }
 
@@ -72,18 +72,15 @@ func tableQuery(path, wholePath string,
 		modelPrint(
 			"error: updateStreamPath not implemented. (tableQuery()) modelFileTest.go")
 		uploadStream(wholePath, w, r) //found in uploadStream.go
-		//errorShortCircuit(w, r, fileFAIL)
 		return true
 	case dSchemaFilePath:
 		//here we just serve the schema for the downloadStreamPath
 		renderStatic(dSchemaFilePath, w, r)
-		//errorShortCircuit(w, r, fileFAIL)
 		return true
 	case modelPubPath:
 		//if head says POST, go to "update mode"
 		contLenStr := r.Header.Get("Content-Length")
 		contLen, _ := strconv.Atoi(contLenStr)
-		//fmt.Println("post: ",contLen)
 		if contLen == 0 {
 			smallQL = sQLRead
 		} else {
@@ -94,7 +91,6 @@ func tableQuery(path, wholePath string,
 	case modelPrivPath:
 		return testModelSchema(wholePath, smallQL, w, r)
 	case modelSchemaRead:
-		//modelPrint("public/schema tableQuery( " + wholePath + " )...")
 		return testModelSchema(wholePath, smallQL, w, r)
 	default:
 		modelPrint("error: path not in tableQuery( " + wholePath + " )")
