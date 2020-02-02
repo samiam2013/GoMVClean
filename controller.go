@@ -13,6 +13,7 @@ const indexPath string = "/"
 const indexName string = "index"
 const indexPathName string = indexPath + indexName
 const indexFAIL = "404"
+const hTTPSafe = false // default false, true once http2 is implemented
 
 // if path ("/"|"/indexName") serve indexName+staticMarkupType otherwise 404
 func routeIndex(w http.ResponseWriter, r *http.Request) {
@@ -26,15 +27,23 @@ func routeIndex(w http.ResponseWriter, r *http.Request) {
 	return
 }
 
-func main() {
+func runHTTP() {
 	http.HandleFunc(indexPath, routeIndex)
 	http.HandleFunc(errorsPath, routeError)  // found in errors.go
 	http.HandleFunc(staticPath, routeStatic) // found in static.go
 	http.HandleFunc(viewPath, routeView)     // found in view.go
 	http.HandleFunc(modelPath, routeModel)   // found in model.go
+	log.Fatal(http.ListenAndServe(httpPort, nil))
+}
+
+func main() {
+	if hTTPSafe {
+		runHTTP()
+	} else if hTTPSafe {
+		//configure the https through the http server and run it here
+	}
 	if gDebug {
 		testEverything(true) //found in test.go
 	}
-	log.Fatal(http.ListenAndServe(httpPort, nil))
 	return
 }

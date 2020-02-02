@@ -6,21 +6,19 @@ func testEverything(hasToPass bool) {
 	passV := testView(hasToPass)
 	passC := testController(hasToPass)
 	if passM && passV && passC {
-		print("pass.\n")
+		print("Tests Pass.\n")
 	} else if !passM {
-		print("failed testModel()......\n")
+		print("Failed testModel()......\n")
 	} else if !passV {
-		print("failed testView()\n")
+		print("Failed testView()\n")
 	} else if !passC {
-		print("failed the testController()\n")
+		print("Failed the testController()\n")
 	}
 }
 
 // self-explanatory
 func testModel(hasToPass bool) bool {
-	print("Testing the Model........\n")
 	testModelPath := modelSchemaPub + "/" + schemaFolder + modelMarkup
-	print("Testing model path: " + testModelPath + "\n")
 	schema, err := loadStaticBody(testModelPath)
 	if !gDebug && err {
 		print("schema.json:" + string(schema) + "\n")
@@ -36,7 +34,7 @@ func testModel(hasToPass bool) bool {
 
 // ...
 func testSchema(schema string) bool {
-	print("Testing the Public Schema.......\n")
+	print("Testing model*.go(?).......\n")
 	jsonBody, err := loadStaticBody(modelPrivPath)
 	if err {
 		print("Fail.\n")
@@ -53,12 +51,12 @@ func testSchema(schema string) bool {
 
 // (ultra) *selfExplanatory
 func testView(hasToPass bool) bool {
-	print("Testing the View.........test not written.\n")
+	print("Testing view.go...test not written.\n")
 	return true
 }
 
 // superMega selfExplanatory
 func testController(hasToPass bool) bool {
-	print("testing the Controller!..test not written.\n")
+	print("Testing controller.go...test not written.\n")
 	return true
 }
