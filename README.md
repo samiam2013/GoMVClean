@@ -1,26 +1,37 @@
 # GoMVClean [![Go Report Card](https://goreportcard.com/badge/github.com/samiam2013/GoMVClean)]
-A Go language MVC template written for keeping with only native dependencies
-
-A quote from internet land : "Go really doesn't need a framework. There have been many attempts, but have all failed because frameworks just get in the way. The core language was designed for building rest APIs. If you want MVC [in] Go, just start structuring your code that way."
-
-What, so I can't do a good job of it and make the result free?
+(definition) - noun ( microMacroService compiled binary JSON schema singleton-pattern website application )
+(explanation) - I need a Go key-value heaped sorted storage mechanism and Model View Controller
+(synonym) - I hate database servers
+(homonym) - A Go language MVC template written for keeping with only native dependencies
+(exception) - it will utilize JavaScript and JSON.
 
 # How to use it
 
-Download Go at Golang.org, clone this project into a directory.
+1) Download Go at [GoLang.Org](https://golang.org) if you don't have it 
 
-go build;
+2) clone this project into a directory.
 
-go run;
+3) open a powershell or bash(? not tested) console
+
+4) change to the package directory
+
+5) type `go build`
+
+6) `go run`
+
+7) find a way to browse localhost:8080
 
 
+# Check Out it's Features (ultra basic mode for now)
 Look at the index, it's a static file, and so is the form.
 
 Look at the view, it's a go file, it just outputs what you send it
 
-Realize that the view file tells you what it sees whether you visit it as a GET request or a POST form.
+Realize that this view "/view/" tells you what it sees whether you visit it as a GET request or a POST form.
 
-look at modelQuery.go and modelBreakStuff.go, these are the important database checks and they also include the most important, most functional stuff to be used.
+Look at modelQuery.go , modelFileTest.go , and modelBreakStuff.go 
+
+These are the important database checks and they also include the most important, most functional model functionality to be used.
 
 Ignore the schema files, they're just stand-ins for whatever you want to use.
 
