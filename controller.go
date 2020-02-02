@@ -6,7 +6,7 @@ import (
 )
 
 //global debugger constant
-const gDebug bool = false
+const gDebug bool = true
 
 const httpPort string = ":8080"
 const indexPath string = "/"

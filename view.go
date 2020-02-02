@@ -23,4 +23,22 @@ func routeView(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprint(w, headString)
 	fmt.Fprint(w, "</code></body></html>")
 	return
+
+	//here's an idea, check if it's post or get
+	// if post type
+	//    then routePost(path)
+	// else
+	//    then routeGet(path)
 }
+
+//  routePost (path)
+//  switch Path
+// 		case "inputForm"
+//			load javascript for pulling ajax result after data processed and uQuery
+//			load new result into view with JS redirect for where data landed
+//			return
+// 		case "/model/public/"
+//			load static index page for docs on the schema
+//			load public schema in through get /model/public/schema/schema.json view
+//			return
+//		case

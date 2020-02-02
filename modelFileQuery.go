@@ -50,19 +50,20 @@ func modelWrite(path, schemaFileName string,
 	w http.ResponseWriter, r *http.Request) bool {
 	//try to write:Static to the model
 	if schemaFileName == schemaFile {
-		return modelStaticWrite(path, w, r)
+		return modeljsonVerifyWrite(path, w, r)
 	}
 	defer log.Fatalln(schemaFailString)
 	errorShortCircuit(w, r, modelFAIL)
 	return false
 }
 
-func modelStaticWrite(path string,
+func modeljsonVerifyWrite(path string,
 	w http.ResponseWriter, r *http.Request) bool {
-	//let's check one last time that we're writing to the request location
+	// check one last time that we're writing to the request location
 	urlPath := r.URL.Path[len(path):]
-	if len(urlPath) > 1 {
+	if len(urlPath) > 1 { // needs to be changed to json check algo
 		//let's write to the request location
+		// [the royal let's] : * DUDE abides. *
 		jsonString, jsonErr := loadStaticBody(urlPath)
 		if jsonErr {
 			defer log.Fatalln(fatalLoadString)

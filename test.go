@@ -10,28 +10,28 @@ func testEverything(hasToPass bool) {
 	passV := testView(hasToPass)
 	passC := testController(hasToPass)
 	if passM && passV && passC {
-		fmt.Println("pass.")
+		print("pass.\n")
 	} else if !passM {
-		fmt.Println("failed testModel()......")
+		print("failed testModel()......\n")
 	} else if !passV {
-		fmt.Println("failed testView()")
+		print("failed testView()\n")
 	} else if !passC {
-		fmt.Println("failed the testController()")
+		print("failed the testController()\n")
 	}
 }
 
 // self-explanatory
 func testModel(hasToPass bool) bool {
-	fmt.Println("testing the Model........")
+	print("Testing the Model........\n")
 	testModelPath := modelSchemaPub + "/" + schemaFolder + modelMarkup
-	fmt.Println("testing model path: ", testModelPath)
+	print("Testing model path: " + testModelPath + "\n")
 	schema, err := loadStaticBody(testModelPath)
 	if !gDebug && err {
-		fmt.Println("schema.json:", string(schema))
+		print("schema.json:" + string(schema) + "\n")
 		return testSchema(string(schema))
 	} else if !gDebug {
 		if !err {
-			fmt.Println("could not retrieve Json Schema!")
+			print("could not retrieve JSON schema!\n")
 			return false
 		}
 	}
@@ -40,18 +40,18 @@ func testModel(hasToPass bool) bool {
 
 // ...
 func testSchema(schema string) bool {
-	fmt.Println("testing the Public schema.......")
+	print("testing the Public schema.......\n")
 	jsonBody, err := loadStaticBody(modelPrivPath)
 	if err {
-		fmt.Print("fail.")
+		print("fail.\n")
 		return true
 	} else if gDebug {
-		fmt.Println("testSchema(" + modelPrivPath + ") : false. printing schema...")
-		fmt.Println(string(jsonBody))
-		fmt.Println("failed.")
+		print("testSchema(" + modelPrivPath + ") : false. printing schema...\n\n")
+		print(string(jsonBody))
+		print("failed.\n")
 		return false
 	}
-	fmt.Print("pass.")
+	print("pass.\n")
 	return false
 }
 
