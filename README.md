@@ -9,6 +9,8 @@
 
 (exception) - it will utilize JavaScript and JSON.
 
+I want to thank: the team at atom editor, github.com/atom , the team at github desktop, https://desktop.github.com/ , github's github https://github.com/github , the team working on Go https://github.com/golang/go , and very ironically the team at microsoft Windows 10 All of you for making 100 + updates to a github repository possible in like 50 hours of writing Go.
+
 # How to use it
 
 1) Download Go at [GoLang.Org](https://golang.org) if you don't have it 
