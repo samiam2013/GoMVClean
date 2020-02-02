@@ -1,9 +1,5 @@
 package main
 
-import (
-	"fmt"
-)
-
 //this has a self-explanatory name
 func testEverything(hasToPass bool) {
 	passM := testModel(hasToPass)
@@ -31,7 +27,7 @@ func testModel(hasToPass bool) bool {
 		return testSchema(string(schema))
 	} else if !gDebug {
 		if !err {
-			print("could not retrieve JSON schema!\n")
+			print("Could not retrieve JSON schema!\n")
 			return false
 		}
 	}
@@ -40,15 +36,15 @@ func testModel(hasToPass bool) bool {
 
 // ...
 func testSchema(schema string) bool {
-	print("testing the Public schema.......\n")
+	print("Testing the Public Schema.......\n")
 	jsonBody, err := loadStaticBody(modelPrivPath)
 	if err {
-		print("fail.\n")
+		print("Fail.\n")
 		return true
 	} else if gDebug {
 		print("testSchema(" + modelPrivPath + ") : false. printing schema...\n\n")
 		print(string(jsonBody))
-		print("failed.\n")
+		print("Failed.\n")
 		return false
 	}
 	print("pass.\n")
@@ -57,12 +53,12 @@ func testSchema(schema string) bool {
 
 // (ultra) *selfExplanatory
 func testView(hasToPass bool) bool {
-	fmt.Println("testing the View.........test not written.")
+	print("Testing the View.........test not written.\n")
 	return true
 }
 
 // superMega selfExplanatory
 func testController(hasToPass bool) bool {
-	fmt.Println("testing the Controller!..test not written.")
+	print("testing the Controller!..test not written.\n")
 	return true
 }
