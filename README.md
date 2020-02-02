@@ -1,8 +1,12 @@
 # GoMVClean [![Go Report Card](https://goreportcard.com/badge/github.com/samiam2013/GoMVClean)]
 (definition) - noun ( microMacroService compiled binary JSON schema singleton-pattern website application )
+
 (explanation) - I need a Go key-value heaped sorted storage mechanism and Model View Controller
+
 (synonym) - I hate database servers
+
 (homonym) - A Go language MVC template written for keeping with only native dependencies
+
 (exception) - it will utilize JavaScript and JSON.
 
 # How to use it
