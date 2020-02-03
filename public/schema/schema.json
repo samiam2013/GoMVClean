@@ -2,7 +2,8 @@
 ELHO these are the JSON table schemas
 
 THIS will be telling user javascript where to query
-then, in descending cascade, tell V8 how to read the database
+then, in descending cascade,
+tell routeModel.go how to read-only or read-write the database
 with these JSON arrays
 "
 
@@ -12,7 +13,7 @@ with these JSON arrays
 
     "schemaFile" : "schema.json",
 
-    "SmallSchemaLang" : "(read-only (schemaFile))"
+    "SmallSchemaLang" : "tableRecursion schema.json"
 
 },
 
@@ -20,7 +21,7 @@ with these JSON arrays
 
     "schemaFile" : "schema.json",
 
-    "SmallSchemaLang" : "(read-write (schemaFile))"
+    "SmallSchemaLang" : "table schema.json"
 
 },
 
@@ -28,5 +29,5 @@ with these JSON arrays
 
     "schemaFile" : "schema.json",
 
-    "SmallSchemaLang" : "(read-write (schemaFile))"
+    "SmallSchemaLang" : "table schema.json"
 }
