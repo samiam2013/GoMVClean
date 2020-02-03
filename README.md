@@ -1,4 +1,6 @@
 # GoMVClean [![Go Report Card](https://goreportcard.com/badge/github.com/samiam2013/GoMVClean)]
+The world's first (that I know of) complete (has it's own database) website automation server (it's configurable).
+
 (definition) - noun ( microMacroService compiled binary JSON schema singleton-pattern website application )
 
 (explanation) - I need a Go key-value heaped sorted storage mechanism and Model View Controller
@@ -8,6 +10,20 @@
 (homonym) - A Go language MVC template written for keeping with only native dependencies
 
 (exception) - it will utilize JavaScript and JSON.
+
+it runs on http, it needs a reverse proxy to reference itself safely. I'm going to work on implementing https on top of http to eliminate the need for a reverse proxy, then I want to implement PGP websockets in TypeScript so the model can be failed over to safely self-reference over HTTP. 
+
+This means: [Tyler Durden enters the chat]
+
+[Durden]: "Rule 0 of GoMVClean is safety and 
+
+[Durden]: "Rule 1 of GoMVClean is speed. 
+
+[GPL]: "Rule 2 of GoMVClean is version 3.0, no TiVo-ization. 
+
+[not Durden]: "Rule 3 of GoMVClean is no middleware, just Go and Javascript. 
+
+[me]: "Rule 4 of GoMVClean is `[databaseServer] = false`, always.
 
 I want to thank: the team at atom editor, github.com/atom , the team at github desktop, https://desktop.github.com/ , github's github https://github.com/github , the team working on Go https://github.com/golang/go , and very ironically the team at microsoft Windows 10 All of you for making 100 + updates to a github repository possible in like 50 hours of writing Go.
 
