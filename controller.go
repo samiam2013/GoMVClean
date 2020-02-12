@@ -31,7 +31,7 @@ func routeIndex(w http.ResponseWriter, r *http.Request) {
 func runHTTPSequence(runHTTPS bool) {
 	fmt.Println("run model() in TLS not done...")
 	//log.Fatal("write the hekkin code to model in TLS ONLY...")
-	go httpsModel() // found in routeModelHTTPS.go
+	go httpsModelAPI() // found in routeModelHTTPS.go
 
 	// then
 	http.HandleFunc(indexPath, routeIndex)

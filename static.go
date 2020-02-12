@@ -23,7 +23,7 @@ func routeStatic(w http.ResponseWriter, r *http.Request) {
 	if staticDEBUG {
 		fmt.Println("routeStatic()...")
 	}
-	pageName := r.URL.Path[len(staticMarkupFolder):]
+	pageName := r.URL.Path[len(staticPath):]
 	path := staticMarkupFolder + pageName + staticMarkupType
 	renderStatic(path, w, r)
 	return
