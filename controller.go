@@ -10,6 +10,7 @@ import (
 //global debugger constant
 const gDebug bool = true
 
+const hostFQDN = "localhost"
 const httpsPort string = ":443"
 const tlsPath = "TLS"
 const tlsFolder = tlsPath + string(os.PathSeparator)
@@ -33,5 +34,19 @@ func main() {
 	if gDebug {
 		testEverything(true) //found in test.go
 	}
+	go concurrentRedir() 
 	return
+}
+
+func redirHTTPS(w http.ResponseWriter, r *http.Request) {
+	http.Redirect(w, r, "https://"+hostFQDN+httpsPort+r.RequestURI,
+		http.StatusMovedPermanently)
+	return
+}
+
+func concurrentRedir() {
+	err := http.ListenAndServe("httpPort", http.HandlerFunc(redirHTTPS))
+	if err != nil {
+		log.Fatal("HTTP -> HTTPS redirect FAIL:", err)
+	}
 }
