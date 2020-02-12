@@ -1,9 +1,13 @@
 package main
 
 import (
+	"crypto/sha256"
+	"encoding/binary"
 	"fmt"
+	"math/rand"
 	"net/http"
 	"net/http/httputil"
+	"time"
 )
 
 // I have to figure out how to run https queries against the modeling
@@ -23,17 +27,38 @@ import (
 const apiPath = "/api/"
 const apiCopies int32 = 0
 
+const csrfPath = apiPath + "csrf"
+
 func routeAPI(w http.ResponseWriter, r *http.Request) {
 	// and at the end of the function call it needs to be albe to call
 	// each and every other single running instance of this server that's
 	// running on another machine,
-	fmt.Fprint(w, "hello I am the api\n\n")
-	header, err := httputil.DumpRequest(r, true)
-	if err != nil {
-		fmt.Println(err)
+
+	path := r.URL.Path
+	switch path {
+	case csrfPath:
+		//seed the random number generator with the time.
+		rand.Seed(time.Now().UnixNano())
+		//get the current time as int64 unix time in seconds.
+		timeStamp := time.Now().Unix()
+		//make a random 64 bit number
+		randN := rand.Int63n(timeStamp)
+		randB := make([]byte, 8)
+		binary.LittleEndian.PutUint64(randB, uint64(randN))
+		//generate the byte form random hash
+		hashN := sha256.Sum256(randB)
+		//generate the string from the byte form
+		hashString := fmt.Sprintf("%x", hashN)
+		//print that as a json pair
+		fmt.Fprint(w, "{\"token\",\"", hashString, "\"}")
+	default:
+		header, err := httputil.DumpRequest(r, true)
+		if err != nil {
+			fmt.Println(err)
+		}
+		headString := string(header)
+		fmt.Fprint(w, headString)
 	}
-	headString := string(header)
-	fmt.Fprint(w, headString)
 
 	//  routePost (path)
 	//  switch Path
