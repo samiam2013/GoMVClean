@@ -8,7 +8,7 @@ import (
 )
 
 // verbosity switch
-const staticDEBUG = false
+const staticDEBUG = true
 
 // who you gonna call?
 const staticPath = "/static/"
@@ -20,12 +20,12 @@ const staticFAIL = "404"
 
 // pull the staticMarkupFolder out of path and render it
 func routeStatic(w http.ResponseWriter, r *http.Request) {
-	if staticDEBUG {
-		fmt.Println("routeStatic()...")
-	}
 	pageName := r.URL.Path[len(staticPath):]
 	path := staticMarkupFolder + pageName + staticMarkupType
 	renderStatic(path, w, r)
+	if staticDEBUG {
+		fmt.Println("routeStatic()...path:", path, ", pageName", pageName)
+	}
 	return
 }
 
