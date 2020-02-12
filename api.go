@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"net/http"
+	"net/http/httputil"
 )
 
 // I have to figure out how to run https queries against the modeling
@@ -26,7 +27,26 @@ func routeAPI(w http.ResponseWriter, r *http.Request) {
 	// and at the end of the function call it needs to be albe to call
 	// each and every other single running instance of this server that's
 	// running on another machine,
-	fmt.Fprint(w, "hello I am an api")
+	fmt.Fprint(w, "hello I am the api\n\n")
+	header, err := httputil.DumpRequest(r, true)
+	if err != nil {
+		fmt.Println(err)
+	}
+	headString := string(header)
+	fmt.Fprint(w, headString)
+
+	//  routePost (path)
+	//  switch Path
+	// 		case "inputForm"
+	//			load javascript for pulling ajax result after data processed and uQuery
+	//			load new result into view with JS redirect for where data landed
+	//			return
+	// 		case "/model/public/"
+	//			load static index page for docs on the schema
+	//			load public schema in through get /model/public/schema/schema.json view
+	//			return
+	//		case
+
 	// this way the store is consistent and scalable as long as there
 	// are no hash collisions amounst separate models (even md5 has no collision)
 	// out to 512 bytes, it's been rainbow-tabled that far.
