@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"net/http"
+)
 
 // I have to figure out how to run https queries against the modeling
 // and run them concurrently with the implemented model system
@@ -16,17 +19,14 @@ import "fmt"
 // if !stringContains(r.URL.Path,"/model/public/*tablePath/*rowPath/*columnPath/*hash(csrf_token)")
 //    updateStream(w, func(r))
 
-const debugHTTPS = true
+const apiPath = "/api/"
+const apiCopies int32 = 0
 
-func httpsModelAPI() {
-	//this runs in a go routine from controller.go
-	if debugHTTPS {
-		fmt.Println("method httpsModelAPI needs implementation.")
-	}
+func routeAPI(w http.ResponseWriter, r *http.Request) {
 	// and at the end of the function call it needs to be albe to call
 	// each and every other single running instance of this server that's
 	// running on another machine,
-
+	fmt.Fprint(w, "hello I am an api")
 	// this way the store is consistent and scalable as long as there
 	// are no hash collisions amounst separate models (even md5 has no collision)
 	// out to 512 bytes, it's been rainbow-tabled that far.

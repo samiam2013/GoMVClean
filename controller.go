@@ -4,17 +4,22 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"os"
 )
 
 //global debugger constant
 const gDebug bool = true
 
-const httpPort string = ":8080"
+const httpsPort string = ":443"
 const indexPath string = "/"
 const indexName string = "index"
 const indexPathName string = indexPath + indexName
 const indexFAIL = "404"
-const hTTPSafe = true // default false, true once http2 is implemented
+
+const tlsPath = "TLS"
+const tlsFolder = tlsPath + string(os.PathSeparator)
+const tlsKey = tlsFolder + "snakeoil.key"
+const tlsCert = tlsFolder + "snakeoil.cert"
 
 // if path ("/"|"/indexName") serve indexName+staticMarkupType otherwise 404
 func routeIndex(w http.ResponseWriter, r *http.Request) {
@@ -28,24 +33,20 @@ func routeIndex(w http.ResponseWriter, r *http.Request) {
 	return
 }
 
-func runHTTPSequence(runHTTPS bool) {
-	fmt.Println("run model() in TLS not done...")
-	//log.Fatal("write the hekkin code to model in TLS ONLY...")
-	go httpsModelAPI() // found in routeModelHTTPS.go
-
-	// then
+func main() {
 	http.HandleFunc(indexPath, routeIndex)
 	http.HandleFunc(errorsPath, routeError)  // found in errors.go
 	http.HandleFunc(staticPath, routeStatic) // found in static.go
 	http.HandleFunc(viewPath, routeView)     // found in view.go
 	http.HandleFunc(modelPath, routeModel)   // found in model.go
+	http.HandleFunc(apiPath, routeAPI)       // found in api.go
 	fmt.Println("GoMvClean v42 running...")
-	log.Fatal(http.ListenAndServe(httpPort, nil))
-
-}
-
-func main() {
-	runHTTPSequence(true)
+	err := http.ListenAndServeTLS(httpsPort, tlsCert, tlsKey, nil)
+	if err != nil {
+		fmt.Println("priv key path: ", tlsKey)
+		fmt.Println("pub key path: ", tlsCert)
+		log.Fatal("TLS Error: ", err)
+	}
 	if gDebug {
 		testEverything(true) //found in test.go
 	}
