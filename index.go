@@ -12,7 +12,7 @@ func routeIndex(w http.ResponseWriter, r *http.Request) {
 	path := r.URL.Path
 	if path == indexPath || path == indexPathName {
 		path = staticMarkupFolder + indexName + staticMarkupType
-		renderStatic(path, w, r)
+		renderStatic(path, true, w, r)
 		return
 	}
 	errorShortCircuit(w, r, indexFAIL)

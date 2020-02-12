@@ -73,7 +73,7 @@ func tableQuery(path, wholePath string,
 		return true
 	case dSchemaFilePath:
 		//here we just serve the schema for the downloadStreamPath
-		renderStatic(dSchemaFilePath, w, r)
+		renderStatic(dSchemaFilePath, false, w, r)
 		return true
 	case modelPubPath:
 		//if head says POST, go to "update mode"

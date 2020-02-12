@@ -1,0 +1,1 @@
+// CREATE A FUNCTION TO CALL FOR A CSRF TOKEN from /api/csrf

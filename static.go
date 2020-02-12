@@ -12,17 +12,24 @@ const staticDEBUG = true
 
 // who you gonna call?
 const staticPath = "/static/"
+const jQueryRelativePath = "static/jquery.min.js"
+const jQueryPath = "/" + jQueryRelativePath
 
 //break out that auto-backslash because windows is broken
 const staticMarkupFolder = "static" + string(os.PathSeparator)
 const staticMarkupType = ".html"
 const staticFAIL = "404"
 
+const headerName = "header"
+const headerPath = staticMarkupFolder + headerName + staticMarkupType
+const footerName = "footer"
+const footerPath = staticMarkupFolder + footerName + staticMarkupType
+
 // pull the staticMarkupFolder out of path and render it
 func routeStatic(w http.ResponseWriter, r *http.Request) {
 	pageName := r.URL.Path[len(staticPath):]
 	path := staticMarkupFolder + pageName + staticMarkupType
-	renderStatic(path, w, r)
+	renderStatic(path, true, w, r)
 	if staticDEBUG {
 		fmt.Println("routeStatic()...path:", path, ", pageName", pageName)
 	}
@@ -30,10 +37,17 @@ func routeStatic(w http.ResponseWriter, r *http.Request) {
 }
 
 // render a static path to the http.ResponseWriter
-func renderStatic(path string, w http.ResponseWriter, r *http.Request) {
+func renderStatic(path string, isHTML bool,
+	w http.ResponseWriter, r *http.Request) {
 	body, err := loadStaticBody(path)
 	if err != true {
+		if isHTML {
+			renderStatic(headerPath, false, w, r)
+		}
 		fmt.Fprintf(w, string(body))
+		if isHTML {
+			renderStatic(footerPath, false, w, r)
+		}
 	} else {
 		errorShortCircuit(w, r, staticFAIL)
 	}
@@ -50,4 +64,9 @@ func loadStaticBody(path string) ([]byte, bool) {
 		return body, false
 	}
 	return nil, true
+}
+
+//manually load jquery if it's called.
+func routeJQuery(w http.ResponseWriter, r *http.Request) {
+	renderStatic(jQueryRelativePath, false, w, r)
 }

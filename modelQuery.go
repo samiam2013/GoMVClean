@@ -23,7 +23,7 @@ func query(path, smallQl, schema string, w http.ResponseWriter, r *http.Request)
 	modelPrint("query(" + path + ")")
 	switch path {
 	case modelSchemaPub:
-		renderStatic(modelSchemaPub+"/"+schema+modelMarkup, w, r)
+		renderStatic(modelSchemaPub+"/"+schema+modelMarkup, false, w, r)
 		return true
 	case modelNoGo:
 		if pubAccessPrivDB {

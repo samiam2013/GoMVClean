@@ -12,7 +12,7 @@ const errorsMarkupType = ".html"
 func routeError(w http.ResponseWriter, r *http.Request) {
 	title := r.URL.Path[len(errorsPath):]
 	path := errorsPath + title + errorsMarkupType
-	renderStatic(path, w, r)
+	renderStatic(path, true, w, r)
 	return
 }
 
@@ -23,16 +23,16 @@ func errorShortCircuit(w http.ResponseWriter,
 	switch errNumString {
 	case "404":
 		w.WriteHeader(http.StatusNotFound)
-		renderStatic(path, w, r)
+		renderStatic(path, true, w, r)
 		return
 	case "403":
 		w.WriteHeader(http.StatusForbidden)
-		renderStatic(path, w, r)
+		renderStatic(path, true, w, r)
 		return
 	default:
 		path = errorsMarkupFolder + "500" + errorsMarkupType
 		w.WriteHeader(http.StatusInternalServerError)
-		renderStatic(path, w, r)
+		renderStatic(path, true, w, r)
 		return
 	}
 }
