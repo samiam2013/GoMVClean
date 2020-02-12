@@ -1,6 +1,4 @@
 {
-  { "cSRF tokens request stream" :
-      "*fqdn/model/public/downloadStream/csrf"},
-  { "upload stream" :
-      "*fqdn/model/public/updateStream/blobs" }
+"CSRF Tokens" : "*fqdn/api/csrf",
+"Upload Endpoint" : "*fqdn/api/updateStream -> POST ?csrf=(hash)"
 }

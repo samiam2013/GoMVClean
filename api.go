@@ -37,20 +37,28 @@ func routeAPI(w http.ResponseWriter, r *http.Request) {
 	path := r.URL.Path
 	switch path {
 	case csrfPath:
+		// !!!!!!!!!!!
+		//	THIS NEEDS RATE-LIMITING AGAINST IP, SESSION COOKIE!
+		//
+		// 	THIS NEEDS TO REQUIRE A DECLARATION OF NEW SESSION OR
+		//  THE LAST CSRF TOKEN THE USER WAS ISSUED.
+		//
 		//seed the random number generator with the time.
 		rand.Seed(time.Now().UnixNano())
 		//get the current time as int64 unix time in seconds.
 		timeStamp := time.Now().Unix()
 		//make a random 64 bit number
 		randN := rand.Int63n(timeStamp)
+		//make an 8*8 bit byte-slice
 		randB := make([]byte, 8)
+		//force that int64 into that 8 byte slice
 		binary.LittleEndian.PutUint64(randB, uint64(randN))
 		//generate the byte form random hash
 		hashN := sha256.Sum256(randB)
 		//generate the string from the byte form
 		hashString := fmt.Sprintf("%x", hashN)
 		//print that as a json pair
-		fmt.Fprint(w, "{\"token\",\"", hashString, "\"}")
+		fmt.Fprint(w, "{\"CSRFtoken\",\"", hashString, "\"}")
 	default:
 		header, err := httputil.DumpRequest(r, true)
 		if err != nil {

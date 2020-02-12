@@ -1,33 +1,14 @@
-"
+/*
 ELHO these are the JSON table schemas
 
 THIS will be telling user javascript where to query
 then, in descending cascade,
 tell routeModel.go how to read-only or read-write the database
 with these JSON arrays
-"
+*/
 
 {
-
-"*fqdn/model/public/schema" : {
-
-    "schemaFile" : "schema.json",
-
-    "SmallSchemaLang" : "tableRecursion schema.json"
-
-},
-
-"*fqdn/model/public/updateStream/schema" : {
-
-    "schemaFile" : "schema.json",
-
-    "SmallSchemaLang" : "table schema.json"
-
-},
-
-"*fqdn/model/public/downloadStream/schema" : {
-
-    "schemaFile" : "schema.json",
-
-    "SmallSchemaLang" : "table schema.json"
+"*fqdn/model/public/schema" : "recursion table schema",
+"*fqdn/model/public/updateStream/schema" : "table schema",
+"*fqdn/model/public/downloadStream/schema" : "table schema",
 }

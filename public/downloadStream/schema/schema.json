@@ -1,3 +1,4 @@
-"*fqdn/model/public/downloadStream/csrf" : {
-    "SmallSchemaLang" : "{ 'csrfToken' : (base64) }"
+"*fqdn/api/csrf" : {
+    "Requires" : "{ 'CSRFtoken' : (string|newSession) }"
+    "Schema" : "{ 'CSRFtoken' : string }"
 }
