@@ -5,6 +5,7 @@ import (
 	"io/ioutil"
 	"net/http"
 	"os"
+	"path/filepath"
 )
 
 // verbosity switch
@@ -12,23 +13,30 @@ const staticDEBUG = true
 
 // who you gonna call?
 const staticPath = "/static/"
-const jQueryRelativePath = "static/jquery.min.js"
-const jQueryPath = "/" + jQueryRelativePath
 
 //break out that auto-backslash because windows is broken
 const staticMarkupFolder = "static" + string(os.PathSeparator)
 const staticMarkupType = ".html"
 const staticFAIL = "404"
 
+//make sure the software knows where the html header/footer are located
 const headerName = "header"
 const headerPath = staticMarkupFolder + headerName + staticMarkupType
 const footerName = "footer"
 const footerPath = staticMarkupFolder + footerName + staticMarkupType
 
+//jquery minified file path
+const jsFolderPath = "js" + string(os.PathSeparator)
+const jQueryRelativePath = staticMarkupFolder + jsFolderPath + "jquery.js"
+const jQueryPath = "/static/js/jquery.js"
+
 // pull the staticMarkupFolder out of path and render it
 func routeStatic(w http.ResponseWriter, r *http.Request) {
 	pageName := r.URL.Path[len(staticPath):]
-	path := staticMarkupFolder + pageName + staticMarkupType
+	path := staticMarkupFolder + pageName
+	if filepath.Ext(pageName) != ".js" {
+		path = path + staticMarkupType
+	}
 	renderStatic(path, true, w, r)
 	if staticDEBUG {
 		fmt.Println("routeStatic()...path:", path, ", pageName", pageName)
