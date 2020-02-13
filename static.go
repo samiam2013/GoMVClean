@@ -15,25 +15,20 @@ const staticDEBUG = true
 const staticPath = "/static/"
 
 //break out that auto-backslash because windows is broken
-const staticMarkupFolder = "static" + string(os.PathSeparator)
+const staticFolder = "static" + string(os.PathSeparator)
 const staticMarkupType = ".html"
 const staticFAIL = "404"
 
 //make sure the software knows where the html header/footer are located
 const headerName = "header"
-const headerPath = staticMarkupFolder + headerName + staticMarkupType
+const headerPath = staticFolder + headerName + staticMarkupType
 const footerName = "footer"
-const footerPath = staticMarkupFolder + footerName + staticMarkupType
-
-//jquery minified file path
-const jsFolderPath = "js" + string(os.PathSeparator)
-const jQueryRelativePath = staticMarkupFolder + jsFolderPath + "jquery.js"
-const jQueryPath = "/static/js/jquery.js"
+const footerPath = staticFolder + footerName + staticMarkupType
 
 // pull the staticMarkupFolder out of path and render it
 func routeStatic(w http.ResponseWriter, r *http.Request) {
 	pageName := r.URL.Path[len(staticPath):]
-	path := staticMarkupFolder + pageName
+	path := staticFolder + pageName
 	if filepath.Ext(pageName) != ".js" {
 		path = path + staticMarkupType
 	}
@@ -45,15 +40,18 @@ func routeStatic(w http.ResponseWriter, r *http.Request) {
 }
 
 // render a static path to the http.ResponseWriter
-func renderStatic(path string, isHTML bool,
+func renderStatic(path string, isMARKUP bool,
 	w http.ResponseWriter, r *http.Request) {
+	if staticDEBUG {
+		fmt.Println("renderStatic(", path, ")")
+	}
 	body, err := loadStaticBody(path)
 	if err != true {
-		if isHTML {
+		if isMARKUP {
 			renderStatic(headerPath, false, w, r)
 		}
 		fmt.Fprintf(w, string(body))
-		if isHTML {
+		if isMARKUP {
 			renderStatic(footerPath, false, w, r)
 		}
 	} else {
@@ -67,14 +65,12 @@ func renderStatic(path string, isHTML bool,
 // DANGEROUS STUFF HERE
 // load a static body given the relative path
 func loadStaticBody(path string) ([]byte, bool) {
+	if staticDEBUG {
+		fmt.Println("loadStaticBody(", path, ")")
+	}
 	body, err := ioutil.ReadFile(path)
 	if err == nil {
 		return body, false
 	}
 	return nil, true
-}
-
-//manually load jquery if it's called.
-func routeJQuery(w http.ResponseWriter, r *http.Request) {
-	renderStatic(jQueryRelativePath, false, w, r)
 }
