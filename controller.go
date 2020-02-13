@@ -8,7 +8,7 @@ import (
 )
 
 //global debugger constant
-const gDebug bool = true
+const gDebug bool = false
 
 const hostFQDN = "localhost"
 const httpsPort string = ":443"

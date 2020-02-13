@@ -6,7 +6,7 @@ import (
 )
 
 //model verbosity switch
-const modelDEBUG = true
+const modelDEBUG = false
 
 //where do I sit on the website tree?
 const modelPath string = "/model/"

@@ -9,7 +9,7 @@ import (
 )
 
 // verbosity switch
-const staticDEBUG = true
+const staticDEBUG = false
 
 // who you gonna call?
 const staticPath = "/static/"
