@@ -41,8 +41,9 @@ I want to thank: the team at atom editor, github.com/atom , the team at github d
 
 6) `go run`
 
-7) find a way to browse localhost:8080
+7) find a way to browse https://localhost
 
+8) change the keys by generating your own for the `TLS/` directory before you connect it to the internet or you'll have no security
 
 # Check Out it's Features (ultra basic mode for now)
 Look at the index, it's a static file, and so is the form.
