@@ -6,7 +6,7 @@ import (
 	"os"
 )
 
-const jsDEBUG = true
+const jsDEBUG = false
 
 //jquery minified file path
 const javascriptPath = "/js/"
