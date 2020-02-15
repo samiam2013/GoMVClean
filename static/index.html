@@ -1,93 +1,106 @@
 <!-- the header should end here -->
   <body>
-    <div style="margin-left: 68px; margin-top: 50px;font-family: monospace;">
+    <div id="listWrapper">
+    <style type="text/css" scoped>
+      #listWrapper {
+        margin-left: 80px;
+        margin-top: 80px;
+        font-family: monospace;}
+
+      ol {
+        display:table;}
+      ul {
+        display:table;}
+      li {
+        display:table-row;}
+      li div {
+        display:table-cell;
+        padding-bottom: 15px;}
+
+    </style>
       <h2>Welcome to GoMVClean</h2>
-      technically speaking, you got here through /view/, even if you didn't see it.<br />
-      view.go has a function call from static.go to pull from the /static/ folder.
-      <br />
+        Here is what this is:
       <ol>
         <li>
-          A statically-referenced
-        <a href="/static/inputForm.html">
-             Text Input Form
-        </a>
+          <div>
+            A statically-referenced, dynamically answered
+            <a href="/static/inputForm.html">
+                 Text Input Form</a>
+          </div>
         </li>
         <li>
-          A link to
-        <a href="/model/public/schema">
-             the public API-DB schema
-        </a>
+          <div>
+            A storage shema, viewable through
+            <a href="/model/public/schema">
+                 the public API-DB schema</a>
+          </div>
         </li>
         <li>
-          A link to a
-        <a href="/model/public/notInSchema">
-          model render that fails with 403
-        </a>
+          <div>
+            A link to a
+            <a href="/model/public/notInSchema">
+              model render that fails with 403</a>
+          </div>
         </li>
         <li>
-        A link to a static form<br />
-        That doesn't exist
-        <a href="/static/inputForm2">
-          that fails with 404.
-        </a>
+          <div>
+            A link that could exist but doesn't,
+            <a href="/static/inputForm2">
+              that fails with 404.</a>
+          </div>
         </li>
         <li>
-        <a href="/model/public/updateStream">
-          A link to a the
-            "view" in GoMVClean</a> <br />
-            where I website, can will run your model query dynamically
+          <div>
+            A link to a the
+            <a href="/model/public/downloadStream/schema/schema.json">
+                downloadStream schema</a>
+          </div>
         </li>
         <li>
-          A link to a the
-          <a href="/model/public/downloadStream/schema/schema.json">
-              downloadStream schema
-          </a>
+          <div>
+            A link to a the
+            <a href="/api/csrf">
+                API request CSRF token endpoint</a>
+          </div>
         </li>
         <li>
-          A link to a the
-          <a href="/api/csrf">
-              api to request a csrf token
-          </a>
+          <div>
+            A link to a the
+            <a href="/js/jquery.js">
+                mirrored jQuery 3.4.1 library</a>
+          </div>
         </li>
         <li>
-          A link to a the
-          <a href="/js/jquery.js">
-              mirrored jQuery 3.4.1 library
-          </a>
+          <div>
+            A link to a the
+            <a href="/static/testCSRF.html">
+              form for testing CSRF tokens</a>
+            !! this is not finished
+          </div>
         </li>
         <li>
-          A link to a the
-          <a href="/static/testCSRF.html">
-              form for testing CSRF tokens ! this is not finished
-          </a>
+          <div>
+            A link to a the
+            <a href="/js/runOnLoad.js">
+                on-load javascript run library/script
+            </a>
+          </div>
         </li>
         <li>
-          A link to a the
-          <a href="/js/runOnLoad.js">
-              on-load javascript run library/script
-          </a>
+          <div>
+            A link to the source code
+            <a href="https://github.com/samiam2013/GoMVClean" target="_blank">
+              GitHub.com/Samiam2013/GoMVClean</a>
+          </div>
+        </li>
+        <li>
+          <div>
+            A link to the source code language documentation
+            <a href="https://golang.org" target="_blank">
+              GoLang.Org</a>
+          </div>
         </li>
       </ol>
-    <br />
-      <ul>
-        <li>
-          A link to the source code <br />
-          <a href="https://github.com/samiam2013/GoMVClean" target="_blank">
-            GitHub.com/Samiam2013/GoMVClean
-          </a>
-        </li>
-        <li>
-          A link to the source code language documentation <br />
-        <a href="https://golang.org" target="_blank">
-          GoLang.Org</a>
-        </li>
-        <li>
-          How pulling yourself up by bootstraps is
-          technically a non-physical thing <br />
-          <a href="https://en.wikipedia.org/wiki/Bootstrapping" target="_blank">
-            en.Wikipedia.org/wiki/Bootstrapping</a>
-        </li>
-      </ul>
     </div>
   </body>
 <!-- the footer should start here -->

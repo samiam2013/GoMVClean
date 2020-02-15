@@ -1,19 +1,29 @@
 
 <!-- the header should end here -->
 <body>
-<div id="bodyWrapper" style="
-                      margin-left: 68px;
-                      margin-top: 50px;
-                      font-family: monospace;">
-&lt  <a href="/">Back to Main Page</a><br />
-<h2>Add your data to GoMVClean!</h2>
-  <form name="textForm" method="POST" action="https://localhost:443/api/testPost">
-      <p>
-        <textarea name="textArea" cols="60" rows="20">base64...</textarea>
-      </p>
+  <div id="bodyWrapper">
+
+    <style scoped>
+      #bodyWrapper{
+        margin-left: 80px;
+        margin-top: 80px;
+        font-family: monospace;}
+    </style>
+
+    &lt  <a href="/">Index</a>
     <br />
-    <input type="submit" value="Submit"></input>
-  </form>
-</div>
+    <br />
+
+    <h3>Click submit on some data to see your request in raw HTTP2</h3>
+
+    <form name="textForm" method="POST" action="https://localhost:443/api/testPost">
+      <br />
+      <textarea name="textArea" cols="50" rows="5">base64...</textarea>
+      <br />
+      <br />
+      <input type="submit" value="Submit"></input>
+    </form>
+
+  </div>
 </body>
 <!-- the footer should start here -->
