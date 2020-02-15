@@ -105,7 +105,7 @@ If I can pull this off, I'm pretty sure I just lasso'ed the moon into low earth 
 
 That's one small Go Lang Library for a man on this big blue marble, one giant
 
-func leap(*manKind){manKind.stepSize(" YUGE - ish. ")}
+oh wait. . *radio key clicks over* "Houston, the flight trajectory gimbal has locked in lunar command!"
 
 Look Mom I got a good grade!
 Karla Dec 26 1963 - Nov 2 2002
