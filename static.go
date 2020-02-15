@@ -9,7 +9,7 @@ import (
 )
 
 // verbosity switch
-const staticDEBUG = false
+const staticDEBUG = true
 
 // who you gonna call?
 const staticPath = "/static/"
@@ -29,10 +29,12 @@ const footerPath = staticFolder + footerName + staticMarkupType
 func routeStatic(w http.ResponseWriter, r *http.Request) {
 	pageName := r.URL.Path[len(staticPath):]
 	path := staticFolder + pageName
-	if filepath.Ext(pageName) != ".js" {
-		path = path + staticMarkupType
+	if filepath.Ext(pageName) == staticMarkupType {
+		fmt.Println("special case: routstatic Markup type(", staticMarkupType, ")..", path)
+		renderStatic(path, true, w, r)
+	} else {
+		renderStatic(path, false, w, r)
 	}
-	renderStatic(path, true, w, r)
 	if staticDEBUG {
 		fmt.Println("routeStatic()...path:", path, ", pageName", pageName)
 	}
