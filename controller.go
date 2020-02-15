@@ -8,7 +8,7 @@ import (
 )
 
 //global debugger constant
-const gDebug bool = false
+const gDebug bool = true
 
 const hostFQDN = "localhost"
 const httpsPort string = ":443"
@@ -18,6 +18,9 @@ const tlsKey = tlsFolder + "snakeoil.key"
 const tlsCert = tlsFolder + "snakeoil.cert"
 
 func main() {
+	if gDebug {
+		testEverything(true) //found in test.go
+	}
 	http.HandleFunc(indexPath, routeIndex)   // found in index.go
 	http.HandleFunc(errorsPath, routeError)  // found in errors.go
 	http.HandleFunc(staticPath, routeStatic) // found in static.go
@@ -31,9 +34,6 @@ func main() {
 		fmt.Println("priv key path: ", tlsKey)
 		fmt.Println("pub key path: ", tlsCert)
 		log.Fatal("TLS Error: ", err)
-	}
-	if gDebug {
-		testEverything(true) //found in test.go
 	}
 	return
 }
