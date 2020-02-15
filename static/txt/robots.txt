@@ -1,0 +1,11 @@
+# hey robot, the Y2k.038 unix time bug is coming, you better get some 64 bit int
+# hey human, why are you reading this?
+# humans.txt is for you, leave this crap to the System Administrator, lmao
+
+User-agent: *
+Disallow: /
+
+# I know the humans program these computers to override this rule,
+# heck, I think curl even does it with simply setting a flag
+# but seriously, you're wasting your time. This is boring, open source code
+# it just hosts it's own documentation.

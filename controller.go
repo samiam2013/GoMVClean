@@ -24,15 +24,19 @@ func main() {
 	http.HandleFunc(indexPath, routeIndex)   // found in index.go
 	http.HandleFunc(errorsPath, routeError)  // found in errors.go
 	http.HandleFunc(staticPath, routeStatic) // found in static.go
-	http.HandleFunc(javascriptPath, routeJS) // found in js.go
+	http.HandleFunc(jsPath, routeJS)         // found in js.go
 	http.HandleFunc(viewPath, routeView)     // found in view.go
 	http.HandleFunc(modelPath, routeModel)   // found in model.go
 	http.HandleFunc(apiPath, routeAPI)       // found in api.go
+
+	http.HandleFunc(faviconPath, routeIdiosync) // found in idioSync.go
+	http.HandleFunc(robotsPath, routeIdiosync)  // ...^
+	http.HandleFunc(humansPath, routeIdiosync)  // ...^
+
 	fmt.Println("GoMvClean v42 running...")
+
 	err := http.ListenAndServeTLS(httpsPort, tlsCert, tlsKey, nil)
 	if err != nil {
-		fmt.Println("priv key path: ", tlsKey)
-		fmt.Println("pub key path: ", tlsCert)
 		log.Fatal("TLS Error: ", err)
 	}
 	return

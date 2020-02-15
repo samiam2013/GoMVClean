@@ -1,0 +1,9 @@
+/* space mission cadets */
+
+Captain:  Samuel Myres
+Contact:  admin [at] dronetriage.com //this might not be back up for a minute
+Facebook: Facebook.com/w9usi
+GitHub:   https://www.Github.com/samiam2013
+From:     Greater Evansville, Indiana, United States
+
+/* please clone, edit, improve this code and join space mission */
