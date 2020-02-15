@@ -15,7 +15,7 @@ const faviconPath string = "/" + faviconFileName
 const staticImgFolder = "img" + string(os.PathSeparator)
 const staticImgFolderPath = staticFolder + staticImgFolder
 
-const idioFAIL = "500"
+const idioFAIL = "404"
 
 // switch path solutions to idiosyncracies of the web, like robots.txt.
 func routeIdiosync(w http.ResponseWriter, r *http.Request) {
