@@ -1,4 +1,4 @@
-# GoMVClean [![Go Report Card](https://goreportcard.com/badge/github.com/samiam2013/GoMVClean)]
+# GoMVClean ![Go Report Card](https://goreportcard.com/badge/github.com/samiam2013/GoMVClean)
 The world's first (that I know of) complete (has it's own database) website automation server (it's configurable).
 
 (definition) - noun ( microMacroService compiled binary JSON schema singleton-pattern website application )
