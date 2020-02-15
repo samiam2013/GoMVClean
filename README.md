@@ -48,11 +48,8 @@ it's going to warn you that the certificate is self-signed.
 
 7) find a way to browse https://localhost
 
-<<<<<<< HEAD
-=======
 8) change the keys by generating your own for the `TLS/` directory before you connect it to the internet or you'll have no security
 
->>>>>>> 6ccbd0d34b5d1c90a31637a751bd5e1106450a9b
 # Check Out it's Features (ultra basic mode for now)
 Look at the index, it's a static file, and so is the form.
 
