@@ -11,17 +11,17 @@ The world's first (that I know of) complete (has it's own database) website auto
 
 (exception) - it will utilize JavaScript and JSON.
 
-it runs on http, it needs a reverse proxy to reference itself safely. I'm going to work on implementing https on top of http to eliminate the need for a reverse proxy, then I want to implement PGP websockets in TypeScript so the model can be failed over to safely self-reference over HTTP. 
+it runs on http, it needs a reverse proxy to reference itself safely. I'm going to work on implementing https on top of http to eliminate the need for a reverse proxy, then I want to implement PGP websockets in TypeScript so the model can be failed over to safely self-reference over HTTP.
 
 This means: [Tyler Durden enters the chat]
 
-[Durden]: "Rule 0 of GoMVClean is safety and 
+[Durden]: "Rule 0 of GoMVClean is safety and
 
-[Durden]: "Rule 1 of GoMVClean is speed. 
+[Durden]: "Rule 1 of GoMVClean is speed.
 
-[GPL]: "Rule 2 of GoMVClean is version 3.0, no TiVo-ization. 
+[GPL]: "Rule 2 of GoMVClean is version 3.0, no TiVo-ization.
 
-[not Durden]: "Rule 3 of GoMVClean is no middleware, just Go and Javascript. 
+[not Durden]: "Rule 3 of GoMVClean is no middleware, just Go and Javascript.
 
 [me]: "Rule 4 of GoMVClean is `[databaseServer] = false`, always.
 
@@ -29,7 +29,12 @@ I want to thank: the team at atom editor, github.com/atom , the team at github d
 
 # How to use it
 
-1) Download Go at [GoLang.Org](https://golang.org) if you don't have it 
+0) hit my local host repository, make sure the code is working by clicking all
+the links, try to crash my raspberry pi with traffic, lol:
+https://www.dronetriage.com
+it's going to warn you that the certificate is self-signed.
+
+1) Download Go at [GoLang.Org](https://golang.org) if you don't have it
 
 2) clone this project into a directory.
 
@@ -43,7 +48,6 @@ I want to thank: the team at atom editor, github.com/atom , the team at github d
 
 7) find a way to browse localhost:8080
 
-
 # Check Out it's Features (ultra basic mode for now)
 Look at the index, it's a static file, and so is the form.
 
@@ -51,7 +55,7 @@ Look at the view, it's a go file, it just outputs what you send it
 
 Realize that this view "/view/" tells you what it sees whether you visit it as a GET request or a POST form.
 
-Look at modelQuery.go , modelFileTest.go , and modelBreakStuff.go 
+Look at modelQuery.go , modelFileTest.go , and modelBreakStuff.go
 
 These are the important database checks and they also include the most important, most functional model functionality to be used.
 
