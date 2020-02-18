@@ -6,7 +6,7 @@ import (
 	"net/http"
 	"os"
 
-	"github.com/samiam2013/GoMVClean/resourceLibrary/resourceLibrary"
+	"github.com/samiam2013/GoMVClean/resourceLibrary"
 )
 
 //global debugger constant
