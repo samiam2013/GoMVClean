@@ -1,4 +1,4 @@
-package main
+package GoMVClean
 
 //this has a self-explanatory name
 func testEverything(hasToPass bool) {

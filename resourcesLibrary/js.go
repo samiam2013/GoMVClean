@@ -1,4 +1,4 @@
-package main
+package resourceLibrary
 
 import (
 	"fmt"
@@ -8,8 +8,8 @@ import (
 
 const jsDEBUG = false
 
-//jquery minified file path
-const jsPath = "/js/"
+// JSPath is Exported to controller.go for routing
+const JSPath = "/js/"
 const jsFolder = "js" + string(os.PathSeparator)
 const jQueryFileName = "jquery.js"
 const jQueryFilePath = staticFolder + jsFolder + jQueryFileName
@@ -20,7 +20,7 @@ func routeJS(w http.ResponseWriter, r *http.Request) {
 	if path == jQueryFilePath {
 		renderStatic(jQueryFilePath, false, w, r)
 	} else {
-		renderStatic(staticFolder+jsFolder+path[len(jsPath):], false, w, r)
+		renderStatic(staticFolder+jsFolder+path[len(JSPath):], false, w, r)
 	}
 	if jsDEBUG {
 		fmt.Println("routing js path...")

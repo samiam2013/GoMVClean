@@ -1,17 +1,17 @@
-package main
+package resourceLibrary
 
 import (
 	"net/http"
 	"os"
 )
 
-const errorsPath = "/errors/"
+const ErrorsPath = "/errors/"
 const errorsMarkupFolder = "errors" + string(os.PathSeparator)
 const errorsMarkupType = ".html"
 
 func routeError(w http.ResponseWriter, r *http.Request) {
-	title := r.URL.Path[len(errorsPath):]
-	path := errorsPath + title + errorsMarkupType
+	title := r.URL.Path[len(ErrorsPath):]
+	path := ErrorsPath + title + errorsMarkupType
 	renderStatic(path, true, w, r)
 	return
 }

@@ -1,4 +1,4 @@
-package main
+package resourceLibrary
 
 import (
 	"net/http"
