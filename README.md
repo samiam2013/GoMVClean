@@ -1,31 +1,19 @@
 # GoMVClean ![Go Report Card](https://goreportcard.com/badge/github.com/samiam2013/GoMVClean)
-The world's first (that I know of) complete (has it's own database) website automation server (it's configurable).
-
-(definition) - noun ( microMacroService compiled binary JSON schema singleton-pattern website application )
-
-(explanation) - I need a Go key-value heaped sorted storage mechanism and Model View Controller
-
-(synonym) - I hate database servers
+A Go HTTP2 library with it's own database. It's VERY configurable. Oh and it's an MVC.
 
 (homonym) - A Go language MVC template written for keeping with only native dependencies
 
 (exception) - it will utilize JavaScript and JSON.
 
-it runs on http, it needs a reverse proxy to reference itself safely. I'm going to work on implementing https on top of http to eliminate the need for a reverse proxy, then I want to implement PGP websockets in TypeScript so the model can be failed over to safely self-reference over HTTP.
+I'm building out an API that will scale across a local network with very basic configuration. My library should be burstable to system limits with just the operating system as a middle layer and it should be distributable to an extent that seems like magic.
 
-This means: [Tyler Durden enters the chat]
+Rule 1 of GoMVClean is safety.
 
-[Durden]: "Rule 0 of GoMVClean is safety and
+Rule 2 of GoMVClean is speed.
 
-[Durden]: "Rule 1 of GoMVClean is speed.
+Rule 3 of GoMVClean is no middleware, just Go and Javascript.
 
-[GPL]: "Rule 2 of GoMVClean is version 3.0, no TiVo-ization.
-
-[not Durden]: "Rule 3 of GoMVClean is no middleware, just Go and Javascript.
-
-[me]: "Rule 4 of GoMVClean is `[databaseServer] = false`, always.
-
-I want to thank: the team at atom editor, github.com/atom , the team at github desktop, https://desktop.github.com/ , github's github https://github.com/github , the team working on Go https://github.com/golang/go , and very ironically the team at microsoft Windows 10 All of you for making 100 + updates to a github repository possible in like 50 hours of writing Go.
+Rule 4 of GoMVClean is `const separateDB = false`
 
 # How to use it
 
@@ -61,9 +49,6 @@ Look at modelQuery.go , modelFileTest.go , and modelBreakStuff.go
 
 These are the important database checks and they also include the most important, most functional model functionality to be used.
 
-Ignore the schema files, they're just stand-ins for whatever you want to use.
-
-
 load a page: renderStatic() in static.go
 
 load an error page: errorShortCircuit()
@@ -75,40 +60,48 @@ check and see if something's in the model: query()
 write to a space in the model: uQuery()
 
 
-as far as I can tell this is all you *need* to make a website.
-
-
 # Basics
-In Go, dynamic form-data handling is really easy because of access to low level data and high accessibility through libraries of functions. It's also insanely easy to reach into the folder structure to read and write.
+In Go, dynamic form-data handling is really easy because of access to low level data and high accessibility through libraries of functions. It's also insanely easy to reach into the folder structure to read and write, especially if you limit yourself to static HTML and leave page templating problems to Javascript and an API.
 
-So with a Go language MVC website template, the entire model can be fractured into private and public instance folders.
-
-Permissions can be dynamically set for access to each user as measured by keeping a persistent-state variable for each user after a login. I don't want to use cookies, I don't like cookies. I'll probably just limit logins to session cookies since that stops me from having to implement persistent cookie storage.
+So with a Go language MVC website template, the entire model can be fractured into private and public instance folders. To handle this, permissions can be dynamically set for access to each user as measured by keeping a persistent-state variable for each user after a login. I'll be limit logins to session cookies and just avoid tracking otherwise since that stops me from having to implement persistent cookie storage and eliminates a man-in-the middle attack on "remember me" login cookies.
 
 # Model Structure
-The MySQL structure `database -> table -> column` is really well known and is being implemented by folders in descending order. This allows for a private folder for development of model scenarios to be implemented alongside the actual live site. This is implemented in a `query("folderPath")` with main folder paths `public/` and `private/` .  For now there's a Boolean switch disabling it until I can implement a solution for deciding if a user should be able to access the private database.
+The MySQL structure `database -> table -> column` is really well known and is being implemented by folders in descending order. This allows for a private folder for development of model scenarios to be implemented alongside the actual live site. This is implemented in a `query("folderPath")` with main folder paths (databases) `public/` and `private/` .  For now there's a Boolean switch disabling use of the private database until I implement a session cookies and database access permission classes.
 
-However, this private/public structure means data from the public side is available for developing with the server while it is still running the site and running your new "private" model development (e.g. for private development of a smartphone app against the private model API)
+This private/public structure means data from the public side is available for developing with the server while it is still running the site and running your new "private" model development (e.g. for private development of a smartphone app against the private model API)
 
-The Model is made of folders with individual `schema.json` files scattered into folders by schema-defined structures. In the future, this will mean self-modifying file structure.
+The Model is made of folders with individual `schema.json` files scattered into folders by schema-self-defined structures. In the future, this will mean self-modifying file structure and documentation, so entire table templates and self-spawning tables are possible.
 
-like `site.domain/public/table/column/hashed(userId)`
+queries are just a URI attached to your domain like `site.domain/public/table/column/hashed(userId)`
 
 Here, `hashed(userId)` is an assurance that even if permissions on the database are failing, brute-force search of the database will still be near impossible or impossible.
 
-I have public model endpoints for arbitrary data upload and download and I'm working on Cross-Site request forgery tokening so that forms are automatically validated. Since JavaScript comes with every browser, I'm going to try to write very vanilla JS for AJAX so that every page pull generates a new token and every page request deletes that token and generates a new one. CSRF everywhere + a reverse HTTPS proxy like NGINX == hopefully safe
+Based on if the library is set up to load balance, there could be a tag on the table name or api endpoint so that you get to the server with that particular table. Moving entire tables will require a copy paste, moving them to an entirely separate server could be implemented in a self-crawler (since only the server will have access to dangerous-if-stolen schema files and indexes). Once a table is moved, re-association will be a simple one line change to a go struct array with table names and local or fully qualified domain  associations, depending on whether you want to load balance with internal or external access. you can either have your user access the model or you could use requests inside Go itself.
 
-After that, I'm going to attempt to write a Go database engine that understands the schema and can find a file arbitrarily and index arbitrarily after being queried with JSON. I'm basically looking to write my own NoSQL MVC in Go in the form of an api that you could write a client for. So that my application, as long as it's running for me, anyone could just write an interface above it with web calls in effectively any user space connected to the internet, 
+I have public model endpoints for arbitrary data upload and download and I'm working on Cross-Site request forgery tokening so that forms are automatically validated. Since JavaScript comes with every browser, I'm going to try to write very vanilla JS or use JQuery for AJAX so that every page pull generates a new token and every page request deletes that token and generates a new one. CSRF everywhere except the home page + HTTPS = more safety. 
 
-# Epitaph
-If I can pull this off, I'm pretty sure I just lasso'ed the moon into low earth orbit and tied it down. If it's finished, you get to write a website from a template that's written in JS and Go. As long as those two languages are supported it will have enforcement of how the code runs aside from browser ajax calls.
+After all of the basic functionality is done, I'm going to attempt to write a Go database engine that understands the schema and can find a file arbitrarily and index arbitrarily after being queried with JSON or just a URL. I'm basically looking to write my own NoSQL MVC in Go in the form of an api that you could write a client for. So that my application, as long as it's running for me, allows anyone to just write an interface above it with web calls in effectively any user space connected to the internet. 
 
-That's one small Go Lang Library for a man on this big blue marble, one giant
+# Credits
+This is not easy, and I'm only doing it because I personally want to see the results.
 
-oh wait. . *radio key clicks over* "Houston, the flight trajectory gimbal has locked in lunar command!"
+[me, if this is a moonshot]: "Houston, the flight trajectory gimbal has locked in lunar command!"
 
-Look Mom I got a good grade!
+Dedicated to my lost Parents
 Karla Dec 26 1963 - Nov 2 2002
+Glenn Nov 2 1965 - Dec 17 2008
 
-Look Dad I still don't have a job!
-Glenn Myres Nov 2 1965 - Dec 17 2008
+I want to thank: 
+
+the team at atom editor, github.com/atom , 
+
+the team at github desktop, https://desktop.github.com/ , 
+
+github's github https://github.com/github , 
+
+the team working on Go https://github.com/golang/go , 
+
+and very ironically the team at microsoft Windows 10 
+
+All of you for making 100 + updates to a github repository possible in like 40 hours or less of writing Go.
+
