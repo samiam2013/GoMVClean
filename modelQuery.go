@@ -1,4 +1,4 @@
-package GoMVClean
+package main
 
 import (
 	"net/http"

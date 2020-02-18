@@ -1,12 +1,10 @@
-package GoMVClean
+package main
 
 import (
 	"fmt"
 	"log"
 	"net/http"
 	"os"
-
-	"github.com/samiam2013/GoMVClean/resourceLibrary"
 )
 
 //global debugger constant
@@ -25,14 +23,14 @@ func main() {
 	if gDebug {
 		testEverything(true) //found in test.go
 	}
-	http.HandleFunc(IndexPath, RouteIndex)             // found in index.go
-	http.HandleFunc(ErrorsPath, RouteError)            // found in errors.go
-	http.HandleFunc(StaticPath, RouteStatic)           // found in static.go
-	http.HandleFunc(JsPath, RouteJS)                   // found in js.go
-	http.HandleFunc(CSSPath, resourceLibrary.RouteCSS) // found in css.go
-	http.HandleFunc(viewPath, routeView)               // found in view.go
-	http.HandleFunc(modelPath, routeModel)             // found in model.go
-	http.HandleFunc(apiPath, routeAPI)                 // found in api.go
+	http.HandleFunc(IndexPath, routeIndex)   // found in index.go
+	http.HandleFunc(ErrorsPath, RouteError)  // found in errors.go
+	http.HandleFunc(StaticPath, routeStatic) // found in static.go
+	http.HandleFunc(JSPath, RouteJS)         // found in js.go
+	http.HandleFunc(CSSPath, RouteCSS)       // found in css.go
+	http.HandleFunc(viewPath, routeView)     // found in view.go
+	http.HandleFunc(modelPath, routeModel)   // found in model.go
+	http.HandleFunc(apiPath, routeAPI)       // found in api.go
 
 	http.HandleFunc(faviconPath, routeIdiosync) // found in idioSync.go
 	http.HandleFunc(robotsPath, routeIdiosync)  // ...^

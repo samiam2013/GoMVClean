@@ -1,4 +1,4 @@
-package resourceLibrary
+package main
 
 import (
 	"fmt"
@@ -15,7 +15,7 @@ const jQueryFileName = "jquery.js"
 const jQueryFilePath = staticFolder + jsFolder + jQueryFileName
 
 //manually load jquery if it's called.
-func routeJS(w http.ResponseWriter, r *http.Request) {
+func RouteJS(w http.ResponseWriter, r *http.Request) {
 	path := r.URL.Path
 	if path == jQueryFilePath {
 		renderStatic(jQueryFilePath, false, w, r)
