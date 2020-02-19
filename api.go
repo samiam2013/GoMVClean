@@ -95,7 +95,7 @@ func routeAPI(w http.ResponseWriter, r *http.Request) {
 			// but print this weird stuff instead, see what it means.
 			fmt.Fprint(w, jsonString)
 			// run the corresponding model query, have to confirm csrfs
-			uQuery(true, "/public/updateStream/blobs/"+hashString+".json", jsonString, "schema", w, r)
+			uQuery(true, "./public/updateStream/blobs/"+hashString+".json", jsonString, "schema", w, r)
 		}
 
 	// this happens if the api doesn't know what to do
