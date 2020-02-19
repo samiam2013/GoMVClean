@@ -1,17 +1,17 @@
-# GoMVClean
+# GoMVClean [![Go Report Card](https://goreportcard.com/badge/github.com/samiam2013/goMVClean)](https://goreportcard.com/report/github.com/samiam2013/goMVClean)
 Go Website Template Written for Native-Only Dependencies
 
 The goal is to have a singleton-pattern binary-compiled MVC framework that makes
 sense when it's finished.
 
-GPL 3.0 means you can't make this code into a private piece of hardware and use
-it for profit, except where required by law and an exception for medical
-equipment (I don't know, I haven't read the entire thing)
-
-You're welcome to play with this code, but it is broken, and not yet finished.
+You're welcome to play with this code, but it is not yet finished.
 
 It documents itself, because it's static HTML and all you need is `go build` in the main directory
-and
+and then run the binary, whatever it's named on windows or linux, I code on windows and host on linux
+so it has to run on both anyway.
+
+To get it to upload csrf tokens into the public folder, you have to create the
+public/updateStream/blobs folder
 
 I have a small business I'm building this for and the example code is up at it's
 domain: https://www.dronetriage.com
