@@ -69,17 +69,21 @@
           </div>
         </li>
 
+        <li>
+          <div>
+          A textarea to test the CSRF token API endpoint
+          </div>
+        </li>
+        <li>
+          <div>
+            <form name="textForm">
+              <textarea id="csrfTag" name="textArea" cols="40" rows="2"></textarea>
+              <br /><br />
+              <input type="button" value="click me" onclick="LoadCSRF()"></input>
+            </form>
+          </div>
+        </li>
       </ol>
-    <h3>Test the primitive-nature CSRF tokens in GoMVClean!</h3>
-      <form name="textForm">
-          <p>
-            Press the button and your token will populate here
-            <br /><br />
-            <textarea id="csrfTag" name="textArea" cols="41" rows="2"></textarea>
-          </p>
-        <br />
-        <input type="button" value="click here to load a new token" onclick="LoadCSRF()"></input>
-      </form>
     </div>
   </body>
 <!-- the footer should start here -->
