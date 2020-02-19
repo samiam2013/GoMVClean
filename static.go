@@ -9,7 +9,7 @@ import (
 )
 
 // verbosity switch
-const staticDEBUG = true
+const staticDEBUG = globalDebug && false
 
 // StaticPath is exported to controller.go for routing
 const staticPath = "/static/"

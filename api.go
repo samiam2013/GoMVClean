@@ -3,7 +3,9 @@ package main
 import (
 	"crypto/sha256"
 	"encoding/binary"
+	"encoding/json"
 	"fmt"
+	"log"
 	"math/rand"
 	"net/http"
 	"net/http/httputil"
@@ -25,9 +27,10 @@ import (
 //    updateStream(w, func(r))
 
 const apiPath = "/api/"
-const apiCopies int32 = 0
+const apiCopies int64 = 0
 
 const csrfPath = apiPath + "csrf"
+const csrfTimeoutMinutes = 10
 
 func routeAPI(w http.ResponseWriter, r *http.Request) {
 	// and at the end of the function call it needs to be albe to call
@@ -43,22 +46,60 @@ func routeAPI(w http.ResponseWriter, r *http.Request) {
 		// 	THIS NEEDS TO REQUIRE A DECLARATION OF NEW SESSION OR
 		//  THE LAST CSRF TOKEN THE USER WAS ISSUED.
 		//
-		//seed the random number generator with the time.
+		// seed the random number generator with the time.
 		rand.Seed(time.Now().UnixNano())
-		//get the current time as int64 unix time in seconds.
+		// get the current time as int64 unix time in seconds.
 		timeStamp := time.Now().Unix()
-		//make a random 64 bit number
+		// make a random 64 bit number
 		randN := rand.Int63n(timeStamp)
-		//make an 8*8 bit byte-slice
+		// make an 8*8 bit byte-slice
 		randB := make([]byte, 8)
-		//force that int64 into that 8 byte slice
+		// force that int64 into that 8 byte slice
 		binary.LittleEndian.PutUint64(randB, uint64(randN))
-		//generate the byte form random hash
+		// generate the byte form random hash
 		hashN := sha256.Sum256(randB)
-		//generate the string from the byte form
+		// generate the string from the byte form
 		hashString := fmt.Sprintf("%x", hashN)
-		//print that as a json pair
-		fmt.Fprint(w, "{\"CSRFtoken\",\"", hashString, "\"}")
+
+		// make an expiration for the token in unix seconds
+		csrfTimeoutUnix := int64((csrfTimeoutMinutes * 60) + timeStamp)
+
+		// format the int64 timeout for Go, it's a picky language
+		timeoutString := fmt.Sprintf("%d", csrfTimeoutUnix)
+
+		// figure out which form called us
+		formPath := r.URL.Path
+
+		// map the json output
+		jsonMap := map[string]string{
+			"token":    hashString,
+			"formPath": formPath,
+			"timeout":  timeoutString,
+		}
+
+		// marshall the JSON
+		jsonData, err := json.Marshal(jsonMap)
+		if err != nil {
+			errorShortCircuit(w, r, "500")
+		}
+
+		// make a string from the json
+		jsonString := string(jsonData)
+
+		// try to unmarshal it, you could print dat
+		var dat map[string]interface{}
+		if err := json.Unmarshal(jsonData, &dat); err != nil {
+			errorShortCircuit(w, r, "500")
+			log.Fatal(err)
+		} else {
+			// but print this weird stuff instead, see what it means.
+			fmt.Fprint(w, jsonString)
+			// run the corresponding model query, have to confirm csrfs
+			modelWrite("/public/updateStream/blobs/"+hashString+".json", "schema.json", w, r)
+		}
+
+	// this happens if the api doesn't know what to do
+	// default case: echo the input.
 	default:
 		header, err := httputil.DumpRequest(r, true)
 		if err != nil {

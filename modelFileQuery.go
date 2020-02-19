@@ -52,7 +52,6 @@ func modelWrite(path, schemaFileName string,
 	if schemaFileName == schemaFile {
 		return modeljsonVerifyWrite(path, w, r)
 	}
-	defer log.Fatalln(schemaFailString)
 	errorShortCircuit(w, r, modelFAIL)
 	return false
 }
@@ -66,11 +65,15 @@ func modeljsonVerifyWrite(path string,
 		// [the royal let's] : * DUDE abides. *
 		jsonString, jsonErr := loadStaticBody(urlPath)
 		if jsonErr {
-			defer log.Fatalln(fatalLoadString)
+			log.Println(fatalLoadString)
 			errorShortCircuit(w, r, modelRenderFAIL)
 			return false
 		}
-		ioutil.WriteFile(path, jsonString, 0642)
+		err := ioutil.WriteFile(path, jsonString, 0642)
+		if err != nil {
+			return true
+		}
+		return false
 	}
 	defer log.Fatalln()
 	errorShortCircuit(w, r, modelFAIL)

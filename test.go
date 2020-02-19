@@ -20,10 +20,10 @@ func testEverything(hasToPass bool) {
 func testModel(hasToPass bool) bool {
 	testModelPath := modelSchemaPub + "/" + schemaFolder + modelMarkup
 	schema, err := loadStaticBody(testModelPath)
-	if !gDebug && err {
+	if !globalDebug && err {
 		print("schema.json:" + string(schema) + "\n")
 		return testSchema(string(schema))
-	} else if !gDebug {
+	} else if !globalDebug {
 		if !err {
 			print("Could not retrieve JSON schema!\n")
 			return false
@@ -39,7 +39,7 @@ func testSchema(schema string) bool {
 	if err {
 		print("Fail.\n")
 		return true
-	} else if gDebug {
+	} else if globalDebug {
 		print("testSchema(" + modelPrivPath + ") : false. printing schema...\n\n")
 		print(string(jsonBody))
 		print("Failed.\n")

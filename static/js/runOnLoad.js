@@ -11,6 +11,6 @@ function LoadCSRF() {
      document.getElementById("csrfTag").innerHTML = this.responseText;
     }
   };
-  xhttp.open("GET", "/api/csrf", true);
+  xhttp.open("POST", "/api/csrf", true);
   xhttp.send();
 }

@@ -8,7 +8,7 @@ import (
 )
 
 //global debugger constant
-const gDebug bool = true
+const globalDebug bool = true
 
 const hostFQDN = "localhost"
 const httpsPort string = ":443"
@@ -20,7 +20,7 @@ const tlsCert = tlsFolder + "snakeoil.cert"
 // const CSSPath set in resourceLibrary/css.go
 
 func main() {
-	if gDebug {
+	if globalDebug {
 		testEverything(true) //found in test.go
 	}
 	http.HandleFunc(indexPath, routeIndex)   // found in index.go
