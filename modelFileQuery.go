@@ -1,8 +1,8 @@
 package main
 
 import (
+	"fmt"
 	"io/ioutil"
-	"log"
 	"net/http"
 )
 
@@ -26,56 +26,43 @@ const schemaFailString = "hey sysadmins, SOMEONE tried to write to \n" +
 	"SOMEWHERE that's not in GoMVClean -> model.go's -> const schemaFileName string" +
 	"That failed with a " + modelFAIL + "..."
 
-func uQuery(writePriority bool, path, schemaFileName string,
+func uQuery(writePriority bool, path, data, schemaFileName string,
 	w http.ResponseWriter, r *http.Request) bool {
 	// use the query path to determine which data to update
 	// then use the Request to figure out what to put there.
 	// return said database query as a renderStatic(path)
-	if query(path, modelSchemaPub, schemaFileName, w, r) {
-		//the data exists and can be read
-		if writePriority {
-			//here's where whe write post data
-			// we're assuming the uQuery Programmers know what this means
-			// here, you can write uQuery(true, "public/schema/uploadStream",
-			//																			"allPaths(), w, r)
-			// and you'd recursively duplicate the site OUT OF EXISTENCE
-			// SO BE CAREFUL
-			return modelWrite(path, schemaFileName, w, r)
-		}
+	if writePriority {
+		//here's where whe write post data
+		// we're assuming the uQuery Programmers know what this means
+		// here, you can write uQuery(true, "public/schema/uploadStream",
+		//																			"allPaths(), w, r)
+		// and you'd recursively duplicate the site OUT OF EXISTENCE
+		// SO BE CAREFUL
+		return modelWrite(path, schemaFileName, data, w, r)
 	}
-	return true
+	return query(path, "read", "schema.json", w, r)
 }
 
-func modelWrite(path, schemaFileName string,
+func modelWrite(path, schemaFileName, data string,
 	w http.ResponseWriter, r *http.Request) bool {
 	//try to write:Static to the model
 	if schemaFileName == schemaFile {
-		return modeljsonVerifyWrite(path, w, r)
+		return modeljsonVerifyWrite(path, data, w, r)
 	}
-	errorShortCircuit(w, r, modelFAIL)
+	//errorShortCircuit(w, r, modelFAIL)
+	fmt.Println("modelWrite(", path, ",", schemaFileName, ", w , r ) failed.")
 	return false
 }
 
-func modeljsonVerifyWrite(path string,
+func modeljsonVerifyWrite(path, data string,
 	w http.ResponseWriter, r *http.Request) bool {
-	// check one last time that we're writing to the request location
-	urlPath := r.URL.Path[len(path):]
-	if len(urlPath) > 1 { // needs to be changed to json check algo
-		//let's write to the request location
-		// [the royal let's] : * DUDE abides. *
-		jsonString, jsonErr := loadStaticBody(urlPath)
-		if jsonErr {
-			log.Println(fatalLoadString)
-			errorShortCircuit(w, r, modelRenderFAIL)
-			return false
-		}
-		err := ioutil.WriteFile(path, jsonString, 0642)
-		if err != nil {
-			return true
-		}
+	dataByte := []byte(data)
+	err := ioutil.WriteFile(path, dataByte, 0642)
+	if err != nil {
+		fmt.Println(path, " couldn't be written to")
 		return false
 	}
-	defer log.Fatalln()
-	errorShortCircuit(w, r, modelFAIL)
+	//fmt.Println(fatalLoadString)
+	//errorShortCircuit(w, r, modelFAIL)
 	return true
 }

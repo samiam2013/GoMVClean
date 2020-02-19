@@ -35,14 +35,3 @@ func query(path, smallQl, schema string, w http.ResponseWriter, r *http.Request)
 		return false //woah wtf why
 	}
 }
-
-func updateQuery(path, id string, w http.ResponseWriter, r *http.Request) bool {
-	//test and make sure the path exists
-	if testModelSchema(path, "update", w, r) {
-		//write into the Database
-		modelPrint("updateQuery( " + path + " ) runnning...")
-		//found in breakStuff.go
-		return uQuery(true, path, schemaFile, w, r)
-	}
-	return true
-}
