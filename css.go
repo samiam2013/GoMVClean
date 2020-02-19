@@ -7,12 +7,12 @@ import (
 
 const cssFolderName = "css"
 const cssFolder = cssFolderName + string(os.PathSeparator)
-const CSSPath = "/" + cssFolderName + "/"
+const cssPath = "/" + cssFolderName + "/"
 const staticCSSFolder = staticFolder + cssFolder
 
 // RouteCSS files and sets the text/css content-type
-func RouteCSS(w http.ResponseWriter, r *http.Request) {
+func routeCSS(w http.ResponseWriter, r *http.Request) {
 	path := r.URL.Path
 	w.Header().Set("Content-Type", "text/css")
-	renderStatic(staticCSSFolder+path[len(CSSPath):], false, w, r)
+	renderStatic(staticCSSFolder+path[len(cssPath):], false, w, r)
 }

@@ -12,7 +12,7 @@ import (
 const staticDEBUG = true
 
 // StaticPath is exported to controller.go for routing
-const StaticPath = "/static/"
+const staticPath = "/static/"
 
 //break out that auto-backslash because windows is broken
 const staticFolder = "static" + string(os.PathSeparator)
@@ -27,7 +27,7 @@ const footerPath = staticFolder + footerName + staticMarkupType
 
 // pull the staticMarkupFolder out of path and render it
 func routeStatic(w http.ResponseWriter, r *http.Request) {
-	pageName := r.URL.Path[len(StaticPath):]
+	pageName := r.URL.Path[len(staticPath):]
 	path := staticFolder + pageName
 	if filepath.Ext(pageName) == staticMarkupType {
 		fmt.Println("special case: routstatic Markup type(", staticMarkupType, ")..", path)
