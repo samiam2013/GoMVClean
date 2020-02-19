@@ -14,3 +14,6 @@ __debug_bin
 
 # Dependency directories (remove the comment below to include it)
 # vendor/
+
+# public schema upload files (protection from uploading the database)
+public/updateStream/blobs/
