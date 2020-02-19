@@ -14,7 +14,7 @@ const jsFolder = "js" + string(os.PathSeparator)
 const jQueryFileName = "jquery.js"
 const jQueryFilePath = staticFolder + jsFolder + jQueryFileName
 
-//manually load jquery if it's called.
+//manually load JS if it's called.
 func RouteJS(w http.ResponseWriter, r *http.Request) {
 	path := r.URL.Path
 	if path == jQueryFilePath {
