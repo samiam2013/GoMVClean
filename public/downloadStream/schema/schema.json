@@ -1,4 +1,1 @@
-"*fqdn/api/csrf" : {
-    "Requires" : "{ 'CSRFtoken' : (string|newSession) }"
-    "Schema" : "{ 'CSRFtoken' : string }"
-}
+/* TODO: define these hidden table schemas */
