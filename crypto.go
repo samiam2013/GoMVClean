@@ -8,7 +8,7 @@ import (
 	"time"
 )
 
-func sha256Token(timeStamp int64) string {
+func sha256RandToken(timeStamp int64) string {
 	// seed the random number generator with the time.
 	rand.Seed(time.Now().UnixNano())
 	return genRandHash(timeStamp)

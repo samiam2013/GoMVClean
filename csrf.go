@@ -14,10 +14,8 @@ func csrfToken(w http.ResponseWriter, r *http.Request) ([]byte, string) {
 	timeoutString := fmt.Sprintf("%d", csrfTimeoutUnix)
 	formPath := r.URL.Path
 	userIP := r.RemoteAddr
-
 	// make a hash string
-	hashString := sha256Token(timeStamp)
-
+	hashString := sha256RandToken(timeStamp)
 	// map the json output
 	jsonMap := map[string]string{
 		"token":    hashString,
@@ -25,7 +23,6 @@ func csrfToken(w http.ResponseWriter, r *http.Request) ([]byte, string) {
 		"timeout":  timeoutString,
 		"ipPort":   userIP,
 	}
-
 	// marshall the JSON
 	jsonData, err := json.Marshal(jsonMap)
 	if err != nil {

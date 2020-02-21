@@ -28,6 +28,8 @@ const apiCopies int64 = 0
 const csrfPath = apiPath + "csrf"
 const csrfTimeoutMinutes = 10
 
+// RouteAPI uses the url path to switch to the most efficient
+//  and functionally decomposed JSON input/output scheme I can muster.
 func routeAPI(w http.ResponseWriter, r *http.Request) {
 	// functionality for api/csrf/server/0..n ?
 
@@ -48,28 +50,33 @@ func routeAPI(w http.ResponseWriter, r *http.Request) {
 				jsonString, "schema", w, r)
 		}
 		return
-	// default case: 500
+	// default case: Internal error 500
 	default:
-		fmt.Fprint(w, "{'error':[500: 'don't know what ", path, " is! - api.go']}")
+		w.WriteHeader(http.StatusNotImplemented)
+		fmt.Fprint(w, "{'error [501]':'", path, " not implemented.'}")
 		return
 	}
 }
 
 func testJSON(mapSelect string, jsonData []byte,
 	w http.ResponseWriter, r *http.Request) bool {
+	// verifies that json is good and returns true/false
+	//	allows you to automatically test json against a set of map interfaces
 	switch mapSelect {
 	case "stringValuePairs":
+		// this is the map of the interface go will use to un-marshall
 		var dat map[string]interface{}
 		// try unmarshalling the JSON, if it fails send back JSON error string
 		if err := json.Unmarshal(jsonData, &dat); err != nil {
 			w.WriteHeader(http.StatusInternalServerError)
-			fmt.Fprint(w, "{'error':[500: 'malformed json response from API']}")
+			fmt.Fprint(w, "{'error [500]':'malformed json stopped by API'}")
 			log.Fatal(err)
 			return false
 		}
 		return true
 	default:
-		fmt.Fprint(w, "{'error':[403: 'api.go testJson() switch mapSelect *",
+		fmt.Fprint(w,
+			"{'error [501]':'JSON map case ", mapSelect, " not implemented'}",
 			mapSelect, "* unknown!']}")
 		return false
 	}
