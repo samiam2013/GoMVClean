@@ -1,8 +1,9 @@
 
-#bodyWrapper {
+body {
   margin-left: 80px;
   margin-top: 80px;
   font-family: monospace;
+  font-size: 15px;
 }
 
 ol {
