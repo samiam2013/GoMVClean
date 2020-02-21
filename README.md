@@ -1,13 +1,12 @@
 # GoMVClean [![Go Report Card](https://goreportcard.com/badge/github.com/samiam2013/goMVClean)](https://goreportcard.com/report/github.com/samiam2013/goMVClean)
 Go Website Template Written for Native-Only Dependencies
 
-The goal is to have a singleton-pattern binary-compiled MVC framework that makes
-sense when it's finished.
+The goal is to have a singleton-pattern binary-compiled MVC framework.
 
 You're welcome to play with this code, but it is not yet finished.
 
 It documents itself, because it's static HTML and all you need is `go build` in the main directory
-and then run the binary, whatever it's named on windows or linux, I code on windows and host on linux
+and then run the binary, whatever it's named on windows or linux, I code on windows and host on linux box
 so it has to run on both anyway.
 
 To get it to upload csrf tokens into the public folder, you have to create the
@@ -32,13 +31,13 @@ A Go HTTP2 library with it's own database. It's VERY configurable. Oh and it's a
 
 I'm building out an API that will scale across a local network with very basic configuration. My library should be burstable to system limits with just the operating system as a middle layer and it should be distributable to an extent that seems like magic.
 
-Rule 1 of GoMVClean is safety.
+Rule 1 is safety.
 
-Rule 2 of GoMVClean is speed.
+Rule 2 is speed.
 
-Rule 3 of GoMVClean is no middleware, just Go and Javascript.
+Rule 3 is no middleware, just Go and Javascript.
 
-Rule 4 of GoMVClean is `const separateDB = false`
+Rule 4 is `const separateDB = false`
 
 # How to use it
 
@@ -70,7 +69,7 @@ Look at the view, it's a go file, it just outputs what you send it
 
 Realize that this view "/view/" tells you what it sees whether you visit it as a GET request or a POST form.
 
-Look at modelQuery.go , modelFileTest.go , and modelBreakStuff.go
+Look at modelQuery.go , modelFileTest.go , and modelWrite.go
 
 These are the important database checks and they also include the most important, most functional model functionality to be used.
 
@@ -103,29 +102,31 @@ Here, `hashed(userId)` is an assurance that even if permissions on the database 
 
 Based on if the library is set up to load balance, there could be a tag on the table name or api endpoint so that you get to the server with that particular table. Moving entire tables will require a copy paste, moving them to an entirely separate server could be implemented in a self-crawler (since only the server will have access to dangerous-if-stolen schema files and indexes). Once a table is moved, re-association will be a simple one line change to a go struct array with table names and local or fully qualified domain  associations, depending on whether you want to load balance with internal or external access. you can either have your user access the model or you could use requests inside Go itself.
 
-I have public model endpoints for arbitrary data upload and download and I'm working on Cross-Site request forgery tokening so that forms are automatically validated. Since JavaScript comes with every browser, I'm going to try to write very vanilla JS or use JQuery for AJAX so that every page pull generates a new token and every page request deletes that token and generates a new one. CSRF everywhere except the home page + HTTPS = more safety.
+I have public model endpoints for arbitrary data upload and download and I'm working on Cross-Site request forgery tokening so that forms are automatically validated. Since JavaScript comes with every browser, I'm going to force it as a dependency. It does not yet have a warning about not having functionality without Javascript, but I imagine as long as I make the source open code and I'm not tracking anyone with it, (unless you want a cookie like a csrf token for a form,) it's up to you to figure out how to track your users and it's on you to track people. As far as I can tell, if I verify the actual information on my public facing pages (which my business idea allows for), then I don't have to worry about tracking visitors, I could have NGINX reverse proxy and log page hits by default, because it does that, or whatever I want to use.
 
-After all of the basic functionality is done, I'm going to attempt to write a Go database engine that understands the schema and can find a file arbitrarily and index arbitrarily after being queried with JSON or just a URL. I'm basically looking to write my own NoSQL MVC in Go in the form of an api that you could write a client for. So that my application, as long as it's running for me, allows anyone to just write an interface above it with web calls in effectively any user space connected to the internet.
+After all of the basic functionality is done, I'm going to attempt to write a Go database engine that understands the schema and can find a file arbitrarily and index arbitrarily after being queried with JSON or just a URL. I'm basically looking to write my own NoSQL MVC in Go in the form of an API that you could write a client for. So that my application, as long as it's running for me, allows anyone to just write an interface above it with web calls in effectively any user space connected to the internet.
 
 # Credits
 This is not easy, and I'm only doing it because I personally want to see the results.
 
 [me, if this is a moonshot]: "Houston, the flight trajectory gimbal has locked in lunar command!"
 
-Dedicated to my lost Parents
+My work personally here is dedicated to my Parents,
 Karla Dec 26 1963 - Nov 2 2002
 Glenn Nov 2 1965 - Dec 17 2008
+Whose jobs would have been less stressful and dangerous if
+technological futures arrive upon having the idea for them.
 
 I want to thank:
 
 the team at atom editor, github.com/atom ,
 
-the team at github desktop, https://desktop.github.com/ ,
+the team at Github desktop, https://desktop.github.com/ ,
 
-github's github https://github.com/github ,
+Github's Github https://github.com/github ,
 
 the team working on Go https://github.com/golang/go ,
 
-and very ironically the team at microsoft Windows 10
+and very ironically the team at Microsoft Windows 10
 
-All of you for making 100 + updates to a github repository possible in like 40 hours or less of writing Go.
+All of you for making 100 + updates to a Github repository possible in like 40 hours or less of writing Go.
