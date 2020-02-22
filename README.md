@@ -56,7 +56,7 @@ it's going to warn you that the certificate is self-signed.
 
 5) type `go build`
 
-6) `go run`
+6) `go ./binaryname` in powershell or bash
 
 7) find a way to browse https://localhost
 
@@ -111,7 +111,12 @@ This is not easy, and I'm only doing it because I personally want to see the res
 
 [me, if this is a moonshot]: "Houston, the flight trajectory gimbal has locked in lunar command!"
 
-My work personally here is dedicated to my Parents,
+If you'd like to hire me, here's my resume: http://dronetriage.com/resume.pfd 
+
+if open source software meant making money, everyone would do it.
+
+
+My work here personally is dedicated to my Parents,
 Karla Dec 26 1963 - Nov 2 2002
 Glenn Nov 2 1965 - Dec 17 2008
 Whose jobs would have been less stressful and dangerous if
