@@ -56,7 +56,7 @@ it's going to warn you that the certificate is self-signed.
 
 5) type `go build`
 
-6) `go run`
+6) `go ./binaryname` in powershell or bash
 
 7) find a way to browse https://localhost
 
