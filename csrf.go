@@ -15,7 +15,7 @@ func csrfToken(w http.ResponseWriter, r *http.Request) ([]byte, string) {
 	formPath := r.URL.Path
 	userIP := r.RemoteAddr
 	// make a hash string
-	hashString := sha256RandToken(timeStamp)
+	hashString := genRandHash(timeStamp) // found in crypto.go
 	// map the json output
 	jsonMap := map[string]string{
 		"token":    hashString,
