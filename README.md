@@ -111,8 +111,6 @@ This is not easy, and I'm only doing it because I personally want to see the res
 
 [me, if this is a moonshot]: "Houston, the flight trajectory gimbal has locked in lunar command!"
 
-If you'd like to hire me, here's my resume: http://dronetriage.com/resume.pfd 
-
 if open source software meant making money, everyone would do it.
 
 
