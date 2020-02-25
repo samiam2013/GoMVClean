@@ -36,8 +36,17 @@ func main() {
 	http.HandleFunc(robotsPath, routeIdiosync)  // ...^
 	http.HandleFunc(humansPath, routeIdiosync)  // ...^
 
+	// warn users that the snakeoil keys need to be replaced
 	fmt.Println("GoMvClean beta running...")
+	if tlsKey == tlsFolder+"snakeoil.key" ||
+		tlsCert == tlsFolder+"snakeoil.cert" {
+		if globalDebug {
+			fmt.Println("You need to replace the snakeoil TLS keys in ./TLS/" +
+				"\n You also need to add the name of your new keys in controller.go")
+		}
+	}
 
+	// start https server
 	err := http.ListenAndServeTLS(httpsPort, tlsCert, tlsKey, nil)
 	if err != nil {
 		log.Fatal("TLS Error: ", err)
