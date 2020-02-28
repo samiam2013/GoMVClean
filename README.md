@@ -10,7 +10,7 @@ and then run the binary, whatever it's named on windows or linux, I code on wind
 so it has to run on both anyway.
 
 To get it to upload csrf tokens into the public folder, you have to create the
-public/updateStream/blobs folder
+public/updateStream/csrf/ folder
 
 My idea is to make a graphing database and binary website that puts UAVs, drones
 or helicopters, or even RC planes that are part of automated networks into a

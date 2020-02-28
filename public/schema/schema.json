@@ -1,0 +1,17 @@
+these files are accessible publicly from the website while it's running
+
+I realized I don't want any of the database schema to be public at all,
+
+because this code has gone through many iterations and someone might want
+
+to try this apporoach (javascript pulling schema JSONs for verifying output)
+
+then they're welcome to, but I'm not sure why you would ever want your user
+
+to know anything about your model, that's marginally dangerous.
+
+the new config file for the public model is going to be put in
+
+/publicModelConfig
+
+not /public/schema/
