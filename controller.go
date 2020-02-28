@@ -5,15 +5,16 @@ import (
 	"log"
 	"net/http"
 	"os"
+
+	"github.com/samiam2013/GoMVClean/modelconfig"
 )
 
 //global debugger constant
 const globalDebug bool = true
 
 const hostFQDN = "localhost"
-const httpsPort string = ":443"
-const tlsPath = "TLS"
-const tlsFolder = tlsPath + string(os.PathSeparator)
+const httpsPort = ":443"
+const tlsFolder = "TLS" + string(os.PathSeparator)
 const tlsKey = tlsFolder + "snakeoil.key"
 const tlsCert = tlsFolder + "snakeoil.cert"
 
@@ -46,10 +47,14 @@ func main() {
 		}
 	}
 
+	// call the model configure script
+	modelConfig.ModelInit()
+
 	// start https server
 	err := http.ListenAndServeTLS(httpsPort, tlsCert, tlsKey, nil)
 	if err != nil {
 		log.Fatal("TLS Error: ", err)
 	}
+
 	return
 }
