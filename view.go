@@ -12,25 +12,25 @@ import (
 const staticDEBUG = globalDebug
 
 // StaticPath is exported to controller.go for routing
-const staticPath = "/static/"
+const viewPath = "/view/"
 
 //break out that auto-backslash because windows is broken
-const staticFolder = "static" + string(os.PathSeparator)
-const staticMarkupType = ".html"
+const viewFolder = "view" + string(os.PathSeparator)
+const viewMarkupType = ".html"
 const staticFAIL = "404"
 
 //make sure the software knows where the html header/footer are located
 const headerName = "header"
-const headerPath = staticFolder + headerName + staticMarkupType
+const headerPath = viewFolder + headerName + viewMarkupType
 const footerName = "footer"
-const footerPath = staticFolder + footerName + staticMarkupType
+const footerPath = viewFolder + footerName + viewMarkupType
 
 // pull the staticMarkupFolder out of path and render it
-func routeStatic(w http.ResponseWriter, r *http.Request) {
-	pageName := r.URL.Path[len(staticPath):]
-	path := staticFolder + pageName
-	if filepath.Ext(pageName) == staticMarkupType {
-		fmt.Println("special case: routstatic Markup type(", staticMarkupType, ")..", path)
+func routeView(w http.ResponseWriter, r *http.Request) {
+	pageName := r.URL.Path[len(viewPath):]
+	path := viewFolder + pageName
+	if filepath.Ext(pageName) == viewMarkupType {
+		fmt.Println("special case: routstatic Markup type(", viewMarkupType, ")..", path)
 		renderStatic(path, true, w, r)
 	} else {
 		renderStatic(path, false, w, r)

@@ -12,7 +12,7 @@ const indexFAIL = "404"
 func routeIndex(w http.ResponseWriter, r *http.Request) {
 	path := r.URL.Path
 	if path == indexPath || path == indexPathName {
-		path = staticFolder + indexName + staticMarkupType
+		path = viewFolder + indexName + viewMarkupType
 		renderStatic(path, true, w, r)
 		return
 	}

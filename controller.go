@@ -20,10 +20,10 @@ const tlsCert = tlsFolder + "snakeoil.cert"
 
 func main() {
 
-	http.HandleFunc(indexPath, routeIndex)   // found in index.go
-	http.HandleFunc(staticPath, routeStatic) // found in view.go
-	http.HandleFunc(modelPath, routeModel)   // found in model.go
-	http.HandleFunc(apiPath, routeAPI)       // found in api.go
+	http.HandleFunc(indexPath, routeIndex) // found in index.go
+	http.HandleFunc(viewPath, routeView)   // found in view.go
+	http.HandleFunc(modelPath, routeModel) // found in model.go
+	http.HandleFunc(apiPath, routeAPI)     // found in api.go
 
 	http.HandleFunc(jsPath, routeStaticFile)      // found in routeStaticFile.go
 	http.HandleFunc(cssPath, routeStaticFile)     // ...^

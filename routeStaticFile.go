@@ -10,7 +10,7 @@ import (
 const cssFolderName = "css"
 const cssFolder = cssFolderName + string(os.PathSeparator)
 const cssPath = "/" + cssFolderName + "/"
-const staticCSSFolder = staticFolder + cssFolder
+const staticCSSFolder = viewFolder + cssFolder
 
 const jsFolderName = "js"
 const jsFolder = jsFolderName + string(os.PathSeparator)
@@ -19,12 +19,12 @@ const jsPath = "/" + jsFolderName + "/"
 const robotsPath = "/robots.txt"
 const humansPath = "/humans.txt"
 const staticTxtFolder = "txt" + string(os.PathSeparator)
-const staticTxtFolderPath = staticFolder + staticTxtFolder
+const staticTxtFolderPath = viewFolder + staticTxtFolder
 
 const faviconFileName = "favicon.ico"
 const faviconPath = "/" + faviconFileName
 const staticImgFolder = "img" + string(os.PathSeparator)
-const staticImgFolderPath = staticFolder + staticImgFolder
+const staticImgFolderPath = viewFolder + staticImgFolder
 
 const idioFAIL = "404"
 
@@ -38,7 +38,7 @@ func routeStaticFile(w http.ResponseWriter, r *http.Request) {
 		// render js as text
 		setCache(7, w)
 		w.Header().Set("Content-Type", "text/javascript")
-		renderStatic(staticFolder+jsFolder+path[len(jsPath):], false, w, r)
+		renderStatic(viewFolder+jsFolder+path[len(jsPath):], false, w, r)
 		return
 	} else if strings.HasPrefix(path, cssPath) {
 		// render css as text
@@ -50,7 +50,7 @@ func routeStaticFile(w http.ResponseWriter, r *http.Request) {
 		switch path {
 		case faviconPath:
 			// pull the favicon from the /images folder?
-			//w.Header().Set("Content-Type", "image/ico")
+			w.Header().Set("Content-Type", "image/ico")
 			setCache(30, w)
 			http.ServeFile(w, r, staticImgFolderPath+faviconFileName)
 			return

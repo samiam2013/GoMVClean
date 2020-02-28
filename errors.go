@@ -6,7 +6,7 @@ import (
 )
 
 const errorsPath = "/errors/"
-const errorsMarkupFolder = staticFolder + "errors" + string(os.PathSeparator)
+const errorsMarkupFolder = viewFolder + "errors" + string(os.PathSeparator)
 const errorsMarkupType = ".html"
 
 func routeError(w http.ResponseWriter, r *http.Request) {
