@@ -65,7 +65,7 @@ Look at modelQuery.go , modelFileTest.go , and modelWrite.go
 
 These are the important database checks and they also include the most important, most functional model functionality to be used.
 
-load a page: renderStatic() in static.go
+load a page: renderStatic() in view.go
 
 load an error page: errorShortCircuit()
 
