@@ -1,5 +1,0 @@
-//this file needs to be set to read-only and only accessible to the lan, !wan
-{
-"CSRF Tokens" : "*fqdn/api/csrf",
-"Upload Endpoint" : " POST /api/csrf -> *fqdn/model/public/updateStream/blobs"
-}

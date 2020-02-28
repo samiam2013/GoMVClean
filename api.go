@@ -46,14 +46,16 @@ func routeAPI(w http.ResponseWriter, r *http.Request) {
 			jsonFileName := "csrfToken_" + hashString + ".json"
 			// run the corresponding model update query, have to confirm csrfs
 			// uQuery is in modelFileQuery.go
-			uQuery(true, "public/updateStream/blobs/"+jsonFileName,
+			uQuery(true, "public/updateStream/csrf/"+jsonFileName,
 				jsonString, "schema", w, r)
 		}
 		return
 	// default case: Internal error 500
 	default:
 		w.WriteHeader(http.StatusNotImplemented)
-		fmt.Fprint(w, "{'error [501]':'", path, " not implemented.'}")
+		fmt.Fprint(w, "{'error [501]':'", path, " not implemented. ",
+			"implement this in api.go by adding to the path switch ",
+			"in routeAPI.go'}")
 		return
 	}
 }
