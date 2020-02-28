@@ -62,8 +62,7 @@ func renderStatic(path string, isMARKUP bool,
 	return
 }
 
-// this gets re-used in modelQuery.go query()
-// and again in modelBreakStuff.go through query()
+// this gets re-used all over the place.
 // DANGEROUS STUFF HERE
 // load a static body given the relative path
 func loadStaticBody(path string) ([]byte, bool) {

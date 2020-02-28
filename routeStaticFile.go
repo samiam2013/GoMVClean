@@ -36,11 +36,13 @@ func routeStaticFile(w http.ResponseWriter, r *http.Request) {
 	}
 	if strings.HasPrefix(path, jsPath) {
 		// render js as text
+		setCache(7, w)
 		w.Header().Set("Content-Type", "text/javascript")
 		renderStatic(staticFolder+jsFolder+path[len(jsPath):], false, w, r)
 		return
 	} else if strings.HasPrefix(path, cssPath) {
 		// render css as text
+		setCache(7, w)
 		w.Header().Set("Content-Type", "text/css")
 		renderStatic(staticCSSFolder+path[len(cssPath):], false, w, r)
 		return
@@ -48,8 +50,9 @@ func routeStaticFile(w http.ResponseWriter, r *http.Request) {
 		switch path {
 		case faviconPath:
 			// pull the favicon from the /images folder?
-			w.Header().Set("Content-Type", "image/ico")
-			loadStaticBody(staticImgFolderPath + faviconFileName)
+			//w.Header().Set("Content-Type", "image/ico")
+			setCache(30, w)
+			http.ServeFile(w, r, staticImgFolderPath+faviconFileName)
 			return
 		case robotsPath:
 			// serve the robots.txt file from /static/txt/robots.txt
@@ -65,4 +68,11 @@ func routeStaticFile(w http.ResponseWriter, r *http.Request) {
 			errorShortCircuit(w, r, idioFAIL)
 		}
 	}
+}
+
+func setCache(days int64, w http.ResponseWriter) {
+	intSeconds := days * 24 * 60 * 60
+	cacheAge := "max-age=" + fmt.Sprintf("%v", intSeconds)
+	fmt.Println(cacheAge)
+	w.Header().Set("Cache-Control", cacheAge)
 }
