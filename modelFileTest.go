@@ -69,7 +69,7 @@ func tableQuery(path, wholePath string,
 	smallQL := sQLRead
 	switch wholePath {
 	case updateStreamPath:
-		routeView(w, r)
+		routeStatic(w, r)
 		return true
 	case dSchemaFilePath:
 		//here we just serve the schema for the downloadStreamPath

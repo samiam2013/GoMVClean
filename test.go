@@ -34,7 +34,7 @@ func testModel(hasToPass bool) bool {
 
 // ...
 func testSchema(schema string) bool {
-	print("Testing model*.go(?).......\n")
+	print("\nTesting model*.go(?).......\n")
 	jsonBody, err := loadStaticBody(modelPrivPath)
 	if err {
 		print("Fail.\n")
