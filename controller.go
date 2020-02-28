@@ -5,8 +5,6 @@ import (
 	"log"
 	"net/http"
 	"os"
-
-	"github.com/samiam2013/GoMVClean/modelconfig"
 )
 
 //global debugger constant
@@ -45,9 +43,6 @@ func main() {
 				"\n You also need to add the name of your new keys in controller.go")
 		}
 	}
-
-	// call the model configure script
-	modelConfig.ModelInit()
 
 	// start https server
 	err := http.ListenAndServeTLS(httpsPort, tlsCert, tlsKey, nil)
