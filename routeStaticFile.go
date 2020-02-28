@@ -29,7 +29,7 @@ const staticImgFolderPath = staticFolder + staticImgFolder
 const idioFAIL = "404"
 
 // switch path solutions to idiosyncracies of the web, like robots.txt.
-func routeIdiosync(w http.ResponseWriter, r *http.Request) {
+func routeStaticFile(w http.ResponseWriter, r *http.Request) {
 	path := r.URL.Path
 	if globalDebug {
 		fmt.Println("routeIdioSync(", path, ")")

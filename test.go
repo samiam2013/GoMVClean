@@ -1,12 +1,16 @@
 package main
 
+import "log"
+
 //this has a self-explanatory name
 func testEverything(hasToPass bool) {
+	print("\nTesting 'Everything'*...")
 	passM := testModel(hasToPass)
 	passV := testView(hasToPass)
 	passC := testController(hasToPass)
 	if passM && passV && passC {
 		print("Tests Pass.\n")
+		return // return so that you don't hit log.Fatal()
 	} else if !passM {
 		print("Failed testModel()......\n")
 	} else if !passV {
@@ -14,14 +18,18 @@ func testEverything(hasToPass bool) {
 	} else if !passC {
 		print("Failed the testController()\n")
 	}
+	if hasToPass {
+		log.Fatal("A test failed and hasToPass (bool) set `true`.")
+	}
 }
 
 // self-explanatory
 func testModel(hasToPass bool) bool {
+	print("\nTesting model...")
 	testModelPath := modelSchemaPub + "/" + schemaFolder + modelMarkup
 	schema, err := loadStaticBody(testModelPath)
-	if !globalDebug && err {
-		print("schema.json:" + string(schema) + "\n")
+	if globalDebug || err {
+		//print("schema.json file contents:\n" + string(schema) + "\n\n\n")
 		return testSchema(string(schema))
 	} else if !globalDebug {
 		if !err {
@@ -34,19 +42,13 @@ func testModel(hasToPass bool) bool {
 
 // ...
 func testSchema(schema string) bool {
-	print("\nTesting model*.go(?).......\n")
-	jsonBody, err := loadStaticBody(modelPrivPath)
-	if err {
-		print("Fail.\n")
-		return true
-	} else if globalDebug {
-		print("testSchema(" + modelPrivPath + ") : false. printing schema...\n\n")
-		print(string(jsonBody))
-		print("Failed.\n")
+	print("model*.go schema file exists.......")
+	if len(schema) == 0 {
+		print("Schema file len() == 0...Fail.\n")
 		return false
 	}
 	print("pass.\n")
-	return false
+	return true
 }
 
 // (ultra) *selfExplanatory
