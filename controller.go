@@ -21,7 +21,6 @@ const tlsCert = tlsFolder + "snakeoil.cert"
 func main() {
 
 	http.HandleFunc(indexPath, routeIndex)   // found in index.go
-	http.HandleFunc(errorsPath, routeError)  // found in errors.go
 	http.HandleFunc(staticPath, routeStatic) // found in view.go
 	http.HandleFunc(modelPath, routeModel)   // found in model.go
 	http.HandleFunc(apiPath, routeAPI)       // found in api.go
@@ -49,7 +48,7 @@ func main() {
 	// start https server
 	err := http.ListenAndServeTLS(httpsPort, tlsCert, tlsKey, nil)
 	if err != nil {
-		log.Fatal("TLS Error: ", err)
+		log.Fatal("Server Error: ", err)
 	}
 
 	return

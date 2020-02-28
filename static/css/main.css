@@ -9,9 +9,11 @@ body {
 ol {
   display:table;
 }
+
 li {
   display:table-row;
 }
+
 li div {
   display:table-cell;
   padding-bottom: 15px;
