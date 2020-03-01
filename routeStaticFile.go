@@ -73,6 +73,5 @@ func routeStaticFile(w http.ResponseWriter, r *http.Request) {
 func setCache(days int64, w http.ResponseWriter) {
 	intSeconds := days * 24 * 60 * 60
 	cacheAge := "max-age=" + fmt.Sprintf("%v", intSeconds)
-	fmt.Println(cacheAge)
 	w.Header().Set("Cache-Control", cacheAge)
 }

@@ -22,7 +22,7 @@ func issueCSRF(w http.ResponseWriter, r *http.Request) {
 		jsonFileName := "csrfToken_" + hashString + ".json"
 		// run the corresponding model update query, have to confirm csrfs
 		// uQuery is in modelFileQuery.go
-		updateQuery("public/csrf/"+jsonFileName, jsonString, w, r)
+		updateQuery("model/public/csrf/"+jsonFileName, jsonString, w, r)
 	}
 	return
 }
