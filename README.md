@@ -71,9 +71,7 @@ load an error page: errorShortCircuit()
 
 get data from the model: loadStaticBody()
 
-check and see if something's in the model: query()
-
-write to a space in the model: uQuery()
+write to a space in the model: updateQuery()
 
 
 # Basics
