@@ -22,7 +22,6 @@ func main() {
 
 	http.HandleFunc(indexPath, routeIndex) // found in index.go
 	http.HandleFunc(viewPath, routeView)   // found in view.go
-	http.HandleFunc(modelPath, routeModel) // found in model.go
 	http.HandleFunc(apiPath, routeAPI)     // found in api.go
 
 	http.HandleFunc(jsPath, routeStaticFile)      // found in routeStaticFile.go
@@ -39,10 +38,6 @@ func main() {
 			fmt.Println("You need to replace the snakeoil TLS keys in ./TLS/" +
 				"\n You also need to add the name of your new keys in controller.go")
 		}
-	}
-
-	if globalDebug {
-		testEverything(true) //found in test.go
 	}
 
 	// start https server

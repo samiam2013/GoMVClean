@@ -22,8 +22,7 @@ func issueCSRF(w http.ResponseWriter, r *http.Request) {
 		jsonFileName := "csrfToken_" + hashString + ".json"
 		// run the corresponding model update query, have to confirm csrfs
 		// uQuery is in modelFileQuery.go
-		uQuery(true, "public/updateStream/csrf/"+jsonFileName,
-			jsonString, "schema", w, r)
+		updateQuery("public/csrf/"+jsonFileName, jsonString, w, r)
 	}
 	return
 }
@@ -33,7 +32,7 @@ func csrfToken(w http.ResponseWriter, r *http.Request) ([]byte, string) {
 	var timeStamp int64 = time.Now().Unix()
 	csrfTimeoutUnix := int64((csrfTimeoutMinutes * 60) + timeStamp)
 	timeoutString := fmt.Sprintf("%d", csrfTimeoutUnix)
-	formPath := r.URL.Path
+	formPath := r.FormValue("form")
 	userIP := r.RemoteAddr
 	// make a hash string
 	hashString := genRandHash(timeStamp) // found in crypto.go

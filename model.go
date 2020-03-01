@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"io/ioutil"
 	"net/http"
 )
 
@@ -14,61 +15,17 @@ const modelPath string = "/model/"
 //where do I get my data from?
 const publicDBPath string = "public/"
 const privateDBPath string = "private/"
-
-//what's the folder for a schema called?
-const schemaFolder string = "schema"
-
-//what's the file for a folder schema called?
-const schemaFile string = "schema"
 const modelMarkup string = ".json"
-
-//const modelTestPath string = modelPath + publicDBPath + modelTestFolder
-const modelNoGo string = privateDBPath + schemaFolder
 const modelPubPath string = modelPath + publicDBPath
 const modelPrivPath string = modelPath + privateDBPath
-const modelPubQueryUpdatePath string = modelPubPath + schemaFolder
-const modelSchemaPub string = publicDBPath + schemaFolder
 
-//can the public see the private things? it's a boolean value!
-const pubAccessPrivDB bool = false //false by default
-
-//smallQL language commands
-const sQLUpdate string = "update"
-const sQLRead string = "read"
-
-//model failure Error Constant
-const modelFAIL = "403"
-
-func modelPrint(prStr string) {
-	if modelDEBUG {
-		fmt.Println(prStr)
+func updateQuery(path, data string, w http.ResponseWriter, r *http.Request) bool {
+	dataByte := []byte(data)
+	err := ioutil.WriteFile(path, dataByte, 0642)
+	if err != nil {
+		fmt.Println(path, " couldn't be written to")
+		return false
 	}
-}
-
-//get the path, send it along to render
-func routeModel(w http.ResponseWriter, r *http.Request) {
-	modelPrint("routing model!...")
-	path := r.URL.Path[len(modelPath):]
-	renderModel(path, w, r)
-	return
-}
-
-//see if the path asked for is available to be tried with private/pub permission
-// then if tryPath(), then tryPathRunFunc()
-func renderModel(path string, w http.ResponseWriter, r *http.Request) {
-	modelPrint("routeModel( " + path + " )")
-	wholePath := r.URL.Path
-	if pubAccessPrivDB {
-		if tryPath(path, privateDBPath, wholePath) {
-			modelPrint("tryPath(" + path + ") returned early, privateQuery() trigd.")
-			tryPathRunFunc(w, r, path, privateDBPath, privateQuery)
-			return
-		}
-	} else if tryPath(path, publicDBPath, wholePath) {
-		tryPathRunFunc(w, r, path, publicDBPath, publicQuery)
-		return
-	}
-	//tell them explicitly that's forbidden
-	errorShortCircuit(w, r, modelFAIL)
-	return
+	w.WriteHeader(http.StatusInternalServerError)
+	return true
 }

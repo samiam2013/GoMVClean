@@ -16,4 +16,4 @@ __debug_bin
 # vendor/
 
 # public schema upload files (protection from uploading the database)
-public/updateStream/csrf/*
+public/csrf/*

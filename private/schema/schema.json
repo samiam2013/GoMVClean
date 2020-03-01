@@ -1,5 +1,0 @@
-{
-  "*fqdn/model/private/schema" : {
-    "schemaFile" : "schema.json",
-    "SmallSchemaLang" : "(read-only (schemaFile))" }
-}
