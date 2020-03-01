@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"regexp"
 	"time"
 )
 
@@ -33,7 +34,12 @@ func csrfToken(w http.ResponseWriter, r *http.Request) ([]byte, string) {
 	csrfTimeoutUnix := int64((csrfTimeoutMinutes * 60) + timeStamp)
 	timeoutString := fmt.Sprintf("%d", csrfTimeoutUnix)
 	formPath := r.FormValue("form")
-	userIP := r.RemoteAddr
+	userIPPort := r.RemoteAddr
+	//split the userIP into ip and port
+	fmt.Println(userIPPort)
+	re := regexp.MustCompile(`(.*):\d+`)
+	matches := re.FindStringSubmatch(userIPPort)
+	userIP := string(matches[1])
 	// make a hash string
 	hashString := genRandHash(timeStamp) // found in crypto.go
 	// map the json output
@@ -41,7 +47,7 @@ func csrfToken(w http.ResponseWriter, r *http.Request) ([]byte, string) {
 		"token":    hashString,
 		"formPath": formPath,
 		"timeout":  timeoutString,
-		"ipPort":   userIP,
+		"ip":       userIP,
 	}
 	// marshall the JSON
 	jsonData, err := json.Marshal(jsonMap)
