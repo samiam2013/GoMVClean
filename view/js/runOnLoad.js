@@ -12,8 +12,11 @@ function LoadCSRF(inputID,formDestination) {
      csrfHiddenTag.value = this.responseText
     }
   };
-  xhttp.open("GET", "/api/csrf?formDestination="+formDestination, true);
-  xhttp.send();
+  xhttp.open("POST", "/api/csrf", true);
+  xhttp.setRequestHeader("Content-Type", "application/json");
+  xhttp.send(JSON.stringify({
+    "formDestination" : formDestination,
+  }));
 }
 
 function noJSWarn(){

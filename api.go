@@ -42,11 +42,11 @@ func routeAPI(w http.ResponseWriter, r *http.Request) {
 			log.Fatal(err)
 		}
 
-		if !verifyCSRF(r.Form.Get("csrf"), w, r) {
+		if !verifyCSRF(w, r) {
 			w.WriteHeader(http.StatusInternalServerError)
 			fmt.Fprint(w, "{'error [500]':'submitted CSRF could not validate'}")
 		} else {
-			fmt.Fprint(w, "csrf validated.")
+			registerUser(w, r)
 		}
 
 		//pull fields from registration form, validate data

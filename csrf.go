@@ -39,7 +39,22 @@ func csrfToken(w http.ResponseWriter, r *http.Request) ([]byte, string) {
 	var timeStamp int64 = time.Now().Unix()
 	csrfTimeoutUnix := int64((csrfTimeoutMinutes * 60) + timeStamp)
 	timeoutString := fmt.Sprintf("%d", csrfTimeoutUnix)
-	formPath := r.FormValue("formDestination")
+	// get the form value from json body
+	requestBody, err := ioutil.ReadAll(r.Body)
+	defer r.Body.Close()
+	if err != nil {
+		fmt.Fprint(w, "{'error[500]':'csrf json request could not be read'}")
+	}
+
+	var request map[string]interface{}
+	err = json.Unmarshal(requestBody, &request)
+	if err != nil {
+		fmt.Fprint(w, "{'error[500]':'csrf json request could not be parsed'}")
+	}
+
+	// golang authors, WTF is a TYPE ASSERTION?
+	formPath := request["formDestination"].(string)
+
 	userIPPort := r.RemoteAddr
 	//split the userIP into ip and port
 	re := regexp.MustCompile(`(.*):\d+`)
@@ -87,9 +102,11 @@ func testJSON(mapSelect string, jsonData []byte,
 	}
 }
 
-func verifyCSRF(tokenSent string, w http.ResponseWriter, r *http.Request) bool {
+func verifyCSRF(w http.ResponseWriter, r *http.Request) bool {
+	// get the csrf token name from request
+	tokenSent := r.Form.Get("csrf")
 	if testJSON("stringValuePairs", []byte(tokenSent), w, r) {
-		//get the csrf token name from payload
+		// map the JSON string to deconstruct it
 		var JSONdataSent map[string]interface{}
 		// try unmarshalling the JSON, if it fails send back false
 		if err := json.Unmarshal([]byte(tokenSent), &JSONdataSent); err != nil {
@@ -118,7 +135,9 @@ func verifyCSRF(tokenSent string, w http.ResponseWriter, r *http.Request) bool {
 					return false
 				}
 				if currentTS < toString {
-					// defer deletion of the file.
+					if globalDebug {
+						fmt.Println("csrf token validated. ")
+					}
 					return true
 				}
 				fmt.Println("timout hit on csrf token")
