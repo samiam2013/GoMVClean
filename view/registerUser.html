@@ -1,0 +1,77 @@
+<body onload="LoadCSRF('csrfInput','/api/registerUser'); noJSWarn();">
+  <div id="bodyWrapper">
+    <h2>Register User to GoMVClean</h2>
+    <h4 id="noJavascript">[Javascript disabled. JS is required on this page for security purposes.]</h4>
+    <ol>
+      <form name="registerUser" method="POST" action="/api/registerUser">
+        <li>
+          <div>
+            Email Address:
+          </div>
+        </li>
+        <li>
+          <div>
+            <input type="text" name="email" />
+          </div>
+        </li>
+        <li>
+          <div>
+            Username:
+          </div>
+        </li>
+        <li>
+          <div>
+            <input type="text" name="userName" />
+          </div>
+        </li>
+        <li>
+          <div>
+            First Name:
+          </div>
+        </li>
+        <li>
+          <div>
+            <input type="text" name="firstName" />
+          </div>
+        </li>
+        <li>
+          <div>
+            Last Name:
+          </div>
+        </li>
+        <li>
+          <div>
+            <input type="text" name="lastName" />
+          </div>
+        </li>
+        <li>
+          <div>
+            Password:
+          </div>
+        </li>
+        <li>
+          <div>
+            <input type="password" name="password" />
+          </div>
+        </li>
+        <li>
+          <div>
+            Password Confirmation:
+          </div>
+        </li>
+        <li>
+          <div>
+            <input type="password" name="passwordConfirm" />
+          </div>
+        </li>
+        <li>
+          <div>
+              <input type="hidden" name="csrf" id="csrfInput" value=""/>
+              <input type="submit" value="register"/>
+          </div>
+        </li>
+      </form>
+    </ol>
+  </div>
+</body>
+<!-- the footer should start here -->

@@ -4,13 +4,18 @@
 // everything is still better than PHP. reddit.com/r/lolPHP
 
 // LoadCSRF pulls the json result of /api/csrf
-function LoadCSRF(formName) {
+function LoadCSRF(inputID,formDestination) {
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
-     document.getElementById("csrfTag").innerHTML = this.responseText;
+     csrfHiddenTag = document.getElementById(inputID)
+     csrfHiddenTag.value = this.responseText
     }
   };
-  xhttp.open("GET", "/api/csrf?form="+formName, true);
+  xhttp.open("GET", "/api/csrf?formDestination="+formDestination, true);
   xhttp.send();
+}
+
+function noJSWarn(){
+  document.getElementById("noJavascript").remove()
 }

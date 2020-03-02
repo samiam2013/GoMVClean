@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"log"
 	"net/http"
 )
 
@@ -23,6 +24,9 @@ import (
 const apiPath = "/api/" // for controller.go
 const apiCopies int64 = 0
 
+const csrfPath = apiPath + "csrf"
+const registerPath = "/api/registerUser"
+
 // RouteAPI uses the url path to switch to the most efficient
 //  and functionally decomposed JSON input/output scheme I can muster.
 func routeAPI(w http.ResponseWriter, r *http.Request) {
@@ -32,6 +36,25 @@ func routeAPI(w http.ResponseWriter, r *http.Request) {
 	// found in csrf.go
 	case csrfPath:
 		issueCSRF(w, r)
+	case registerPath:
+		//pull csrf token from form
+		if err := r.ParseForm(); err != nil {
+			log.Fatal(err)
+		}
+
+		if !verifyCSRF(r.Form.Get("csrf"), w, r) {
+			w.WriteHeader(http.StatusInternalServerError)
+			fmt.Fprint(w, "{'error [500]':'submitted CSRF could not validate'}")
+		} else {
+			fmt.Fprint(w, "csrf validated.")
+		}
+
+		//pull fields from registration form, validate data
+		// relocate (302) to form if data's not validate
+		// 		implement Javascript to validate beforehand
+		//			so that this doesn't have to be hit often.
+		// relocate to landing page if valid,
+
 	// default case: Internal error 501
 	default:
 		w.WriteHeader(http.StatusNotImplemented)
