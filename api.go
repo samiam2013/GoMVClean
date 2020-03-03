@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"log"
 	"net/http"
 )
 
@@ -37,24 +36,7 @@ func routeAPI(w http.ResponseWriter, r *http.Request) {
 	case csrfPath:
 		issueCSRF(w, r)
 	case registerPath:
-		//pull csrf token from form
-		if err := r.ParseForm(); err != nil {
-			log.Fatal(err)
-		}
-
-		if !verifyCSRF(w, r) {
-			w.WriteHeader(http.StatusInternalServerError)
-			fmt.Fprint(w, "{'error [500]':'submitted CSRF could not validate'}")
-		} else {
-			registerUser(w, r)
-		}
-
-		//pull fields from registration form, validate data
-		// relocate (302) to form if data's not validate
-		// 		implement Javascript to validate beforehand
-		//			so that this doesn't have to be hit often.
-		// relocate to landing page if valid,
-
+		registerUser(w, r)
 	// default case: Internal error 501
 	default:
 		w.WriteHeader(http.StatusNotImplemented)

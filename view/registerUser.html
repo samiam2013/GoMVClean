@@ -1,9 +1,15 @@
-<body onload="LoadCSRF('csrfInput','/api/registerUser'); noJSWarn();">
+<body onload="regFormLoad()">
+<script>
+function regFormLoad(){
+  document.getElementById('noJavascript').remove();
+  LoadCSRF('/api/registerUser','csrfInput');
+}
+</script>
   <div id="bodyWrapper">
     <h2>Register User to GoMVClean</h2>
     <h4 id="noJavascript">[Javascript disabled. JS is required on this page for security purposes.]</h4>
     <ol>
-      <form name="registerUser" method="POST" action="/api/registerUser">
+      <form id="registerUser" method="POST" action="/api/registerUser">
         <li>
           <div>
             Email Address:
@@ -11,7 +17,7 @@
         </li>
         <li>
           <div>
-            <input type="text" name="email" />
+            <input type="text" id="email"/>
           </div>
         </li>
         <li>
@@ -21,7 +27,7 @@
         </li>
         <li>
           <div>
-            <input type="text" name="userName" />
+            <input type="text" id="userName" />
           </div>
         </li>
         <li>
@@ -31,7 +37,7 @@
         </li>
         <li>
           <div>
-            <input type="text" name="firstName" />
+            <input type="text" id="firstName" />
           </div>
         </li>
         <li>
@@ -41,7 +47,7 @@
         </li>
         <li>
           <div>
-            <input type="text" name="lastName" />
+            <input type="text" id="lastName" />
           </div>
         </li>
         <li>
@@ -51,7 +57,7 @@
         </li>
         <li>
           <div>
-            <input type="password" name="password" />
+            <input type="password" id="password" />
           </div>
         </li>
         <li>
@@ -61,13 +67,13 @@
         </li>
         <li>
           <div>
-            <input type="password" name="passwordConfirm" />
+            <input type="password" id="passwordConfirm" />
           </div>
         </li>
         <li>
           <div>
-              <input type="hidden" name="csrf" id="csrfInput" value=""/>
-              <input type="submit" value="register"/>
+              <input type="hidden" id="csrfInput" value=""/>
+              <input type="button" value="register" onclick="submitRegistrationForm('csrfInput')"/>
           </div>
         </li>
       </form>

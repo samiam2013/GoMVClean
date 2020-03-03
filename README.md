@@ -9,16 +9,6 @@ It documents itself, because it's static HTML and all you need is `go build` in 
 and then run the binary, whatever it's named on windows or linux, I code on windows and host on linux box
 so it has to run on both anyway.
 
-To get it to upload csrf tokens into the public folder, you have to create the
-public/updateStream/csrf/ folder
-
-My idea is to make a graphing database and binary website that puts UAVs, drones
-or helicopters, or even RC planes that are part of automated networks into a
-shape that allows you to "Google"-a-drone for whatever you need, whenever you
-need it, be it search and rescue or filming a wedding in 6 months. The small
-business idea will eventually become a hybrid networked and human operated
-drone triage infrastructure.
-
 # What is this thing?
 A Go HTTP2 library with it's own database. It's VERY configurable. Oh and it's an MVC.
 
